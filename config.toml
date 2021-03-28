@@ -1,0 +1,18 @@
+baseURL = ""
+languageCode = "en-us"
+title = "T++"
+enableInlineShortcodes = true
+paginate = 3
+
+theme = "casper3"
+
+[params]
+  twitter = "https://twitter.com/kyeotic"
+  github = "https://github.com/kyeotic"
+  description = "T++"
+  mainSections = ["post"]
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
