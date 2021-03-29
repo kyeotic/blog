@@ -33,6 +33,6 @@ jobs:
         with:
           emptyCommits: false
         env:
-           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-            publish_dir: ./public
-            publish_branch: gh-pages
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./public
+          publish_branch: gh-pages
