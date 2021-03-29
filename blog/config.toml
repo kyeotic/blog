@@ -2,6 +2,7 @@ baseURL = ""
 languageCode = "en-us"
 title = "T++"
 enableInlineShortcodes = true
+RelativeURLs=true
 paginate = 3
 
 theme = "casper3"
