@@ -18,9 +18,9 @@ jobs:
         with:
           node-version: 10.x
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2.2.1
+        uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.75.1'
+          hugo-version: '0.82.1'
       - name: Prepare Hugo
         run: |
           git submodule sync && git submodule update --init
@@ -29,10 +29,10 @@ jobs:
       - name: add nojekyll
         run: touch ./blog/public/.nojekyll
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v2.4.0
+        uses: peaceiris/actions-gh-pages@v3
         with:
           emptyCommits: false
         env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./blog/public
+           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+            publish_dir: ./public
+            publish_branch: gh-pages
