@@ -1,0 +1,71 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Self-Hosting Commento alongside Ghost 2.x · T++</title><meta name=HandheldFriendly content="True"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=../style.main.min.b28e7c479851dfa1f339f72221d7a4256505edfe2af520bdaf0ba2172b480266.css></head><body class=post-template><div class=site-wrapper><header class=site-header><div class="outer site-nav-main"><div class=inner><nav class=site-nav><div class=site-nav-left><a class=site-nav-logo href>T++</a><div class=site-nav-content><ul class=nav role=menu></ul></div></div></nav></div></div></header><main id=site-main class="site-main outer"><div class=inner><article class="post-full post no-image"><header class=post-full-header><section class=post-full-tags><a href=../tags/ghost>ghost</a></section><h1 class=post-full-title>Self-Hosting Commento alongside Ghost 2.x</h1><div class=post-full-byline><section class=post-full-byline-content><section class=post-full-byline-meta><div class=byline-meta-content><time class=byline-meta-date datetime=2019-125-05>15 May 2019</time>
+<span class=byline-reading-time><span class=bull>&bull;</span> 4 min read</span></div></section></section></div></header><section class=post-full-content><div class=post-content><p>I recently upgraded this blog to Ghost 2.x and took the opportunity to abandon Disqus. It bloated the post page and came with something like 45 tracking scripts/cookies. To replace it I settled on <a href=https://commento.io/>Commento</a>, a small and privacy-focused open source solution. The minimum subscription is $3/month, which is a bit high for a blog that I only pay <a href=../migrating-ghost-0-x-to-2-x>$5/month</a> for. Luckily they offer a self-hosted option. Here is how I got it setup.</p><p>Since I am <a href=../migrating-ghost-0-x-to-2-x>running this blog on Digital Ocean</a> I chose to install and run Commento from the same Droplet (Virtual Machine). You don&rsquo;t need to do this, but the smallest Droplet is sufficient to run Ghost and Commento side-by-side if your traffic isn&rsquo;t too high.</p><h2 id=prerequisites>Prerequisites</h2><ul><li><strong>PostgreSQL</strong>: This is a <em>requirement</em>. <a href=https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04#step-1-%E2%80%94-installing-postgresql>This is a good guide for installation</a>. <strong>Commento</strong> requires its own database. I created a system user named &ldquo;commento&rdquo; (<code>adduser commento</code>), matched it to a databse role (<code>createuser --interactive</code>, name it &ldquo;commento&rdquo;) and a database of the same name (<code>createdb commento</code>). When you are done make sure you <code>sudo systemctl enable postgresql</code> to keep it running.</li><li><strong>smtp</strong>: This is <em>optional</em>, but without it you wont be able to send activation or password reset emails. While its focused on gmail forwarding, my <a href=using-mailgun-to-route-gmail-for-free/>mailgun guide</a> covers setting up smpt credentials which will be usable for Commento. I highly recommend getting this setup.</li><li><strong>DNS</strong>: Commento needs its own (sub)domain to run on. I used <code>commento.blog.kye.dev</code>, and pointed it to the same <strong>floating IP</strong> that Ghost is on.</li></ul><h2 id=install-commento>Install Commento</h2><pre><code># Switch to the commento user
+sudo -u commento
+
+# Download
+wget https://commento-release.s3.amazonaws.com/commento-linux-amd64-v1.7.0.tar.gz
+
+# Unpack
+mkdir commento-server
+tar xvf commento-linux-amd64-v1.7.0.tar.gz -C ./commento-server
+</code></pre><h2 id=create-ssl-cert>Create SSL Cert</h2><p>This is the same process used to <a href=migrating-ghost-0-x-to-2-x/#adding-additional-ssl-certs>add certs for alternate/redirect domains</a>.</p><pre><code># Switch user
+sudo -u ghost-mgr
+
+# Navigate to ghost install root
+cd /var/www/ghost
+
+# Set Commento URL
+ghost config url https://commento.YOURBLOG.com
+
+# Get Ghost-CLI to generate an SSL setup for you:
+ghost setup nginx ssl
+
+# Switch back to your Blog
+ghost config url https://YOURBLOG.com
+</code></pre><p>This will create certs with Lets Encrypt/acme.sh, as well as generate some NGINX conf files in <code>/var/www/ghost/system/files</code>. The conf files point to Ghost though, and we need to reverse proxy them to the Commento server.</p><h2 id=update-nginx>Update NGINX</h2><p>We need to edit 3 files: the <em>ssl</em> and *http *conf files for Commento; and the <em>ssl-params</em> file used by NGINX.</p><p>We need to reverse proxy NGINX to the Commento server (that we will setup in the next step). In <code>/var/www/ghost/system/files</code> update the <code>commento*.conf</code> files. Their <code>Location /</code> block should look like this</p><pre><code>location / {
+  proxy_set_header Host $http_host;
+  proxy_pass http://localhost:8081;
+ }
+</code></pre><p>Then in <code>/etc/nginx/snippets/ssl-params.conf</code> remove/comment out the following line:</p><pre><code># Find and comment out this line
+add_header X-Content-Type-Options nosniff;
+</code></pre><blockquote><p>Note: this is necessary because of bad MIME type handling in Commento. Hopefully this will be fixed in the near-future.</p></blockquote><h2 id=create-the-commento-service>Create the Commento Service</h2><p>Create the following file at <code>/etc/systemd/system/commento.service</code></p><pre><code>[Unit]
+Description=Commento daemon service
+After=network.target postgresql.service
+
+[Service]
+Type=simpleExecStart=/home/commento/commento-server/commento
+Environment=COMMENTO_ORIGIN=https://commento.YOURBLOG.com
+Environment=COMMENTO_PORT=8081
+Environment=COMMENTO_POSTGRES=postgres://commento:commento@127.0.0.1:5432/commento?sslmode=disable
+Environment=COMMENTO_SMTP_HOST=smtp.mailgun.org
+Environment=COMMENTO_SMTP_USERNAME=YOUR_SMTP_USERNAME
+Environment=COMMENTO_SMTP_PASSWORD=YOUR_SMTP_PASSOWRD
+Environment=COMMENTO_SMTP_PORT=465
+Environment=COMMENTO_SMTP_FROM_ADDRESS=no-reply@YOURBLOG.com
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><p>Then run</p><pre><code>sudo chmod u+x /etc/systemd/system/commento.service
+sudo systemctl start commento
+sudo systemctl enable commento
+</code></pre><p>To get NGINX routing to Commento you will need to restart it.</p><pre><code>sudo nginx -s reload
+</code></pre><h2 id=register-domain-in-commento>Register Domain in Commento</h2><p>Commento should be running now. You need to complete the <a href=https://commento.gitlab.io/docs/installation/self-hosting/register-your-website/>domain setup</a> in the Commento dashboard (the one running on your server, not the cloud one).</p><h2 id=add-commento-code-to-ghost-template>Add Commento code to Ghost Template</h2><p>Once your domain is registered in the dashboard a snippet is provided under the <strong>installation</strong> section. It looks like this</p><pre><code>&lt;div id=&quot;commento&quot;&gt;&lt;/div&gt;
+&lt;script src=&quot;https://commento.blog.kye.dev/js/commento.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>You will need to add this to <code>/var/www/ghost/content/themes/casper/post.hbs</code>. The section is near the bottom, in a commented out block. Uncomment the container and replace the contents with the above snippet.</p><p>To get Ghost to compile and use the new template, restart Ghost</p><pre><code># Switch to the commento user
+sudo -u commento
+
+# Move to Ghost root
+cd /var/www/ghost
+
+#Restart
+ghost restart
+</code></pre><p>You should be all set. Comments should start showing up in your posts.</p></div></section></article></div></main><aside class="read-next outer"><div class=inner><div class=read-next-feed><article class=read-next-card><header class=read-next-card-header><h3><span>More in</span> <a href=../tags/ghost>ghost</a></h3></header><div class=read-next-card-content><ul><li><h4><a href=../migrating-ghost-0-x-to-2-x/>Migrating Ghost 0.x to 2.x (and a new domain!)</a></h4><div class=read-next-card-meta><p><time datetime=2019-125-05>05 May 2019</time></p></div></li><li><h4><a href=../self-hosting-commento/>Self-Hosting Commento alongside Ghost 2.x</a></h4><div class=read-next-card-meta><p><time datetime=2019-125-05>05 May 2019</time></p></div></li><li><h4><a href=../ghost-webfaction-sendmail/>Setting up Webfaction Sendmail with Ghost</a></h4><div class=read-next-card-meta><p><time datetime=2013-1212-12>12 Dec 2013</time></p></div></li></ul></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../hot-reload-in-jspm-0-17/><header class=post-card-header><div class=post-card-primary-tag>jspm</div><h2 class=post-card-title>Hot Reloading redux in jspm 0.17</h2></header><section class=post-card-excerpt><p>I struggled quite a bit with this one, because understanding the components of hot reloading was very difficult. There are a lot of explanations out there that are light on details, or just downright wrong.
+I read Dan Abramov&rsquo;s recent post on Hot Reloading. In it, he suggests trying the local storage approach. I tried Redux LocalStorage, but it has an issue when, hilariously, it has to use its own merge.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2016-123-03>15 March 2016</time>
+<span class=bull>&bull;</span> 2 min read</span></div></footer></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../migrating-ghost-0-x-to-2-x/><header class=post-card-header><div class=post-card-primary-tag>ghost</div><h2 class=post-card-title>Migrating Ghost 0.x to 2.x (and a new domain!)</h2></header><section class=post-card-excerpt><p>To accompany my recent handle change I took the time to upgrade this blog.
+Previously it had been running Ghost 0.4 on a Digital Ocean CentOS 7 machine. To get from 0.x to 2.x requires that your exported data travel through 1.x first, which is a bit of a challenge. My first attempt was to upgrade the server in place, but issues with *yum *and node got so bad I gave up.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2019-125-05>15 May 2019</time>
+<span class=bull>&bull;</span> 4 min read</span></div></footer></div></article></div></div></aside><footer class="site-footer outer"><div class="site-footer-content inner"><section class=copyright><a href>T++</a> &copy; 2019</section><nav class=site-footer-nav><a href>Latest Posts</a>
+<a href=https://twitter.com/kyeotic target=_blank rel=noopener>Twitter</a>
+<a href=https://github.com/kyeotic target=_blank rel=noopener>Github</a>
+<a href=https://jonathanjanssens.com target=_blank rel=noopener style=opacity:.5>Hugo Casper3 by Jonathan Janssens</a></nav></div></footer></div></body></html>

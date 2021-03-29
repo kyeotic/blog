@@ -1,0 +1,46 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>jspm, jQuery Plugins, and ES6 · T++</title><meta name=HandheldFriendly content="True"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=../style.main.min.b28e7c479851dfa1f339f72221d7a4256505edfe2af520bdaf0ba2172b480266.css></head><body class=post-template><div class=site-wrapper><header class=site-header><div class="outer site-nav-main"><div class=inner><nav class=site-nav><div class=site-nav-left><a class=site-nav-logo href>T++</a><div class=site-nav-content><ul class=nav role=menu></ul></div></div></nav></div></div></header><main id=site-main class="site-main outer"><div class=inner><article class="post-full post no-image"><header class=post-full-header><section class=post-full-tags><a href=../tags/aurelia>aurelia</a></section><h1 class=post-full-title>jspm, jQuery Plugins, and ES6</h1><div class=post-full-byline><section class=post-full-byline-content><section class=post-full-byline-meta><div class=byline-meta-content><time class=byline-meta-date datetime=2015-121-01>14 January 2015</time>
+<span class=byline-reading-time><span class=bull>&bull;</span> 2 min read</span></div></section></section></div></header><section class=post-full-content><div class=post-content><p><a href=http://jspm.io/>jspm</a> is a new package manager for JavaScript fornt-ends that comes with a universal <a href=https://github.com/systemjs/systemjs>module loading system</a>. It integrates nicely with <a href=https://www.npmjs.com/>npm</a> by adding a <code>jspm</code> property to the <code>package.json</code> that specifies what the jspm dependencies are. Mine looks like this:</p><pre><code>&quot;jspm&quot;: {
+    &quot;directories&quot;: {
+      &quot;baseURL&quot;: &quot;client&quot;
+    },
+    &quot;dependencies&quot;: {
+      &quot;Magnific-Popup&quot;: &quot;github:dimsemenov/Magnific-Popup@^1.0.0&quot;,
+      &quot;aurelia-bootstrapper&quot;: &quot;^0.8.0&quot;,
+      &quot;aurelia-http-client&quot;: &quot;^0.4.1&quot;,
+      &quot;bootstrap&quot;: &quot;^3.3.1&quot;,
+      &quot;font-awesome&quot;: &quot;^4.2.0&quot;,
+      &quot;jquery&quot;: &quot;^2.1.3&quot;
+    }
+  }
+</code></pre><p>One of the really cool things about jspm is that, while it uses npm to load packages, it allows multiple endpoints to be defined. By default, it has a <a href=https://github.com/>Github</a> endpoint. This allows packages to be installed from Github if they aren&rsquo;t in the npm registry. This is pretty handy when working with jQuery plugins, since most of them are not on the npm registry.</p><p>To control versioning and dependencies jspm also uses a <code>config.js</code>. This file is similar to RequireJS&rsquo;s <a href=http://requirejs.org/docs/api.html#config>config</a>: it maps package names to their sources, allows them to specify their dependencies, and it allows shims to be written for packages that don&rsquo;t follow a module loading pattern. If you&rsquo;ve ever used RequireJS, you&rsquo;ll recognize the shim configuration as necessary for loading jQuery plugins, which are always looking to modify globally scoped objects.</p><h1 id=shim-configuration>Shim Configuration</h1><p>I am working with a jQuery plugin called <a href=https://github.com/dimsemenov/Magnific-Popup>Magnific Popup</a>, which provides some nice image lightbox gallery functionality. To get it to load nicely, I use this shim:</p><pre><code>&quot;shim&quot;: {
+    &quot;packages&quot;: {
+      &quot;Magnific-Popup&quot;: {
+        &quot;main&quot;: &quot;Magnific-Popup&quot;,
+        &quot;format&quot;: &quot;global&quot;,
+        &quot;deps&quot;: &quot;jquery&quot;,
+        &quot;exports&quot;: &quot;$.magnificPopup&quot;
+      }
+    }
+  }
+</code></pre><p>Then below, in the map, I include the Github source:</p><pre><code>System.config({
+  &quot;map&quot;: {
+    &quot;Magnific-Popup&quot;: &quot;github:dimsemenov/Magnific-Popup@1.0.0&quot;,
+    //more stuff you don't care about
+    }
+</code></pre><p>If you want to see how these fit together, you can checkout the complete <a href=https://github.com/tyrsius/portfolio/blob/8bc0217b087c65a6b4b3a4cd0d53e78e64faf4d0/client/config.js>config.js</a> I am using.</p><h1 id=importing-with-es6>Importing with ES6</h1><p>If you are trying to use this plugin in an ES6 module, you have to import it first. Normalling an import in ES6 will look like this</p><pre><code>import {Router} from 'router-module';
+</code></pre><p>But since jQuery and it&rsquo;s globally scoped plugins are loading into the <code>default</code> object, they need a bare import.</p><pre><code>import $ from 'jquery';
+import magnific from 'Magnific-Popup';
+</code></pre><p>After that, you can use them on the <code>$</code> object as normal</p><pre><code>$('.image-link').magnificPopup({
+  type: 'image',
+  gallery: { enabled: true }
+});
+</code></pre></div></section></article></div></main><aside class="read-next outer"><div class=inner><div class=read-next-feed><article class=read-next-card><header class=read-next-card-header><h3><span>More in</span> <a href=../tags/aurelia>aurelia</a></h3></header><div class=read-next-card-content><ul><li><h4><a href=../jspm-jquery-plugins-and-es6/>jspm, jQuery Plugins, and ES6</a></h4><div class=read-next-card-meta><p><time datetime=2015-121-01>01 Jan 2015</time></p></div></li></ul></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../durandal-vs-angular/><header class=post-card-header><h2 class=post-card-title>Durandal vs Angular</h2></header><section class=post-card-excerpt><p>Yep, time to throw in my $.02. I&rsquo;ve used Durandal on multiple personal projects, as well as a large professional project spanning several months. I have used Angular on two personal projects, and am currently using it at work. I have a lot more experience with Durandal than I do with Angular, so if I make any factual errors here feel free to let me know. I would love to be wrong about some of my gripes, since that would mean not having to deal with them.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2014-1212-12>31 December 2014</time>
+<span class=bull>&bull;</span> 8 min read</span></div></footer></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../react-and-jspm/><header class=post-card-header><div class=post-card-primary-tag>jspm</div><h2 class=post-card-title>React and jspm</h2></header><section class=post-card-excerpt><p>I&rsquo;ve been tinkering with React a lot lately; I am really loving it. Since I still believe that jspm offers a better development and bundling experience than WebPack (unless you need hot module reloading), I spend some time this week getting a solid project template down for React and jspm.
+Directory Structure Let&rsquo;s just jump straight to the solution, and then break down the reasons.
+Project |--assets/ | |--css/ | |--fonts/ | |--images/ | +--stylus/ |--dist/ +--built.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2016-121-01>2 January 2016</time>
+<span class=bull>&bull;</span> 3 min read</span></div></footer></div></article></div></div></aside><footer class="site-footer outer"><div class="site-footer-content inner"><section class=copyright><a href>T++</a> &copy; 2015</section><nav class=site-footer-nav><a href>Latest Posts</a>
+<a href=https://twitter.com/kyeotic target=_blank rel=noopener>Twitter</a>
+<a href=https://github.com/kyeotic target=_blank rel=noopener>Github</a>
+<a href=https://jonathanjanssens.com target=_blank rel=noopener style=opacity:.5>Hugo Casper3 by Jonathan Janssens</a></nav></div></footer></div></body></html>

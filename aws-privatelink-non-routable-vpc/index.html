@@ -1,0 +1,224 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Configuring AWS PrivateLink in non-routable VPCs Consumers with Terraform · T++</title><meta name=HandheldFriendly content="True"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=../style.main.min.b28e7c479851dfa1f339f72221d7a4256505edfe2af520bdaf0ba2172b480266.css></head><body class=post-template><div class=site-wrapper><header class=site-header><div class="outer site-nav-main"><div class=inner><nav class=site-nav><div class=site-nav-left><a class=site-nav-logo href>T++</a><div class=site-nav-content><ul class=nav role=menu></ul></div></div></nav></div></div></header><main id=site-main class="site-main outer"><div class=inner><article class="post-full post no-image"><header class=post-full-header><section class=post-full-tags><a href=../tags/aws>aws</a></section><h1 class=post-full-title>Configuring AWS PrivateLink in non-routable VPCs Consumers with Terraform</h1><div class=post-full-byline><section class=post-full-byline-content><section class=post-full-byline-meta><div class=byline-meta-content><time class=byline-meta-date datetime=2019-125-05>31 May 2019</time>
+<span class=byline-reading-time><span class=bull>&bull;</span> 7 min read</span></div></section></section></div></header><section class=post-full-content><div class=post-content><p><a href=https://docs.aws.amazon.com/vpc/latest/userguide/getting-started-ipv4.html>AWS VPC</a>s make it possible to establish private network connections across AWS accounts with <a href=https://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html>VPC Peering</a>, essentially merging the networks into one. However, there is another option for cross-account/cross-VPC network access, with a much smaller surface area.</p><p>PrivateLink is a bundle of services with some <a href=https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html>difficult-to-parse documentation</a>, but it&rsquo;s pretty powerful. Today I&rsquo;m just going to cover a single use case: communicating between a central <em>service provider</em> to a set of <em>consumers</em>, living in non-routable VPC&rsquo;s (no NAT gateway, no internet gateway, no public/elastic IPs), all in various AWS accounts.</p><p>This is great if you have a dynamic fleet of publishers with incredibly sensitive payloads, since there is no attack surface. They won&rsquo;t be able to talk to the internet, and the internet won&rsquo;t be able to talk to them. You won&rsquo;t run out of IP addresses either.</p><h2 id=overview>Overview</h2><p>There are two halves.</p><ul><li>In the **Service Provider **account we will setup a <strong>VPC Service Endpoint</strong> and a **Network Load Balancer **pointing to an Ec2 Instance.</li><li>In the <strong>Consumer</strong> account we will setup a **non-routable VPC **and a <strong>VPC Endpoint</strong>.</li></ul><p>The <strong>Consumer</strong> account setup can be repeated against the same <strong>Service Provider Endpoint</strong>. As a bonus, after we have it setup we will look at handling HTTPS/TLS. This is important if your service provider is pulling double duty as a Public service, as mine was, because HTTPS redirection doesn&rsquo;t play nicely with the standard setup for VPC Endpoints.</p><p>I&rsquo;m going to be providing terraform code throughout this post, with variables that you either need to provide from existing infrastructure or define for this module. Variables that start with <code>existing_</code> are for resources that exist, and variables that start with <code>your_</code> are for resources to-be-created (so pick whatever value).</p><h2 id=service-provider-setup>Service Provider Setup</h2><p>Since this isn&rsquo;t about the service itself, I&rsquo;m not going to cover setting up an EC2 instance, or the VPC that the provider uses. I&rsquo;ll just show you the setup for the *Service Endpoint *and related setup.</p><p>The following data resources will be used, assuming existing infrastructure</p><pre><code>data &quot;aws_vpc&quot; &quot;provider&quot; {
+  id = &quot;${var.existing_provider_vpc_id}&quot;
+}
+</code></pre><p>First we need a <em>Network Load Balancer</em> (NLB) that targets the Ec2 instance. <strong>NOTE:</strong> you <strong>cannot</strong> use an ALB/ELB, as <em>service endpoints</em> only support NLBs</p><pre><code>resource &quot;aws_lb&quot; &quot;link&quot; {
+  name               = &quot;${var.your_nlb_name}&quot;
+  internal           = true
+  load_balancer_type = &quot;network&quot;
+  subnets            = [&quot;${var.existing_target_subnet_id}&quot;]
+}
+
+resource &quot;aws_lb_target_group&quot; &quot;link_http&quot; {
+  name     = &quot;${}&quot;
+  port     = 80
+  protocol = &quot;TCP&quot;
+  vpc_id   = &quot;${data.aws_vpc.provider.id}&quot;
+
+  stickiness = {
+    type    = &quot;lb_cookie&quot;
+    enabled = false
+  }
+}
+
+resource &quot;aws_lb_target_group_attachment&quot; &quot;link_http&quot; {
+  target_group_arn = &quot;${aws_lb_target_group.link_http.arn}&quot;
+  target_id        = &quot;${local.target_instance}&quot;
+  port             = 80
+}
+
+resource &quot;aws_lb_listener&quot; &quot;link_http&quot; {
+  load_balancer_arn = &quot;${aws_lb.link.arn}&quot;
+  port              = &quot;80&quot;
+  protocol          = &quot;TCP&quot;
+
+  default_action {
+    type             = &quot;forward&quot;
+    target_group_arn = &quot;${aws_lb_target_group.link_http.arn}&quot;
+  }
+}
+</code></pre><p>This is the terraform for the <em>VPC**Service Endpoint</em>.</p><pre><code>resource &quot;aws_vpc_endpoint_service&quot; &quot;service_provider&quot; {
+  network_load_balancer_arns = [&quot;${aws_lb.link.arn}&quot;]
+  allowed_principals         = [&quot;${var.consumer_principals}&quot;]
+  acceptance_required        = false
+}
+
+# you probably want to include these for reference
+output &quot;service_provider_name&quot; {
+  description = &quot;The name of VPC Endpoint Service&quot;
+  value       = &quot;${aws_vpc_endpoint_service.service_provider.service_name}&quot;
+}
+
+output &quot;service_provider_zones&quot; {
+  description = &quot;Availability Zones of the Provider&quot;
+  value       = &quot;${aws_vpc_endpoint_service.service_provider.availability_zones}&quot;
+}
+</code></pre><p>The <em>outputs</em> are going to be needed in the <em>consumer</em> configuration, make sure you write them down.</p><p>For cross-VPC communication the <em>Service Endpoint</em>needs to be in the same <em>physical</em> availability zone as the <em>consumer Endpoint</em>. The gotcha here is that the <a href=https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html>name given to availability zones in each AWS account is essentially <em>random</em></a> (probably to help balance out the physical distribution when everyone probably uses <code>us-east-1a</code>). Which means you can&rsquo;t rely on the <strong>name</strong>, you need the <strong>AZ ID</strong>. To get that you can <a href=../mapping-aws-availiability-zone-ids/>use a terraform data resource to look it up</a> and another output to read it.</p><pre><code>data &quot;aws_availability_zones&quot; &quot;available&quot; {}
+
+output &quot;service_provider_zone_ids&quot; {
+  description = &quot;Availability Zone IDs of the Provider&quot;
+
+  value = &quot;${matchkeys(
+    data.aws_availability_zones.available.zone_ids,
+    data.aws_availability_zones.available.names,
+    aws_vpc_endpoint_service.service_provider.availability_zones
+  )}&quot;
+}
+</code></pre><h2 id=consumer-setup>Consumer Setup</h2><p>Since our consumer will be a new service we will define</p><ul><li><p>A <strong>new VPC</strong> with <strong>private subnets</strong></p></li><li><p>Security groups with ingress and egress rules</p></li><li><p>A <strong>VPC Endpoint</strong> (this is the consumer half of the provider&rsquo;s <em>service endpoint</em>)</p><p>locals {
+# Private IP address space
+vpc_cidr_block = &ldquo;10.0.0.0/16&rdquo;
+vpc_private_subnet_blocks = [&ldquo;10.0.1.0/24&rdquo;]
+}</p><p>resource &ldquo;aws_vpc&rdquo; &ldquo;consumer&rdquo; {
+cidr_block = &ldquo;${local.vpc_cidr_block}&rdquo;
+enable_dns_support = true
+enable_dns_hostnames = true</p><pre><code>tags = {
+  &quot;Name&quot; = &quot;${var.your_consumer_vpc_name}&quot;
+}
+</code></pre><p>}</p><p>resource &ldquo;aws_route_table&rdquo; &ldquo;consumer&rdquo; {
+count = &ldquo;${length(local.vpc_private_subnet_blocks)}&rdquo;</p><pre><code>vpc_id = &quot;${aws_vpc.consumer.id}&quot;
+</code></pre><p>}</p><p>resource &ldquo;aws_subnet&rdquo; &ldquo;consumer&rdquo; {
+vpc_id = &ldquo;${aws_vpc.consumer.id}&rdquo;
+cidr_block = &ldquo;${element(local.vpc_private_subnet_blocks, 0)}&rdquo;
+# This is the output var from the provider setup
+availability_zone_id = &ldquo;${var.existing_vpc_availability_zone_id}&rdquo;</p><pre><code>tags = {
+  &quot;Name&quot; = &quot;${var.your_consumer_vpc_name}&quot;
+}
+</code></pre><p>}</p><p>resource &ldquo;aws_default_security_group&rdquo; &ldquo;default&rdquo; {
+vpc_id = &ldquo;${aws_vpc.consumer.id}&rdquo;
+}</p><p>resource &ldquo;aws_security_group&rdquo; &ldquo;endpoint_services&rdquo; {
+name = &ldquo;_endpoint_services&rdquo;
+description = &ldquo;Allows traffic for endpoint services&rdquo;
+vpc_id = &ldquo;${aws_vpc.consumer.id}&rdquo;</p><pre><code>tags = {
+  &quot;Name&quot; = &quot;${var.your_consumer_vpc_name} - Endpoint Services&quot;
+  &quot;Type&quot; = &quot;endpoint_services&quot;
+}
+</code></pre><p>}</p><p>resource &ldquo;aws_security_group_rule&rdquo; &ldquo;endpoint_services_ingress_80&rdquo; {
+type = &ldquo;ingress&rdquo;
+from_port = 80
+to_port = 80
+protocol = &ldquo;tcp&rdquo;</p><pre><code>cidr_blocks = [
+  &quot;${aws_vpc.consumer.cidr_block}&quot;,
+]
+
+security_group_id = &quot;${aws_security_group.endpoint_services.id}&quot;
+</code></pre><p>}</p><p>resource &ldquo;aws_security_group_rule&rdquo; &ldquo;endpoint_services_ingress_443&rdquo; {
+type = &ldquo;ingress&rdquo;
+from_port = 443
+to_port = 443
+protocol = &ldquo;tcp&rdquo;</p><pre><code>cidr_blocks = [
+  &quot;${aws_vpc.consumer.cidr_block}&quot;,
+]
+
+security_group_id = &quot;${aws_security_group.endpoint_services.id}&quot;
+</code></pre><p>}</p><h1 id=dns>DNS</h1><p>resource &ldquo;aws_security_group_rule&rdquo; &ldquo;endpoint_services_egress_53_TCP&rdquo; {
+type = &ldquo;egress&rdquo;
+from_port = 53
+to_port = 53
+protocol = &ldquo;tcp&rdquo;</p><pre><code>cidr_blocks = [
+  &quot;${aws_vpc.consumer.cidr_block}&quot;,
+]
+
+security_group_id = &quot;${aws_security_group.endpoint_services.id}&quot;
+</code></pre><p>}</p><p>resource &ldquo;aws_security_group_rule&rdquo; &ldquo;endpoint_services_egress_53_UDP&rdquo; {
+type = &ldquo;egress&rdquo;
+from_port = 53
+to_port = 53
+protocol = &ldquo;udp&rdquo;</p><pre><code>cidr_blocks = [
+  &quot;${aws_vpc.consumer.cidr_block}&quot;,
+]
+
+security_group_id = &quot;${aws_security_group.endpoint_services.id}&quot;
+</code></pre><p>}</p><p>resource &ldquo;aws_security_group_rule&rdquo; &ldquo;endpoint_services_egress_80&rdquo; {
+type = &ldquo;egress&rdquo;
+from_port = 80
+to_port = 80
+protocol = &ldquo;tcp&rdquo;</p><pre><code>cidr_blocks = [
+  &quot;${aws_vpc.consumer.cidr_block}&quot;,
+]
+
+security_group_id = &quot;${aws_security_group.endpoint_services.id}&quot;
+</code></pre><p>}</p><p>resource &ldquo;aws_security_group_rule&rdquo; &ldquo;endpoint_services_egress_443&rdquo; {
+type = &ldquo;egress&rdquo;
+from_port = 443
+to_port = 443
+protocol = &ldquo;tcp&rdquo;</p><pre><code>cidr_blocks = [
+  &quot;${aws_vpc.consumer.cidr_block}&quot;,
+]
+
+security_group_id = &quot;${aws_security_group.endpoint_services.id}&quot;
+</code></pre><p>}</p><p>resource &ldquo;aws_vpc_endpoint&rdquo; &ldquo;service_consumer&rdquo; {
+vpc_id = &ldquo;${aws_vpc.consumer.id}&rdquo;
+subnet_ids = ["${aws_subnet.consumer.id}"]</p><pre><code>security_group_ids = [&quot;${aws_security_group.endpoint_services.id}&quot;]
+
+# This is the output from the previous section
+service_name       = &quot;${var.existing_service_provider_name}&quot;
+vpc_endpoint_type  = &quot;Interface&quot;
+</code></pre><p>}</p></li></ul><p>This basic setup will allow communication from our consumer service (such as an AWS Lambda) to our service provider. It does not have any public IP addresses or internet interfaces, which means you cannot talk to anything on the public internet, <em>including</em> AWS services. This is probably something you want to do, and luckily its possible to add additional endpoints for AWS services <em>without connecting to the internet</em>. Here is an example with STS:</p><pre><code>data &quot;aws_vpc_endpoint_service&quot; &quot;sts&quot; {
+  count   = &quot;${data.aws_region.current.name == &quot;us-east-1&quot; ? &quot;0&quot; : &quot;1&quot;}&quot;
+  service = &quot;sts&quot;
+}
+
+resource &quot;aws_vpc_endpoint&quot; &quot;sts&quot; {
+  count             = &quot;${data.aws_region.current.name == &quot;us-east-1&quot; ? &quot;0&quot; : &quot;1&quot;}&quot;
+  vpc_id            = &quot;${aws_vpc.consumer.id}&quot;
+  service_name      = &quot;${data.aws_vpc_endpoint_service.sts.service_name}&quot;
+  vpc_endpoint_type = &quot;Interface&quot;
+
+  security_group_ids = [
+    &quot;${aws_security_group.endpoint_services.id}&quot;,
+  ]
+
+  subnet_ids = [
+    &quot;${aws_subnet.consumer.id}&quot;,
+  ]
+
+  private_dns_enabled = true
+}
+</code></pre><p>If you don&rsquo;t need to worry about HTTPS/TLS when connecting to your service provider then this is all you need.</p><h2 id=connecting-with-httpstls>Connecting with HTTPS/TLS</h2><p>When I set this up my service provider was using an HTTP -> HTTPS redirect, which broke the whole thing. First it broke because I hadn&rsquo;t address 443 egress, but when I did of course the SSL Certificate didn&rsquo;t match up with the consumer VPC endpoint domain, since its an AWS domain.</p><p>To get past this I created a new CNAME that pointed to the consumer VPC endpoint, configured AWS Certificate to get an SSL Certificate, and used the new CNAME in my consumer service.</p><pre><code>data &quot;aws_route53_zone&quot; &quot;base&quot; {
+  name = &quot;${var.your_hosted_zone_name}&quot;
+}
+
+resource &quot;aws_route53_record&quot; &quot;consumer&quot; {
+  zone_id = &quot;${data.aws_route53_zone.base.zone_id}&quot;
+  name    = &quot;consumer-link.${data.aws_route53_zone.base.name}&quot;
+  type    = &quot;CNAME&quot;
+  ttl     = &quot;300&quot;
+  records = [&quot;${aws_vpc_endpoint.service_consumer.dns_entry.1.dns_name}&quot;]
+}
+
+
+provider &quot;aws&quot; {
+  region = &quot;us-east-1&quot;
+  alias  = &quot;certificates&quot;
+}
+
+# This should match your existing primary AWS provider
+provider &quot;aws&quot; {
+  region = &quot;${var.existing_region}&quot;
+  alias  = &quot;dns&quot;
+}
+
+module &quot;cert&quot; {
+  source = &quot;github.com/azavea/terraform-aws-acm-certificate?ref=1.1.0&quot;
+
+  providers = {
+    aws.acm_account     = &quot;aws.certificates&quot;
+    aws.route53_account = &quot;aws.dns&quot;
+  }
+
+  domain_name                       = &quot;${aws_route53_record.consumer.name}&quot;
+  hosted_zone_id                    = &quot;${data.aws_route53_zone.base.zone_id}&quot;
+  validation_record_ttl             = &quot;60&quot;
+  allow_validation_record_overwrite = true
+}
+</code></pre><p><a href="https://unsplash.com/@othentikisra?utm_source=ghost&utm_medium=referral&utm_campaign=api-credit">Cover Photo by Isreal Palacio</a></p></div></section></article></div></main><aside class="read-next outer"><div class=inner><div class=read-next-feed><article class=read-next-card><header class=read-next-card-header><h3><span>More in</span> <a href=../tags/aws>aws</a></h3></header><div class=read-next-card-content><ul><li><h4><a href=../aws-privatelink-non-routable-vpc/>Configuring AWS PrivateLink in non-routable VPCs Consumers with Terraform</a></h4><div class=read-next-card-meta><p><time datetime=2019-125-05>05 May 2019</time></p></div></li><li><h4><a href=../mapping-aws-availiability-zone-ids/>Getting AWS Availability Zone IDs with Terraform</a></h4><div class=read-next-card-meta><p><time datetime=2019-125-05>05 May 2019</time></p></div></li></ul></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../mapping-aws-availiability-zone-ids/><header class=post-card-header><div class=post-card-primary-tag>aws</div><h2 class=post-card-title>Getting AWS Availability Zone IDs with Terraform</h2></header><section class=post-card-excerpt><p>AWS Availability Zone names may look like unique identifiers, but they are mapped to physical availability zones essentially at random. This means that us-west-2b in one account may be the same physical availability zone as us-west-2a in another account.
+If you are doing certain kinds of cross-account networking mapping by name can result in errors. To solve this AWS provides the ID** of the availability zone, which *will* map to the same physical availability zone in every account.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2019-125-05>31 May 2019</time>
+<span class=bull>&bull;</span> 1 min read</span></div></footer></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../hugo-github-pages-actions/><header class=post-card-header><div class=post-card-primary-tag>GitHub</div><h2 class=post-card-title>Deploying Hugo to GitHub Pages with GitHub Actions</h2></header><section class=post-card-excerpt><p>There are a lot of strategies to hosting in-repo docs on GitHub Pages (as opposed to a dedicated repo for docs). I&rsquo;m going to cover how to publish docs that are stored on the master branch to the gh-pages branch.
+This approach has several benefits
+Only the Hugo &ldquo;source&rdquo; files live in master, while gh-pages contains the built HTML, etc. This keeps master clean and lean, and makes PR diffs much easier to review.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2019-1210-10>3 October 2019</time>
+<span class=bull>&bull;</span> 4 min read</span></div></footer></div></article></div></div></aside><footer class="site-footer outer"><div class="site-footer-content inner"><section class=copyright><a href>T++</a> &copy; 2019</section><nav class=site-footer-nav><a href>Latest Posts</a>
+<a href=https://twitter.com/kyeotic target=_blank rel=noopener>Twitter</a>
+<a href=https://github.com/kyeotic target=_blank rel=noopener>Github</a>
+<a href=https://jonathanjanssens.com target=_blank rel=noopener style=opacity:.5>Hugo Casper3 by Jonathan Janssens</a></nav></div></footer></div></body></html>

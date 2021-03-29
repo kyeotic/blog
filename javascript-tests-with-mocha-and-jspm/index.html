@@ -1,0 +1,74 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>JavaScript tests with Mocha and jspm · T++</title><meta name=HandheldFriendly content="True"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=../style.main.min.b28e7c479851dfa1f339f72221d7a4256505edfe2af520bdaf0ba2172b480266.css></head><body class=post-template><div class=site-wrapper><header class=site-header><div class="outer site-nav-main"><div class=inner><nav class=site-nav><div class=site-nav-left><a class=site-nav-logo href>T++</a><div class=site-nav-content><ul class=nav role=menu></ul></div></div></nav></div></div></header><main id=site-main class="site-main outer"><div class=inner><article class="post-full post no-image"><header class=post-full-header><section class=post-full-tags><a href=../tags/jspm>jspm</a></section><h1 class=post-full-title>JavaScript tests with Mocha and jspm</h1><div class=post-full-byline><section class=post-full-byline-content><section class=post-full-byline-meta><div class=byline-meta-content><time class=byline-meta-date datetime=2016-122-02>18 February 2016</time>
+<span class=byline-reading-time><span class=bull>&bull;</span> 3 min read</span></div></section></section></div></header><section class=post-full-content><div class=post-content><p>It&rsquo;s no secret that I love <a href=http://jspm.io/>jspm</a>. I think it does everything right. I think <a href=https://webpack.github.io/>Webpack</a> requires far too much configuration. jspm is also much more standards-oriented, so I expect the patterns I learn and develop to last much longer, which is something I sorely need in JavaScript development.</p><p>However, testing it is difficult bordering on silly. I just spent three days trying to get tests to work, and the solution I have for you isn&rsquo;t perfect. It requires a harness file, and locking yourself into Babel 5 (for now). I tried <a href=http://www.aptoma.com/es6-code-coverage-babel-jspm-karma-jasmine-istanbul/>several</a><a href=http://dancras.co.uk/2015/12/31/using-mocha-with-jspm.html>different</a><a href=http://vadosware.com/2016/01/02/using-mocha-with-jspm/>guides</a>, each getting me close-but-not-quite-there.</p><p>Let&rsquo;s get to it.</p><h2 id=setting-up-dependencies>Setting up dependencies</h2><p>You will need the following installed by npm, not jspm, since our harness file is run by node.</p><pre><code>&quot;devDependencies&quot;: {
+    &quot;babel&quot;: &quot;^5.8.35&quot;,
+    &quot;chai&quot;: &quot;^3.5.0&quot;,
+    &quot;debug&quot;: &quot;^2.2.0&quot;,
+    &quot;glob&quot;: &quot;^7.0.0&quot;,
+    &quot;jspm&quot;: &quot;^0.16.19&quot;,
+    &quot;mocha&quot;: &quot;^2.4.5&quot;,
+    &quot;systemjs&quot;: &quot;^0.18.17&quot;
+  }
+</code></pre><p>You shouldn&rsquo;t need <code>debug</code>, but I experienced a node module error without it. Not sure what is going on there.</p><h2 id=a-harness-file>A harness file</h2><p>I am using a harness file to load tests with <a href=https://github.com/isaacs/node-glob>node-glob</a> and then run them with the mocha programmatic api. This is also where I <code>require('babel/register')</code> to allow my tests to be written with ES6.</p><pre><code>var Mocha = require('mocha'),
+    glob = require('glob')
+
+require('babel/register')
+
+// Instantiate a Mocha instance.
+var mocha = new Mocha()
+
+//Get all the test files
+glob.sync('src/**/*.test.js').forEach(function(file) {
+  mocha.addFile(file)
+})
+
+var System = require('systemjs')
+require('../jspm.config.js') //Or whatever your config file is called
+
+//
+//Fixup SystemJS (more on this in a second)
+//
+
+
+// Run the tests.
+mocha.run(function(failures){
+    process.on('exit', function () {
+        process.exit(failures)
+    })
+})
+</code></pre><p>This will find all of my tests (I like to colocate them with my source files, you may prefer a <code>tests</code> directory), load them into mocha, and start the testing process.</p><p>For anything to work correctly though, you probably need to tinker with SystemJS to mock modules or remove any bundles you have configured. I have to mock out modules with browser dependencies, like <a href=https://github.com/mzabriskie/axios>axios</a>.</p><pre><code>System.delete(System.normalizeSync('util/http'));
+System.set(System.normalizeSync('util/http'), System.newModule({ default: { } }));
+</code></pre><p>This will remove the existing module and replace it with a completely empty one. You might opt to load up <a href=http://sinonjs.org/>Sinon</a> and replace the module with a spy here.</p><p>You can also remove any bundles you have with this line. I have to do this because my bundles and source code are stored differently than they are hosted, and SystemJS operates on the filesystem when run by node.</p><pre><code>System.bundles = {}
+</code></pre><p>Save this file somewhere, and setup a test script to call it in your <code>package.json</code></p><pre><code>&quot;scripts&quot;: {
+    &quot;test&quot;: &quot;node tests/harness.js&quot;
+}
+</code></pre><h2 id=writing-a-test>Writing a test</h2><p>Writing a test will still require you to load the module with SystemJS, unfortunately. You can&rsquo;t just <code>import</code> it in like normal. Babel will transform <code>import</code>s into <code>require</code> calls, and fail to find them since it will look in <code>node_modules</code> instead of <code>jspm_packages</code>.</p><pre><code>import { expect } from 'chai'
+import System from 'systemjs'
+
+describe('residents page', function() {
+    let residents
+
+    before(function () {
+        return System.import('pages/residents')
+            .then((mod) =&gt; residents = mod)
+    })
+
+    describe('Module Loading', function() {
+        it('should load', function() {
+            expect(residents.default).to.not.be.undefined
+        })
+    })
+})
+</code></pre><p>You&rsquo;ll notice I don&rsquo;t use arrow functions for the mocha before hooks or test suites. Mocha discourages this in its documentation due to the lexical binding of <code>this</code> breaking there tests.</p></div></section></article></div></main><aside class="read-next outer"><div class=inner><div class=read-next-feed><article class=read-next-card><header class=read-next-card-header><h3><span>More in</span> <a href=../tags/jspm>jspm</a></h3></header><div class=read-next-card-content><ul><li><h4><a href=../hot-reload-in-jspm-0-17/>Hot Reloading redux in jspm 0.17</a></h4><div class=read-next-card-meta><p><time datetime=2016-123-03>03 Mar 2016</time></p></div></li><li><h4><a href=../javascript-tests-with-mocha-and-jspm/>JavaScript tests with Mocha and jspm</a></h4><div class=read-next-card-meta><p><time datetime=2016-122-02>02 Feb 2016</time></p></div></li><li><h4><a href=../react-and-jspm/>React and jspm</a></h4><div class=read-next-card-meta><p><time datetime=2016-121-01>01 Jan 2016</time></p></div></li></ul></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../center-div-vertically-and-horizontally-with-full-width-and-height/><header class=post-card-header><div class=post-card-primary-tag>css</div><h2 class=post-card-title>Center DIV Vertically and Horizontally with full width and height</h2></header><section class=post-card-excerpt><p>There are way too many solutions to this online that just don&rsquo;t work. I want a full-page absolutely centered DIV. It needs to center in the browser, which means forcing the correct height and width.
+This uses flexbox, so it doesn&rsquo;t work in Internet Explorer (yes, even IE11&mldr; I thought we were passed this?)
+.center-on-page { height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; } vh and vw are viewport relative units, which will cause this div to be the size of the entire browser.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2016-121-01>29 January 2016</time>
+<span class=bull>&bull;</span> 1 min read</span></div></footer></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../name-change/><header class=post-card-header><h2 class=post-card-title>Name Change</h2></header><section class=post-card-excerpt><p>I legally changed my name today from
+Timothy Samuel Joshua Nehemiah Moran
+to
+Timothy Joshua Kye
+I think it&rsquo;s a pretty solid improvement.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2016-122-02>19 February 2016</time>
+<span class=bull>&bull;</span> 1 min read</span></div></footer></div></article></div></div></aside><footer class="site-footer outer"><div class="site-footer-content inner"><section class=copyright><a href>T++</a> &copy; 2016</section><nav class=site-footer-nav><a href>Latest Posts</a>
+<a href=https://twitter.com/kyeotic target=_blank rel=noopener>Twitter</a>
+<a href=https://github.com/kyeotic target=_blank rel=noopener>Github</a>
+<a href=https://jonathanjanssens.com target=_blank rel=noopener style=opacity:.5>Hugo Casper3 by Jonathan Janssens</a></nav></div></footer></div></body></html>

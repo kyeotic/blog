@@ -1,0 +1,82 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Application Management and Crontab · T++</title><meta name=HandheldFriendly content="True"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=../style.main.min.b28e7c479851dfa1f339f72221d7a4256505edfe2af520bdaf0ba2172b480266.css></head><body class=post-template><div class=site-wrapper><header class=site-header><div class="outer site-nav-main"><div class=inner><nav class=site-nav><div class=site-nav-left><a class=site-nav-logo href>T++</a><div class=site-nav-content><ul class=nav role=menu></ul></div></div></nav></div></div></header><main id=site-main class="site-main outer"><div class=inner><article class="post-full post no-image"><header class=post-full-header><section class=post-full-tags><a href=../tags/nodejs>nodejs</a></section><h1 class=post-full-title>Application Management and Crontab</h1><div class=post-full-byline><section class=post-full-byline-content><section class=post-full-byline-meta><div class=byline-meta-content><time class=byline-meta-date datetime=2016-121-01>8 January 2016</time>
+<span class=byline-reading-time><span class=bull>&bull;</span> 5 min read</span></div></section></section></div></header><section class=post-full-content><div class=post-content><p>This is part of my complete guide to <a href=../digital-ocean-for-beginners>Setting up a CentOS Digital Ocean droplet with Nginx for beginners</a>.</p><p>When working with Nodejs starting your applications and keeping them running is not always straightforward. There are tools to help you with this, like <a href=https://www.npmjs.com/package/forever>forever</a> and <a href=https://www.npmjs.com/package/pm2>pm2</a>, but if you are doing any kind of <a href=../deploying-applications-with-git-and-ssh>deploy-and-build</a> step you will need to have more of a plan than &ldquo;run the application.&rdquo;</p><p>My application server management consists of five pieces</p><ol><li>The application directory structure</li><li>Shell scripts to manage the individual application</li><li>A git repository with a post-receive hook</li><li>A shell script to manage all applications</li><li>Cron to make sure everything stays up and starts after a reboot</li></ol><h2 id=application-structure-on-the-server>Application structure on the server</h2><p>A consistent directory structure will help keep you sane as the number of projects on your server grows. Here is what I use</p><pre><code>~/
+|- /git
+|   +- /project.git
++- /webapps
+    +- /project
+        |- /app
+        +- /run
+</code></pre><p>The git repository holds the source code. The <code>/webapps</code> directory has a project folder for every project. The <code>/project/app</code> directory holds the actual application code. The <code>/project/run</code> directory holds several scripts that control the application.</p><h2 id=shell-scripts-for-the-application>Shell scripts for the application</h2><p>I use five shell scripts to manage every application. If I ever take some time to learn bash better, I will condense them down to one script with flags, but I am not there yet. To simplify project setup, all five can be downloaded and Regexed (sed) into place with this command.</p><pre><code>curl https://raw.githubusercontent.com/tyrsius/scripts/master/linux/node-hooks/download-all | sh -s APPDIR APPPORT
+</code></pre><p>I have these scripts to encapsulate application control. They are called from various places, and if individual applications have special constraints, or all applications need to change, I only need to make changes to these scripts. Some of them, like the one-line <code>stop</code> may seem like overkill, but if I ever switch from <strong>forever</strong> to <strong>pm2</strong> its going to save me a lot of headaches to only update a couple <code>stop</code> scripts.</p><p>These are the scripts.</p><h3 id=start>./start</h3><p>The <code>start</code> script is a safe-for-cron script. It can be run and re-run without any negative side-effects, because it checks to see if the app that it&rsquo;s about to start is running before trying to actually start it.</p><pre><code>#!/bin/sh
+procs=$(forever list | grep -F /home/tyrsius/webapps/portfolio/app/server.js)
+if [ -z &quot;$procs&quot; ]; then
+  PORT=32101 NODE_ENV=production forever start \
+    /home/tyrsius/webapps/portfolio/app/server.js
+fi
+</code></pre><h3 id=stop>./stop</h3><pre><code>#!/bin/sh
+forever stop /home/tyrsius/webapps/portfolio/app/server.js
+</code></pre><p>Just stop the app. Moving on.</p><h3 id=restart>./restart</h3><pre><code>#!/bin/sh
+. /home/tyrsius/webapps/portfolio/run/stop
+. /home/tyrsius/webapps/portfolio/run/start
+</code></pre><p>If any of these scripts are redudant or able to be dropped, it&rsquo;s restart.</p><h3 id=install>./install</h3><pre><code>#!/bin/sh
+cd /home/tyrsius/webapps/portfolio/app
+#npm install
+npm run setup
+npm run build
+</code></pre><p>This is a pretty important one: it controls how the app is built. It will be used when the app is updated by git&rsquo;s <code>post-receive</code> hook.</p><h3 id=restart-install>./restart-install</h3><pre><code>#!/bin/sh
+. /home/tyrsius/webapps/portfolio/run/stop
+. /home/tyrsius/webapps/portfolio/run/install
+. /home/tyrsius/webapps/portfolio/run/start
+</code></pre><p>Since the app needs to install <em>in-between</em><code>stop</code> and <code>start</code>, the <code>restart</code> script can&rsquo;t be used (which is part of what really limits its utility). This is the script that is <em>actually</em> called from git&rsquo;s <code>post-receive</code> hook.</p><h2 id=git-post-receive-hook>Git post-receive hook</h2><p>I cover this topic in my <a href=../deploying-applications-with-git-and-ssh>Deploying with SSH post</a>. In short, this script runs after <code>git push</code>.</p><pre><code>#!/bin/sh
+while read oldrev newrev refname  
+do  
+    branch=$(git rev-parse --symbolic --abbrev-ref $refname)
+    if [ &quot;master&quot; == &quot;$branch&quot; ]; then
+        GIT_WORK_TREE=/home/username/webapps/YOURAPP/app git checkout -f master
+        GIT_WORK_TREE=/home/username/webapps/YOURAPP/app git reset --hard
+        . /home/username/webapps/YOURAPP/run/restart
+    fi
+done  
+</code></pre><h2 id=a-shell-script-for-all-applications>A shell script for all applications</h2><p>Now some people skip this step and just load the <code>start</code> script for each application into their cron jobs. I don&rsquo;t like doing this, because I want to run cron every fifteen minutes <em><strong>and</strong></em> after reboot. This would mean writing the call to the start script <strong>twice</strong>, for <strong>each application</strong>. Instead, I wrap all of them into one script.</p><pre><code>apps=(
+ &quot;blog&quot;
+ &quot;portfolio&quot;
+ &quot;home&quot;
+  #etc...
+)
+for i in &quot;${apps[@]}&quot;
+do
+  /home/tyrsius/webapps/$i/run/start
+done
+</code></pre><p>This has the added advantage of the very clean &ldquo;one app per line&rdquo; format that the <code>apps</code> array loop gives us. Also, because each <code>start</code> script is safe to run multiple times, so is this script.</p><h2 id=cron-jobs>Cron jobs</h2><p>Last, but certainly not least, is the cron job that makes sure the apps are always running.</p><pre><code>PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/tyrsius/bin/node/bin
+
+@reboot /home/tyrsius/webapps/start-all-apps
+*/15 * * * * /home/tyrsius/webapps/start-all-apps
+</code></pre><p>It&rsquo;s simple, and it never needs to grow. When new apps are added, they go into <code>start-all-apps</code>.</p><p>The <code>PATH</code> for cron jobs won&rsquo;t include node normally, which I why I have to manually set the path at the top; otherwise, the <code>start</code> script calls to <code>forever</code> will fail.</p><h1 id=spinning-up-new-apps>Spinning up new apps</h1><p>This can all be done manually, without <em>too</em> much effort. However, as a developer, I prefer to automate as much as possible. WIth that in mind, I have a script that will create a new project directory, a new git repo, and even add an entry to <code>start-all-script</code> for me. Its long, and uses scripts I have stored on GitHub, but you might find it interesting.</p><pre><code>#!/bin/sh
+# $1 app directory
+# $2 app port
+# $3 git repo
+# $4 subdomain
+cd /home/tyrsius/webapps
+mkdir $1
+cd $1
+mkdir app
+mkdir run
+cd run
+curl https://raw.githubusercontent.com/tyrsius/scripts/master/linux/node-hooks/download-all | sh -s $1 $2
+cd /home/tyrsius/git
+git init --bare $3.git
+cd $3.git/hooks
+rm *
+curl https://raw.githubusercontent.com/tyrsius/scripts/master/linux/post-receive | sh -s $1
+sed -i &quot;s/)/# \&quot;$1\&quot;\n)/g&quot; /home/tyrsius/webapps/start-all-apps
+</code></pre><p>The comments at the top show you what arguments it needs to be called with.</p><p>There is a line at the bottom that I have omitted that also adds configuration to nginx for this newly created app, but explaining it would require another blog post. Maybe next time.</p></div></section></article></div></main><aside class="read-next outer"><div class=inner><div class=read-next-feed><article class=read-next-card><header class=read-next-card-header><h3><span>More in</span> <a href=../tags/nodejs>nodejs</a></h3></header><div class=read-next-card-content><ul><li><h4><a href=../application-management-and-crontab/>Application Management and Crontab</a></h4><div class=read-next-card-meta><p><time datetime=2016-121-01>01 Jan 2016</time></p></div></li><li><h4><a href=../installing-nodejs-on-centos/>Installing Nodejs on CentOS</a></h4><div class=read-next-card-meta><p><time datetime=2016-121-01>01 Jan 2016</time></p></div></li></ul></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../deploying-applications-with-git-and-ssh/><header class=post-card-header><div class=post-card-primary-tag>git</div><h2 class=post-card-title>Deploying Applications with Git and SSH</h2></header><section class=post-card-excerpt><p>This is part of my complete guide to Setting up a CentOS Digital Ocean droplet with Nginx for beginners.
+I&rsquo;ve written about this before, but my methods have changed somewhat since then. Digital Ocean also makes it quite a bit easier than webfaction. Hopefully you have already gone though the DNS Managment guide. if you have not installed git and setup a CNAME for git.DOMAIN.com, you should do that now.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2016-121-01>8 January 2016</time>
+<span class=bull>&bull;</span> 4 min read</span></div></footer></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../using-mailgun-to-route-gmail-for-free/><header class=post-card-header><div class=post-card-primary-tag>email</div><h2 class=post-card-title>Using Mailgun to route email to Gmail</h2></header><section class=post-card-excerpt><p>This is part of my complete guide to Setting up a CentOS DigitalOcean droplet with Nginx for beginners.
+The Why If you have a custom domain but you want to use Gmail as your inbox/outbox, there are a couple solutions.
+Pay $5/month/user for a Google Apps account Use Zoho to setup a real inbox for free Forward everything to an existing gmail account, and give that account SMTP access to send from your custom domain.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2016-121-01>28 January 2016</time>
+<span class=bull>&bull;</span> 4 min read</span></div></footer></div></article></div></div></aside><footer class="site-footer outer"><div class="site-footer-content inner"><section class=copyright><a href>T++</a> &copy; 2016</section><nav class=site-footer-nav><a href>Latest Posts</a>
+<a href=https://twitter.com/kyeotic target=_blank rel=noopener>Twitter</a>
+<a href=https://github.com/kyeotic target=_blank rel=noopener>Github</a>
+<a href=https://jonathanjanssens.com target=_blank rel=noopener style=opacity:.5>Hugo Casper3 by Jonathan Janssens</a></nav></div></footer></div></body></html>

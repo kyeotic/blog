@@ -1,0 +1,98 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Configuring Nginx as a Reverse Proxy (for NodeJS) · T++</title><meta name=HandheldFriendly content="True"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=../style.main.min.b28e7c479851dfa1f339f72221d7a4256505edfe2af520bdaf0ba2172b480266.css></head><body class=post-template><div class=site-wrapper><header class=site-header><div class="outer site-nav-main"><div class=inner><nav class=site-nav><div class=site-nav-left><a class=site-nav-logo href>T++</a><div class=site-nav-content><ul class=nav role=menu></ul></div></div></nav></div></div></header><main id=site-main class="site-main outer"><div class=inner><article class="post-full post no-image"><header class=post-full-header><section class=post-full-tags><a href=../tags/centos>centOS</a></section><h1 class=post-full-title>Configuring Nginx as a Reverse Proxy (for NodeJS)</h1><div class=post-full-byline><section class=post-full-byline-content><section class=post-full-byline-meta><div class=byline-meta-content><time class=byline-meta-date datetime=2016-121-01>7 January 2016</time>
+<span class=byline-reading-time><span class=bull>&bull;</span> 6 min read</span></div></section></section></div></header><section class=post-full-content><div class=post-content><p>This is part of my complete guide to <a href=../digital-ocean-for-beginners>Setting up a CentOS Digital Ocean droplet with Nginx for beginners</a>.</p><blockquote><p>Nginx is a highly-capable server, suitable for many use cases. The purpose of this guide is to show nginx&rsquo;s use as a reverse proxy, not as the application server itself. It is assumed you will be using an application server, like NodeJS, to perform the rest of the work.</p></blockquote><p>If you don&rsquo;t yet have Nginx installed, you can install it with</p><pre><code>sudo yum install epel-release # if you haven't already
+sudo yum install nginx
+</code></pre><h2 id=reverse-proxies>Reverse Proxies</h2><p>If you came here from the <a href=../digital-ocean-for-beginners>main guide</a>, you may not know what a <strong>reverse proxy</strong> is, or what it is used for. A reverse proxy handles incoming connections by re-routing them to internal destinations, concealing the real target from the outside world. This is the reverse of a standard proxy, which handles outgoining connections, concealing the real source from the outside world.</p><p>The use case we are interested in is having a single server handle the requests for multiple applications, by using the <strong>http domain</strong> to figure out which internal port to use.</p><p>If you use Node.js in development you are probably used to going to <code>http://localhost:3000</code> or <code>http://localhost:9000</code> to see your server. That <code>:3000</code> is a port number. You don&rsquo;t normally see it because when it is left off the browser assumes that it is port <code>80</code> for <code>http</code> and port <code>443</code> for <code>https</code>. You need admin/sudo/root access to bind to those ports, so development commonly picks a high number so that it can run as a normal user.</p><p>When we want to have multiple applications running on a single server, for example a <a href=https://blog.tyrsius.com>blog</a> and a <a href=http://tyrsius.com>portfolio</a>, they cannot both listen on that servers port 80 (or 443 if they are using SSL). This is where nginx comes in. You can configure these applications to listen on other ports (like <code>3000</code> and <code>3001</code>) and then have nginx route calls to <code>blog.tyrsius.com</code> (which is port 80 by default) and <code>tyrsius.com</code> (still port 80), and route them to <code>3000</code> and <code>3001</code> internally.</p><p>This is what we are going to do.</p><h2 id=configuring-nginx>Configuring Nginx</h2><p>The default config file for nginx is located at <code>/etc/nginx/nginx.conf</code>. It contains a server block for the default server. We are going to ignore that, since it doesn&rsquo;t affect us, but if you want to change the default response nginx serves to visitors who browse to your servers IP address directly, this is where you would do it.</p><p>By default, nginx also loads all of the <code>.conf</code> file in <code>/etc/nginx/conf.d/</code> with a wildcard <code>include</code> statement. We will take advantage of this by adding a <code>.conf</code> file for each application we are going to host on this server. I am going to stick with my blog and portfolio examples.</p><pre><code>sudo nano /etc/nginx/conf.d/blog.conf
+</code></pre><p>These conf files are in a close-to-json format that I do not know the name of (if it even has one). Configuration is done in blocks, and the top-level block we need is the <strong>server block</strong></p><pre><code>server { 
+	listen 80; 
+	server_name blog.tyrsius.com; 
+}
+</code></pre><p>This tells nginx to create a server listening on port 80 (the default <code>http</code> port) for requests to <code>blog.tyrsius.com</code>.</p><p>The second level block we need to configure is the <strong>location block</strong>. You can have more than one of these in a server block, but don&rsquo;t worry about that for now.</p><pre><code>server { 
+	listen 80; 
+	server_name durandalgrid.tyrsius.com; 
+
+	location / {
+        proxy_pass http://localhost:32102; 
+        
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade; 
+	} 
+}
+</code></pre><p>The only important value in here is the top one, <code>proxy_pass</code>. It controls where nginx will route requests to <code>blog.tyrsius.com:80</code>. I picked <code>32100</code> as a base to increment ports from on all my node applications. You can safely pick any unique port in the range <code>1024–49151</code>, <a href=http://stackoverflow.com/questions/113224/what-is-the-largest-tcp-ip-network-port-number-allowable-for-ipv4>though there is some confusion</a> on whether that range extends to <code>65535</code>. It only has to be unique to your server.</p><p>The rest of the values are boilerplate, and we will be using them everywhere. To simplify this, we can extract them into another file, and use an <code>include</code> to pull them in. SInce we are going to be using them a lot, this is a good idea.</p><pre><code>sudo nano /etc/nginx/basic-http
+</code></pre><p>And save the following</p><pre><code>proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection 'upgrade';
+proxy_set_header Host $host;
+proxy_cache_bypass $http_upgrade; 
+</code></pre><p>Then you can change <code>blog.conf</code> to</p><pre><code>server { 
+	listen 80; 
+	server_name blog.tyrsius.com; 
+
+	location / {
+        proxy_pass http://localhost:32102; 
+        include /etc/nginx/basic-http; 
+	} 
+}
+</code></pre><p>Much better!</p><p>If we want another site, running on another port, we can just create another file.</p><pre><code>server { 
+	listen 80; 
+	server_name www.tyrsius.com; 
+
+	location / {
+        proxy_pass http://localhost:32101; 
+        include /etc/nginx/basic-http; 
+	} 
+}
+</code></pre><p>However, I want my portfolio to have a cleaner url, with the <code>www</code>. For this, we will use a redirect.</p><h2 id=redirects-in-nginx>Redirects in Nginx</h2><p>Nginx makes creates permanent redirects easy. We want a fairly simple redirect from <code>www.tyrsius.com</code> to <code>tyrsius.com</code>, which will look like this</p><pre><code>server {
+    listen 80;
+    server_name www.tyrsius.com;
+    return 301 https://tyrsius.com$request_uri;
+}
+
+server {
+    listen 80;
+    server_name tyrsius.com;
+    
+    location / {
+      proxy_pass http://localhost:32101;
+      include /etc/nginx/basic-http;
+    }
+}
+</code></pre><p>The important bits here are that the top server block doesn&rsquo;t have a <code>location</code>, just a <code>return</code>. It contains <code>301</code>, the http response code for a permanent redirect, the host it&rsquo;s redirecting, and a backreference to <code>$request_uri</code>, which ensures that deep links like <a href=http://www.tyrsius.com/projects/portfolio>http://www.tyrsius.com/projects/portfolio</a> gets redirected to <a href=http://tyrsius.com/projects/portfolio>http://tyrsius.com/projects/portfolio</a> instead of just <a href=http://tyrsius.com>http://tyrsius.com</a>.</p><h2 id=adding-sslhttps>Adding SSL/HTTPS</h2><p>If you are hosting your sites on HTTPS with an SSL certificate, nginx can configure this for you. It can even handle redirecting from HTTP to HTTPS, the same way we did the redirect above.</p><pre><code>server {
+    listen 80;
+     server_name blog.tyrsius.com;
+     return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name blog.tyrsius.com;
+
+    location / {
+        proxy_pass http://localhost:32102;
+        include /etc/nginx/basic-http;
+    }
+
+    ssl_certificate /etc/letsencrypt/live/blog.tyrsius.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/blog.tyrsius.com/privkey.pem;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+	ssl_prefer_server_ciphers on;
+	ssl_ciphers AES256+EECDH:AES256+EDH:!aNULL;
+}
+</code></pre><p>You might notice the redirect here is a little different. This is because going from HTTP to HTTPS doesn&rsquo;t require us to change the subdomain, so we can use the backreference <code>$host</code> instead of spelling it out.</p><p>You should also notice that the server block that handles the real request is listening on <code>443</code> instead of <code>80</code>, which is the default <code>ssl</code> port. It also has <code>ssl</code> after the port, which tells nginx the kind of request it is.</p><p>The SSL values are listed below the location, and are pretty boilerplate. In fact, the bottom 3 values can (and should) be extracted into another include. My real conf looks like this.</p><pre><code>  ...
+  ssl_certificate /etc/letsencrypt/live/blog.tyrsius.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/blog.tyrsius.com/privkey.pem;
+  include /etc/nginx/basic-https;
+}
+</code></pre><p>You should also notice that the <code>proxy_pass</code> is <strong>not going to HTTPS</strong>. That&rsquo;s because the internal application is still listening on the same HTTP port it was before. Nginx is handling the SSL stuff for the application. This is actually very handy, especially for node.js applications, since they don&rsquo;t even have to know they are running in https mode. You can develop with the same node server that you use in production!!.</p><h2 id=dns>DNS</h2><p>The nginx server is only part of the story. To actually <em>get</em> requests made to <code>blog.tyrsius.com</code> or <code>tyrsius.com</code> the DNS for these domains needs to point them to the server running nginx. If you are using Digital Ocean, this is pretty easy. To see how to do that, check out <a href=https://www.digitalocean.com/community/tutorials/how-to-set-up-a-host-name-with-digitalocean>this excellent guide</a> from the Digital Ocean Community.</p><p>When you are done, it should look something like this (the blurry bit is your droplet IP address)</p><p><img src=https://i.imgur.com/wT8jekM.png alt="DNS configuration"></p></div></section></article></div></main><aside class="read-next outer"><div class=inner><div class=read-next-feed><article class=read-next-card><header class=read-next-card-header><h3><span>More in</span> <a href=../tags/centos>centOS</a></h3></header><div class=read-next-card-content><ul></ul></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../configuring-the-firewall-on-centos/><header class=post-card-header><h2 class=post-card-title>Configuring the firewall on CentOS</h2></header><section class=post-card-excerpt><p>This is part of my complete guide to Setting up a CentOS Digital Ocean droplet with Nginx for beginners.
+If you just need the commands, here they are. Read on for an explanation of what is happening.
+sudo systemctl start firewalld sudo firewall-cmd --permanent --add-service=ssh sudo firewall-cmd --permanent --add-port=4444/tcp #if you changed default ssh port sudo firewall-cmd --permanent --add-service=http sudo firewall-cmd --permanent --add-service=https sudo firewall-cmd --permanent --add-service=smtp sudo firewall-cmd --reload sudo systemctl enable firewalld I am not going to bother repeating the excellent explanation of these commands from their source guide.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2016-121-01>7 January 2016</time>
+<span class=bull>&bull;</span> 1 min read</span></div></footer></div></article><article class="post-card post
+no-image"><div class=post-card-content><a class=post-card-content-link href=../installing-nodejs-on-centos/><header class=post-card-header><div class=post-card-primary-tag>nodejs</div><h2 class=post-card-title>Installing Nodejs on CentOS</h2></header><section class=post-card-excerpt><p>This is part of my complete guide to Setting up a CentOS Digital Ocean droplet with Nginx for beginners.
+Where to get it from Yum has a Nodejs package. I don&rsquo;t recommend using it. It update slowly, and you are probably going to want to manage node and npm&rsquo;s version yourself. I highly recommend installing and updating node yourself, without a package manager (other than npm). Later on, being able to update Nodejs though npm is going to make your life a lot easier.</p></section></a><footer class=post-card-meta><ul class=author-list><li class=author-list-item><div class=author-name-tooltip></div><a href=# class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21.0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#fff"/></g></svg></a></li></ul><div class=post-card-byline-content><span></span><span class=post-card-byline-date><time datetime=2016-121-01>8 January 2016</time>
+<span class=bull>&bull;</span> 2 min read</span></div></footer></div></article></div></div></aside><footer class="site-footer outer"><div class="site-footer-content inner"><section class=copyright><a href>T++</a> &copy; 2016</section><nav class=site-footer-nav><a href>Latest Posts</a>
+<a href=https://twitter.com/kyeotic target=_blank rel=noopener>Twitter</a>
+<a href=https://github.com/kyeotic target=_blank rel=noopener>Github</a>
+<a href=https://jonathanjanssens.com target=_blank rel=noopener style=opacity:.5>Hugo Casper3 by Jonathan Janssens</a></nav></div></footer></div></body></html>
