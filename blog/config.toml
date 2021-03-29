@@ -12,8 +12,8 @@ theme = "casper3"
   github = "https://github.com/kyeotic"
   description = "T++"
   mainSections = ["post"]
-  pygmentsCodeFences = true
-  pygmentsStyle="monokai"
+  # pygmentsCodeFences = true
+  # pygmentsStyle="monokai"
 
 [taxonomies]
 category = "categories"
