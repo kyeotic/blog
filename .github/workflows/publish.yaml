@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'blog/**'
+      - '*'
 
 jobs:
   build:
@@ -34,5 +35,5 @@ jobs:
           emptyCommits: false
         env:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./blog/public
+          publish_dir: ./public
           publish_branch: gh-pages
