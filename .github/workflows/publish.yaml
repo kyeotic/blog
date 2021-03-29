@@ -31,9 +31,7 @@ jobs:
         run: touch ./blog/public/.nojekyll
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        with:
-          emptyCommits: false
         env:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
