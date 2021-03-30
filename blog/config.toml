@@ -1,4 +1,4 @@
-baseURL = ""
+baseurl = "/"
 languageCode = "en-us"
 title = "T++"
 enableInlineShortcodes = true
