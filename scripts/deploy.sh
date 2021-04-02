@@ -19,6 +19,12 @@ terraform_state_bucket="terraform-remote-$AWS_ACCOUNT_ID"
 # # TF version
 tf_ver="v0.14.9"; if [[ ! $(Terraform --version) =~ "Terraform $tf_ver" ]]; then echo "Terraform $tf_ver is required"; exit 1; fi
 
+mkdir -p build
+
+# pushd infrastructure
+# zip -r "../build/edge.zip" lambdaEdge/
+# popd
+
 # # Cleanup .terraform
 pushd infrastructure/terraform
 # rm -rf .terraform/

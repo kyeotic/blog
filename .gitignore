@@ -11,6 +11,8 @@ $RECYCLE.BIN/
 # OSX
 .DS_Store
 /dist
+/build/
 
 .terraform/
+*.zip
 *.tfstate*

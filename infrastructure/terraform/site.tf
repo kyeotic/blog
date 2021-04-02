@@ -50,22 +50,22 @@ resource "aws_cloudfront_distribution" "website_cdn" {
     }
   }
   default_root_object = "index.html"
-  custom_error_response {
-    error_code = "404"
+  # custom_error_response {
+  #   error_code = "404"
 
-    # error_caching_min_ttl = "360"
-    response_code      = "200"
-    response_page_path = "/index.html"
-  }
-  custom_error_response {
-    error_code = "403"
+  #   # error_caching_min_ttl = "360"
+  #   response_code      = "200"
+  #   response_page_path = "/index.html"
+  # }
+  # custom_error_response {
+  #   error_code = "403"
 
-    # error_caching_min_ttl = "360"
-    response_code      = "200"
-    response_page_path = "/index.html"
-  }
+  #   # error_caching_min_ttl = "360"
+  #   response_code      = "200"
+  #   response_page_path = "/index.html"
+  # }
   default_cache_behavior {
-    allowed_methods = ["GET", "HEAD", "DELETE", "OPTIONS", "PATCH", "POST", "PUT"]
+    allowed_methods = ["GET", "HEAD"]
     cached_methods  = ["GET", "HEAD"]
 
     forwarded_values {
@@ -84,9 +84,15 @@ resource "aws_cloudfront_distribution" "website_cdn" {
     // This redirects any HTTP request to HTTPS. Security first!
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
+
+    lambda_function_association {
+      event_type   = "origin-request"
+      lambda_arn   = aws_lambda_function.edge.qualified_arn
+      include_body = false
+    }
   }
   ordered_cache_behavior {
-    allowed_methods = ["GET", "HEAD", "DELETE", "OPTIONS", "PATCH", "POST", "PUT"]
+    allowed_methods = ["GET", "HEAD"]
     cached_methods  = ["GET", "HEAD"]
 
     forwarded_values {

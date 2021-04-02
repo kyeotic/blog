@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://blog.kye.dev/"
 languageCode = "en-us"
 title = "T++"
 enableInlineShortcodes = true
