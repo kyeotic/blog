@@ -3,9 +3,9 @@ name: Publish
 on:
   push:
     branches:
-      - deploy
-    # paths:
-    #   - 'blog/**'
+      - main
+    paths:
+      - 'blog/**'
 
 jobs:
   build:
