@@ -17,11 +17,8 @@ HELP_FUNC = \
 help:
 	@perl -e '$(HELP_FUNC)' $(MAKEFILE_LIST)
 
-run-blog: ## Run in development mode
-	cd blog && hugo serve -D
-
-blog: ## Build the site
-	cd blog && hugo -d public --gc --minify --cleanDestinationDir
+run: ## Run in development mode
+	docker-compose -f infrastructure/docker-compose.yaml up
 
 sync-blog: ## update blog theme submodules
 	git submodule update --init --recursive

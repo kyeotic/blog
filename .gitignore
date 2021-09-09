@@ -16,3 +16,4 @@ $RECYCLE.BIN/
 .terraform/
 *.zip
 *.tfstate*
+/.env

@@ -10,7 +10,7 @@ This doesn't specifically apply to the [Brandon Eich saga](http://arstechnica.co
 
 I think this is somewhat related to the concept that if someone speaks an opinion, because they have a right to speak it (under the 1st Amendment), that they have a right not to suffer an ill will for it. That nobody should disagree with them, or call them out on their opinion, because doing so is "chilling" free speech.
 
-They aren't directly related, but I hear them come up in similar scenarios and from similar people. Since I partially addressed the latter in my last [blog post about Eich](http://blog.tyrsius.com/mozilla-eich/), I'm going to focus on the former today.
+They aren't directly related, but I hear them come up in similar scenarios and from similar people. Since I partially addressed the latter in my last [blog post about Eich](/mozilla-eich/), I'm going to focus on the former today.
 
 Before I try to analyze anything I want to define my terms.
 
@@ -36,10 +36,10 @@ We have to determine for ourselves how much we are going to tolerate, and as soo
 
 I think they are asking for one of two things (there might be more, but these two are what I am going to focus on).
 
-1. 
+1.
 They are asking for equal treatment. When the civil rights movement asked for tolerance of black people, they were asking to be treated the same as white people. When the LGBT movement asks for tolerance, they are asking for the right to marry the people they love, the same as straight people.
 
-2. 
+2.
 They are asking for differentiated treatment. When the segregation movement asked for the right to not allow black children to attend the same schools as white children, they were asking for children to be educated based on their race. When the anti gay marriage movement asks for legislation defining marriage as between one man and one woman, they are asking that adults be institutionalized based on their gender.
 
 I think "tolerance" accurately applies to only one of these. Equality is tolerance, differentiation is the opposite.

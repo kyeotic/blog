@@ -17,11 +17,11 @@ In it's tutorial, and by way of using `app.useConvention()`, it opines on an org
     |	|--views
     |	|	+--shell.html
     |	|--viewmodels
-    |	|	+shell.js	
+    |	|	+shell.js
     |	+-main.js
     +--lib
     	+--durandal
-    
+
 
 When you compose a viewmodel, Durandal locates the view for it by replacing the `viewmodels` section of its path with `views`. If your viewmodel is at `app/viewmodels/shell.js`, it will look for the view at `app/views/shell.html`.
 
@@ -49,7 +49,7 @@ If you leave off the `app.useConvention()` call, you end up with a scheme I very
     |	+-main.js
     +--lib
     	+--durandal
-    
+
 
 I think this organization scales much better. It matches conventional filesystem organization, which is I think easier to understand, and easier to navigate. When I want to work on something related to user, not only is each viewmodel/view pair located next to each other, but related viewmodel/view pairs are also right there. If I want to reuse a module in another project, I just copy the whole folder.
 
@@ -74,6 +74,6 @@ So far, all my Durandal projects have had a NodeJS backend (except the ones at w
     +--test
     	|--unit tests
         +--integration tests
-    
 
-> A project seed using the organization in the post, with BootStrap 3.0 and the plugins I used can be found [here](https://github.com/tyrsius/durandal-seed).
+
+> A project seed using the organization in the post, with BootStrap 3.0 and the plugins I used can be found [here](https://github.com/kyeotic/durandal-seed).

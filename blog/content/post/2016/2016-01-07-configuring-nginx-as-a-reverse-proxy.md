@@ -14,7 +14,7 @@ If you don't yet have Nginx installed, you can install it with
 
     sudo yum install epel-release # if you haven't already
     sudo yum install nginx
-    
+
 
 ## Reverse Proxies
 
@@ -24,7 +24,7 @@ The use case we are interested in is having a single server handle the requests 
 
 If you use Node.js in development you are probably used to going to `http://localhost:3000` or `http://localhost:9000` to see your server. That `:3000` is a port number. You don't normally see it because when it is left off the browser assumes that it is port `80` for `http` and port `443` for `https`. You need admin/sudo/root access to bind to those ports, so development commonly picks a high number so that it can run as a normal user.
 
-When we want to have multiple applications running on a single server, for example a [blog](https://blog.tyrsius.com) and a [portfolio](http://tyrsius.com), they cannot both listen on that servers port 80 (or 443 if they are using SSL). This is where nginx comes in. You can configure these applications to listen on other ports (like `3000` and `3001`) and then have nginx route calls to `blog.tyrsius.com` (which is port 80 by default) and `tyrsius.com` (still port 80), and route them to `3000` and `3001` internally.
+When we want to have multiple applications running on a single server, for example a [blog](/) and a [portfolio](http://tyrsius.com), they cannot both listen on that servers port 80 (or 443 if they are using SSL). This is where nginx comes in. You can configure these applications to listen on other ports (like `3000` and `3001`) and then have nginx route calls to `blog.tyrsius.com` (which is port 80 by default) and `tyrsius.com` (still port 80), and route them to `3000` and `3001` internally.
 
 This is what we are going to do.
 
@@ -35,42 +35,42 @@ The default config file for nginx is located at `/etc/nginx/nginx.conf`. It cont
 By default, nginx also loads all of the `.conf` file in `/etc/nginx/conf.d/` with a wildcard `include` statement. We will take advantage of this by adding a `.conf` file for each application we are going to host on this server. I am going to stick with my blog and portfolio examples.
 
     sudo nano /etc/nginx/conf.d/blog.conf
-    
+
 
 These conf files are in a close-to-json format that I do not know the name of (if it even has one). Configuration is done in blocks, and the top-level block we need is the **server block**
 
-    server { 
-    	listen 80; 
-    	server_name blog.tyrsius.com; 
+    server {
+    	listen 80;
+    	server_name blog.tyrsius.com;
     }
-    
+
 
 This tells nginx to create a server listening on port 80 (the default `http` port) for requests to `blog.tyrsius.com`.
 
 The second level block we need to configure is the **location block**. You can have more than one of these in a server block, but don't worry about that for now.
 
-    server { 
-    	listen 80; 
-    	server_name durandalgrid.tyrsius.com; 
-    
+    server {
+    	listen 80;
+    	server_name durandalgrid.tyrsius.com;
+
     	location / {
-    		proxy_pass http://localhost:32102; 
-            
+    		proxy_pass http://localhost:32102;
+
     		proxy_http_version 1.1;
     		proxy_set_header Upgrade $http_upgrade;
     		proxy_set_header Connection 'upgrade';
     		proxy_set_header Host $host;
-    		proxy_cache_bypass $http_upgrade; 
-    	} 
+    		proxy_cache_bypass $http_upgrade;
+    	}
     }
-    
+
 
 The only important value in here is the top one, `proxy_pass`. It controls where nginx will route requests to `blog.tyrsius.com:80`. I picked `32100` as a base to increment ports from on all my node applications. You can safely pick any unique port in the range `1024–49151`, [though there is some confusion](http://stackoverflow.com/questions/113224/what-is-the-largest-tcp-ip-network-port-number-allowable-for-ipv4) on whether that range extends to `65535`. It only has to be unique to your server.
 
 The rest of the values are boilerplate, and we will be using them everywhere. To simplify this, we can extract them into another file, and use an `include` to pull them in. SInce we are going to be using them a lot, this is a good idea.
 
     sudo nano /etc/nginx/basic-http
-    
+
 
 And save the following
 
@@ -78,36 +78,36 @@ And save the following
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
     proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade; 
-    
+    proxy_cache_bypass $http_upgrade;
+
 
 Then you can change `blog.conf` to
 
-    server { 
-    	listen 80; 
-    	server_name blog.tyrsius.com; 
-    
+    server {
+    	listen 80;
+    	server_name blog.tyrsius.com;
+
     	location / {
-    		proxy_pass http://localhost:32102; 
-    		include /etc/nginx/basic-http; 
-    	} 
+    		proxy_pass http://localhost:32102;
+    		include /etc/nginx/basic-http;
+    	}
     }
-    
+
 
 Much better!
 
 If we want another site, running on another port, we can just create another file.
 
-    server { 
-    	listen 80; 
-    	server_name www.tyrsius.com; 
-    
+    server {
+    	listen 80;
+    	server_name www.tyrsius.com;
+
     	location / {
-    		proxy_pass http://localhost:32101; 
-    		include /etc/nginx/basic-http; 
-    	} 
+    		proxy_pass http://localhost:32101;
+    		include /etc/nginx/basic-http;
+    	}
     }
-    
+
 
 However, I want my portfolio to have a cleaner url, with the `www`. For this, we will use a redirect.
 
@@ -120,17 +120,17 @@ Nginx makes creates permanent redirects easy. We want a fairly simple redirect f
         server_name www.tyrsius.com;
         return 301 https://tyrsius.com$request_uri;
     }
-    
+
     server {
         listen 80;
         server_name tyrsius.com;
-        
+
         location / {
           proxy_pass http://localhost:32101;
           include /etc/nginx/basic-http;
         }
     }
-    
+
 
 The important bits here are that the top server block doesn't have a `location`, just a `return`. It contains `301`, the http response code for a permanent redirect, the host it's redirecting, and a backreference to `$request_uri`, which ensures that deep links like [http://www.tyrsius.com/projects/portfolio](http://www.tyrsius.com/projects/portfolio) gets redirected to [http://tyrsius.com/projects/portfolio](http://tyrsius.com/projects/portfolio) instead of just [http://tyrsius.com](http://tyrsius.com).
 
@@ -143,23 +143,23 @@ If you are hosting your sites on HTTPS with an SSL certificate, nginx can config
          server_name blog.tyrsius.com;
          return 301 https://$host$request_uri;
     }
-    
+
     server {
         listen 443 ssl;
         server_name blog.tyrsius.com;
-    
+
         location / {
             proxy_pass http://localhost:32102;
             include /etc/nginx/basic-http;
         }
-    
+
         ssl_certificate /etc/letsencrypt/live/blog.tyrsius.com/fullchain.pem;
         ssl_certificate_key /etc/letsencrypt/live/blog.tyrsius.com/privkey.pem;
         ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     	ssl_prefer_server_ciphers on;
     	ssl_ciphers AES256+EECDH:AES256+EDH:!aNULL;
     }
-    
+
 
 You might notice the redirect here is a little different. This is because going from HTTP to HTTPS doesn't require us to change the subdomain, so we can use the backreference `$host` instead of spelling it out.
 
@@ -172,7 +172,7 @@ The SSL values are listed below the location, and are pretty boilerplate. In fac
       ssl_certificate_key /etc/letsencrypt/live/blog.tyrsius.com/privkey.pem;
       include /etc/nginx/basic-https;
     }
-    
+
 
 You should also notice that the `proxy_pass` is **not going to HTTPS**. That's because the internal application is still listening on the same HTTP port it was before. Nginx is handling the SSL stuff for the application. This is actually very handy, especially for node.js applications, since they don't even have to know they are running in https mode. You can develop with the same node server that you use in production!!.
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-#!/bin/bash
 ###########################
 ## Use for local deploys ##
 ###########################
@@ -10,14 +9,11 @@ set -e
 SUBDOMAIN="blog"
 ZONE_NAME="kye.dev"
 
-DOCKER_BUILDKIT=1 docker build -f ./infrastructure/Dockerfile.static --output type=local,dest=dist/ .
+DOCKER_BUILDKIT=1 docker build -f ./infrastructure/Dockerfile --output type=local,dest=dist/ .
 
 # Terraform state, bucket name
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity | jq -r '.Account')
 terraform_state_bucket="terraform-remote-$AWS_ACCOUNT_ID"
-
-# # TF version
-tf_ver="v0.14.9"; if [[ ! $(Terraform --version) =~ "Terraform $tf_ver" ]]; then echo "Terraform $tf_ver is required"; exit 1; fi
 
 mkdir -p build
 

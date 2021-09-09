@@ -39,7 +39,7 @@ All of the code I am about to show you assumes your test directory looks like th
     	|	+--durandalHarness.js
     	|--testSpec1.js
     	+--testSpec2.js
-    
+
 
 I organize them this way because once it's set up, I don't need to change anything in the `lib` folder. The tests are what I care about, so I want them seperate and visible. We will cover what each of these files is in turn.
 
@@ -55,13 +55,13 @@ I split the spec file in to two parts, because adding javasscript to the page vi
     setTimeout(function () {
         phantom.exit();
     }, 2000);
-    
+
     //globals: phantom, require, runTests
     var fs = require('fs'),
         Q = require('./q'),
         page = require('webpage').create(),
         specFiles;
-    
+
     //Collect all of the test files we want to run
     //In this case I am assuming they are all the .js files
     //that are up one level
@@ -74,11 +74,11 @@ I split the spec file in to two parts, because adding javasscript to the page vi
         .map(function (item) {
             return 'tests/' + item.substring(0, item.length - 3);
         });
-    
+
     //Include this line if you want an output the tests
     //you are about to run
     //console.log('\nRunning spec files:' + specFiles.map(function (s) { return '\n' + s; }));
-    
+
     //The console-reporter is new()-ed up for each tests
     //We need a way to track failures across all the run tests
     var runSpecs = { run: 0, failed: 0 };
@@ -92,14 +92,14 @@ I split the spec file in to two parts, because adding javasscript to the page vi
         }
         return true;
     };
-    
+
     //All of our tests need to run in a clean environment
     //But Phantom can only handle one page at a time
     //Q chains are an easy way to queue up the work
-    var test = Q();    
+    var test = Q();
     var chainTest = function (promise, test) {
         return promise.then(function () {
-            var defer = Q.defer();    
+            var defer = Q.defer();
             page.onConsoleMessage = function (msg) {
                 if (msg === "ConsoleReporter finished") {
                     defer.resolve();
@@ -107,23 +107,23 @@ I split the spec file in to two parts, because adding javasscript to the page vi
                 }
                 if (!checkForResults(msg))
                     console.log(msg);
-            };            
+            };
             page.onLoadFinished = function () {
                 page.evaluate(function (test) {
                     window.specFiles = [test];
                     require(['lib/durandalHarness']);
                 }, test);
-            };    
-            page.open('spec.html');    
+            };
+            page.open('spec.html');
             return defer.promise;
         });
     };
-    
+
     //Chain all the tests into one sequence
     for (var i = 0; i < specFiles.length; i++) {
         test = chainTest(test, specFiles[i]);
     }
-    
+
     //Run all the tests, then log the final results
     test.then(function () {
         console.log("");
@@ -131,14 +131,14 @@ I split the spec file in to two parts, because adding javasscript to the page vi
         console.log("-----------------");
         console.log('Specs: ' + runSpecs.run + ', Failed: ' + runSpecs.failed);
     }).then(phantom.exit);
-    
+
     test.fail(function(error) {
         console.log('An error occured', error);
         phantom.exit(runSpecs.failed == 0 ? 0 : 1);
     });
-    
+
     test.done();
-    
+
 
 Basically, this file tells Phantom to locate all of the test specs in the parent directory. Then it creates a promise for each test that loads the `spec.html`, connects the `console-reporter`, requires the `durandalHarness` (more on this later), and run the tests. Then it chains all the promises together, and runs the whole thing.
 
@@ -181,7 +181,7 @@ Basically, this file tells Phantom to locate all of the test specs in the parent
         <body>
         </body>
         </html>
-    
+
 
 The `script` tags are pretty straightforward. They are running from phantom, so they are relative to the current directory. For our project code, we have to back out and go into the `source` folder. Note here that these paths are written as if `source` directly contains your Durandal code, and this is probably not the case. Adjust your paths accordingly.
 
@@ -209,7 +209,7 @@ Finally, we create ` runTests()` that the `durandalHarness` will call once Duran
             runTests(window.specFiles);
         });
     });
-    
+
 
 This is basically going to mirror your `main.js` file. You need to have Durandal install the plugins so that your code that interacts with them will behave the same way its going to behave in the real-world. You can add any additional configuration you need before calling `runTests()`.
 
@@ -219,26 +219,26 @@ Our environment is setup now. We can write a test, and run it from the terminal.
 
     define(['services/facilities', 'order/add'], function (facilityService, OrderAdd) {
         describe('OrderAddViewmodel', function () {
-    
+
             var async = new AsyncSpec(this),
                 sut;
-            
+
             beforeEach(function() {
                 sut = new OrderAdd();
             });
-    
+
             it('changing jobTypes sets specialties', function () {
                 var jobType = { id: 1, specialties: [{ id: 1, name: 'guy' }, { id: 2, name: 'something' }] };
-                
+
                 sut.selectedJobType(jobType);
-                
+
                 expect(sut.specialties()).toBe(jobType.specialties);
                 expect(sut.selectedSpecialty()).toBe(null);
             });
-    
+
             async.it('activate gets facilities from service', function (done) {
                 var facilities = [{ id: 1, name: 'guy' }, { id: 2, name: 'something' }];
-    
+
                 //This promise test works a bit differently than the ones below, since it returns the promise,
                 //Instead of completing it internally. We can simply attach a .then() to the function call
                 spyOn(facilityService, 'getFacilities').andCallFake(function () { return Q(facilities); });
@@ -250,8 +250,8 @@ Our environment is setup now. We can write a test, and run it from the terminal.
             });
         });
     });
-    
+
 
 That's pretty much it. You can call `phantom spec.js` to run these tests from the terminal.
 
-> Like a lot of my Durandal boiler-plate, you can find all of this code in [this Github Repo](https://github.com/tyrsius/VariousExtensions). This code is all inside the `durandalTest` directory.
+> Like a lot of my Durandal boiler-plate, you can find all of this code in [this Github Repo](https://github.com/kyeotic/VariousExtensions). This code is all inside the `durandalTest` directory.

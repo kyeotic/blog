@@ -9,12 +9,11 @@ RUN wget "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hu
   rm -r hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && \
   mv hugo /usr/bin
 
-COPY ./blog /site
-WORKDIR /site
-RUN hugo
+RUN mkdir -p /root/app
+COPY ./blog /root/app
+WORKDIR /root/app
 
-#Copy static files to Nginx
-FROM nginx:alpine
-COPY --from=build /site/public /usr/share/nginx/html
+RUN hugo -d public --gc --minify --cleanDestinationDir
 
-WORKDIR /usr/share/nginx/html
+FROM scratch as static
+COPY --from=build /root/app/public /
