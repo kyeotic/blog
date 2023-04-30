@@ -3,14 +3,6 @@ import 'https://esm.sh/prismjs@1.27.0/components/prism-yaml'
 import 'https://esm.sh/prismjs@1.27.0/components/prism-toml'
 import 'https://esm.sh/prismjs@1.27.0/components/prism-javascript'
 
-export const unocssConfig = {
-  theme: {
-    colors: {
-      'color-canvas-subtle': '#272822',
-    },
-  },
-}
-
 export const xonokai = `
 
 /* customizations to xonokai */
