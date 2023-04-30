@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-read --allow-env=NODE_DEBUG --watch --no-check main.tsx --dev"
+  }
+}
