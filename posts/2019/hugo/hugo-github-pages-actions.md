@@ -150,21 +150,21 @@ This *almost* works out of the box. Unfortunately we can't use GitHub Actions's 
 
 To do this go to **Settings > Deploy Keys > Add Deploy Key**
 
-![](/images/2019-10-03-hugo-deploy-keys.png)
+![](/2019/hugo/hugo-deploy-keys.png)
 
 Copy the key and then add it to **Settings > Secrets**.
 
-![](/images/2019-10-03-hugo-secrets.png)
+![](/2019/hugo/hugo-secrets.png)
 
 With all of this in place you are ready to **commit to master**. This should kick off the publish workflow, which you can view under **Actions > Publish Docs**.
 
-![](/images/2019-10-03-hugo-publish.png)
+![](/2019/hugo/hugo-publish.png)
 
 ## Turn on GitHub Pages
 
 Finally, enable GitHub pages from your repository **settings **page by selecting **gh-pages branch** on the **Source** dropdown.
 
-![](/images/2019-10-03-hugo-enable-pages.png)
+![](/2019/hugo/hugo-enable-pages.png)
 
 Once you've done that you should get a link to your new GitHub Pages deployment!
 
