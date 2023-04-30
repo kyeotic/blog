@@ -23,6 +23,10 @@ export const xonokai = `
   background-color: #191b1f;
 }
 
+ol, ul {
+	list-style: revert;
+}
+
 /* end custom */
 
 
