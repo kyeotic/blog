@@ -5,7 +5,7 @@ publish_date: 2016-01-07
 tags: ["digital-ocean", "centOS", "nginx", "ssh"]
 ---
 
-If you want to get to the meat of the post, jump down to [the guide](#theguide).
+If you want to get to the meat of the post, jump down to [the guide](#the-guide).
 
 ### Intro
 
