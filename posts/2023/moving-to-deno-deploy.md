@@ -16,8 +16,18 @@ The [getting started guide](https://deno.land/x/blog@0.5.0#getting-started) cove
 
 A minimal setup looks like this
 
+```
+blog/
+├─ posts/
+│  ├─ a_post.md
+├─ main.ts
+```
+
+Where your `main.ts` file has this minimal configuration
+
 ```ts
-import blog, { ga, redirects } from 'https://deno.land/x/blog@0.5.0/blog.tsx'
+// See #issues below for why I am using a forked version
+import blog, { ga, redirects } from 'https://raw.githubusercontent.com/kyeotic/deno_blog/custom-url/blog.tsx'
 
 blog({
   title: 'T++',
@@ -32,7 +42,9 @@ blog({
 })
 ```
 
-Wow! Look how tiny that is! After doing this any markdown files in `/posts` will be turned into posts, and their [front matter](https://jekyllrb.com/docs/front-matter/) will be parsed using the (currently undocumented) options:
+That's it. You can now `deno run -A main.ts` or push this to Deno Deploy. Its so tiny! This is the most minimal static-site/blog kit I've ever found, and I love it.
+
+Markdown files in `/posts` will be turned into posts, and their [front matter](https://jekyllrb.com/docs/front-matter/) will be parsed using the (currently undocumented) options:
 
 * `title`: title of the post, rendered at the top as an `<H1>`
 * `pathname`: a url override. Without this the file name will be used for the url.
@@ -74,6 +86,29 @@ blog({
 You can include any other style changes you want in this same fashion.
 
 > There is an `unocss` option on `blog()`, but it takes a complete theme, not a partial override. This means if you provide anything there, you lose all the default styling. I couldn't find an export of the existing theme, so I wasn't able to extend it. Using `style` was the path of least resistance.
+
+### Custom Footer
+
+This was pretty easy, but again not documented. It uses JSX to the `main.ts` has to become `main.tsx`
+
+
+```ts
+import blog, {
+  h,
+} from 'https://raw.githubusercontent.com/kyeotic/deno_blog/custom-url/blog.tsx'
+
+blog({
+  // same as before
+  footer: (
+    <footer class="mt-20 pb-16 lt-sm:pb-8 lt-sm:mt-16">
+      <a href="/" title="T++">
+        T++ © {new Date().getFullYear()}
+      </a>
+    </footer>
+  ),
+})
+
+```
 
 ## Issues
 
