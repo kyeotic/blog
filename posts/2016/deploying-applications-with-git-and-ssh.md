@@ -15,14 +15,16 @@ If you are just using SSH to connect to git, instead of HTTP, the setup is actua
 
 I recommend keeping all of your git workspaces in `~/git`.
 
-    mkdir ~/git
-    
+```shell
+mkdir ~/git
+```
 
 For this guide I am going to be using my portfolio as an example. This is how you create a workspace.
 
-    cd ~/git
-    git init --bare portfolio.git
-    
+```shell
+cd ~/git
+git init --bare portfolio.git
+```
 
 The `.git` suffix is conventional, not necessary. The `--bare` flag just tells git not to stick things into the standard `.git` hidden directory. Since we aren't using this directory to do work, the extra nesting doesn't help. Its still a full repo, but getting to the very useful `/hooks` directoy will be `/portfolio.git/hooks` instead of `/portfolio.git/.git/hooks`. Much cleaner.
 
@@ -32,18 +34,21 @@ That's... actually all you need to do on the server. This directory is ready to 
 
 Since we are pushing over ssh, we need to tell git where the server is at. This is done by configuring your **remote branches**. You usually only have one remote, `origin`, which is the default remote that receives your changes when you `git push`. If you are not using GitHub or some other public repository as your primary, you can alter this remote
 
-    git remote set-url origin USER@git.DOMAIN.com:git/portfolio.git
-    
+```shell
+git remote set-url origin USER@git.DOMAIN.com:git/portfolio.git
+```
 
 However, you are probably using Github, and want to continue using it. In that case, you need to add a **new** remote branch. I am going to call this remote `digi`, for Digital Ocean
 
-    git remote add digi USER@git.DOMAIN.com:git/portfolio.git
-    
+```shell
+git remote add digi USER@git.DOMAIN.com:git/portfolio.git
+```
 
 We can push to this remote with
 
-    git push digi master
-    
+```shell
+git push digi master
+```
 
 You will be prompted for your SSH password, and then the branch will push. Your droplet now has all your source code in it.
 
@@ -63,18 +68,19 @@ This hook will fire after *every* push, which implies that you are really only w
 
 Open a file editor to put our post receive hook into
 
-    cd ~/git/portfolio.git/hooks
-    nano post-receive
-    
+```shell
+cd ~/git/portfolio.git/hooks
+nano post-receive
+```
 
 Then enter the script
 
-    #!/bin/sh
-    GIT_WORK_TREE=/home/tyrsius/webapps/portfolio/app git checkout -f master
-    GIT_WORK_TREE=/home/tyrsius/webapps/portfolio/app git reset --hard
-    . /home/tyrsius/webapps/portfolio/run/restart-install
-    
-    
+```shell
+#!/bin/sh
+GIT_WORK_TREE=/home/tyrsius/webapps/portfolio/app git checkout -f master
+GIT_WORK_TREE=/home/tyrsius/webapps/portfolio/app git reset --hard
+. /home/tyrsius/webapps/portfolio/run/restart-install
+```
 
 This script assumes you are using the structure I use in the [Application Managment guide](/application-management-and-crontab), where `PROJECT/app` contians the application code, and `PROJECT/run` contains scripts for managing it.
 
@@ -86,16 +92,17 @@ Some of my projects are not open source. Actually, right now just one. Its the p
 
 The single branch hook is going to give you trouble in this situation. Luckily, we can make this script conditional on the branch name.
 
-    #!/bin/sh
-    while read oldrev newrev refname  
-    do  
-        branch=$(git rev-parse --symbolic --abbrev-ref $refname)
-        if [ "master" == "$branch" ]; then
-            GIT_WORK_TREE=/home/username/webapps/YOURAPP/app git checkout -f master
-            GIT_WORK_TREE=/home/username/webapps/YOURAPP/app git reset --hard
-            . /home/username/webapps/YOURAPP/run/restart
-        fi
-    done  
-    
+```shell
+#!/bin/sh
+while read oldrev newrev refname  
+do  
+    branch=$(git rev-parse --symbolic --abbrev-ref $refname)
+    if [ "master" == "$branch" ]; then
+        GIT_WORK_TREE=/home/username/webapps/YOURAPP/app git checkout -f master
+        GIT_WORK_TREE=/home/username/webapps/YOURAPP/app git reset --hard
+        . /home/username/webapps/YOURAPP/run/restart
+    fi
+done  
+```
 
 You may want to use this for all your hooks anyway, just to be safe.

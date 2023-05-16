@@ -16,37 +16,39 @@ If you want to talk to your server to get information that you use for configuri
 
 Here is how Durandal does it's application config and startup:
 
-        define(['durandal/app'], function(app) {
-            app.configurePlugins({
-                router: true,
-                dialog: true
-            });
-    
-            app.start().then(function () {
-                app.setRoot('shell/shell');
-            });
-        });
-    
+```js
+define(['durandal/app'], function(app) {
+    app.configurePlugins({
+        router: true,
+        dialog: true
+    });
+
+    app.start().then(function () {
+        app.setRoot('shell/shell');
+    });
+});
+```
 
 Wait, do you need to do some configuration before your application starts? Is some of it asynchronous? Is some of it in a service module? Whatever, piece of cake.
 
-    define(['durandal/app', 'some/serviceModule'], 
-        function(app, module) {
-            app.configurePlugins({
-                router: true,
-                dialog: true
-            });
-            
-    		module.promiseReturningMethod()
-                .then(function() {
-                    //Do some shit
-                })
-                .then(app.start)
-                .then(function () {
-                    app.setRoot('shell/shell');
-                });
+```js
+define(['durandal/app', 'some/serviceModule'], 
+    function(app, module) {
+        app.configurePlugins({
+            router: true,
+            dialog: true
         });
-    
+        
+    module.promiseReturningMethod()
+        .then(function() {
+            //Do some shit
+        })
+        .then(app.start)
+        .then(function () {
+            app.setRoot('shell/shell');
+        });
+});
+```
 
 Durandal handles async like a champ since it uses promises internally for everything. Configuration is whatever the hell you want it to be, because Durandal has no concept of specialized modules for configuration. If you want to run some code you just load the module and run it. Want to run back to your webserver to get some configuration values before your app starts? Go ahead. Want to just run some stupid animation before databinding? Whatever, Durandal doesn't care.
 
@@ -89,11 +91,12 @@ Durandal handles Custom DOM behavior with either a component, a widget, or a bin
 - Widget: Just a regular Durandal viewmodel module, with support for transclusion with `data-part` HTML attributes. Analogous to "transclusion directives."
 - Component: Analogous to "controller directives." Register with
 
-     ko.components.register('some-component-name', {
-           viewModel: [viewModelOrRequirePath],
-           template: [templateOrRequirePath
-    }
-    
+```js
+    ko.components.register('some-component-name', {
+        viewModel: [viewModelOrRequirePath],
+        template: [templateOrRequirePath
+}
+```
 
 Each of them are for a specific use case, which may seem confusing at first. That may be fair point, but actually working with them is very straightforward due to their simple API's.
 

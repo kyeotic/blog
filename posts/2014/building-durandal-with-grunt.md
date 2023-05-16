@@ -35,22 +35,23 @@ Grunt is an `npm` package, so installing the cli is done through `npm`.
 
 Just make a file in your project root with this
 
-    {
-        "name" : "[ProjectName]",
-        "version" : "0.1.0",
-        "author" : "Timothy Moran",
-        "private" : true,
-    
-        "devDependencies" : {
-            "grunt" :						"~0.4.0",
-            "grunt-contrib-watch":			"*",
-            "grunt-contrib-jshint":			"*",
-            "grunt-htmlhint":			    "*",
-            "grunt-durandal":				"*",
-            "matchdep":						"*"
-        } 
-    }
-    
+```json
+{
+    "name" : "[ProjectName]",
+    "version" : "0.1.0",
+    "author" : "Timothy Moran",
+    "private" : true,
+
+    "devDependencies" : {
+        "grunt" :						"~0.4.0",
+        "grunt-contrib-watch":			"*",
+        "grunt-contrib-jshint":			"*",
+        "grunt-htmlhint":			    "*",
+        "grunt-durandal":				"*",
+        "matchdep":						"*"
+    } 
+}
+```
 
 The `devDependencies` specify which Grunt packages to install. To install these packages just run `npm install` from your project root. This will also install the Grunt runner for you.
 

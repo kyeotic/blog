@@ -11,20 +11,21 @@ I've been tinkering with [React](https://facebook.github.io/react/) a lot lately
 
 Let's just jump straight to the solution, and then break down the reasons.
 
-    Project
-    |--assets/
-    |    |--css/
-    |    |--fonts/
-    |    |--images/
-    |    +--stylus/
-    |--dist/
-        +--built.js
-    |--node_modules/
-    |--jspm_packages/
-    |--src/
-    |--jspm.config.js
-    +--server.js
-    
+```
+Project
+|--assets/
+|    |--css/
+|    |--fonts/
+|    |--images/
+|    +--stylus/
+|--dist/
+    +--built.js
+|--node_modules/
+|--jspm_packages/
+|--src/
+|--jspm.config.js
++--server.js
+```
 
 ## Assets
 
@@ -44,12 +45,13 @@ Both `node_modules` and `jspm_packages` are at the root to keep them out of the 
 
 To get bundling to work alongside development hosting with the `jspm_packages` folder outside the `src` folder, I use the following config.
 
-    paths: {
-      "*": "src/*",
-      "github:*": "jspm_packages/github/*",
-      "npm:*": "jspm_packages/npm/*"
-    }
-    
+```json
+paths: {
+    "*": "src/*",
+    "github:*": "jspm_packages/github/*",
+    "npm:*": "jspm_packages/npm/*"
+}
+```
 
 This allows my ES6 imports to reference app code without the `src/` prefix.
 
@@ -57,23 +59,24 @@ This allows my ES6 imports to reference app code without the `src/` prefix.
 
 To ensure bunlding works alongside development, `jspm_packages` needs to get served at `/jspm_packages`. `jspm.config.js` also needs to be served, preferably from the root. I don't want to just host everything in `__dirname` though; I only want to host what the public needs access to. Luckily express makes setting up multiple static directories easy.
 
-    var port = process.env.PORT || 9000,
-        ip = process.env.IP || "0.0.0.0",
-        isProduction = process.env.NODE_ENV == 'production',
-        clientDir = __dirname + (isProduction ? '/dist/' : '/src/'),
-        assetDir = __dirname + '/assets',
-        jspmConfigName = '/jspm.config.js',
-        jspmConfig = __dirname + jspmConfigName,
-        jspmDir = __dirname + '/jspm_packages/',
-        express = require('express'),
-        app = express();
-    
-    //Configure
-    app.use('/jspm_packages', express.static(jspmDir));
-    app.use('/assets', express.static(assetDir));
-    app.use('/src', express.static(clientDir));
-    app.use(jspmConfigName, express.static(jspmConfig));
-    
+```js
+var port = process.env.PORT || 9000,
+    ip = process.env.IP || "0.0.0.0",
+    isProduction = process.env.NODE_ENV == 'production',
+    clientDir = __dirname + (isProduction ? '/dist/' : '/src/'),
+    assetDir = __dirname + '/assets',
+    jspmConfigName = '/jspm.config.js',
+    jspmConfig = __dirname + jspmConfigName,
+    jspmDir = __dirname + '/jspm_packages/',
+    express = require('express'),
+    app = express();
+
+//Configure
+app.use('/jspm_packages', express.static(jspmDir));
+app.use('/assets', express.static(assetDir));
+app.use('/src', express.static(clientDir));
+app.use(jspmConfigName, express.static(jspmConfig));
+```
 
 # Yeoman
 

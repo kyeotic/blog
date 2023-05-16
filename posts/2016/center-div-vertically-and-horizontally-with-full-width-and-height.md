@@ -9,13 +9,14 @@ There are way too many solutions to this online that just don't work. I want a f
 
 This uses flexbox, so it doesn't work in Internet Explorer (yes, even IE11... I thought we were passed this?)
 
-    .center-on-page {
-    	height: 100vh;
-    	width: 100vw;
-    	display: flex;
-    	justify-content: center;
-    	align-items: center;
-    }
-    
+```css
+.center-on-page {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+```
 
 `vh` and `vw` are **viewport** relative units, which will cause this `div` to be the size of the entire browser.

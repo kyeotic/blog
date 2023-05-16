@@ -4,7 +4,7 @@
 import blog, {
   h,
 } from 'https://raw.githubusercontent.com/kyeotic/deno_blog/custom-url/blog.tsx'
-import { xonokai } from './config/highlight.ts'
+import { theme } from './config/highlight.ts'
 
 blog({
   title: 'T++',
@@ -17,7 +17,7 @@ blog({
     { title: 'Email', url: 'mailto:tim@kye.dev' },
   ],
   theme: 'dark',
-  style: xonokai,
+  style: theme,
   footer: (
     <footer class="mt-20 pb-16 lt-sm:pb-8 lt-sm:mt-16">
       <a href="/" title="T++">

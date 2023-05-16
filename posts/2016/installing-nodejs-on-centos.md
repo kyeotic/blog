@@ -25,25 +25,27 @@ Whatever you do, ***do not install nodejs in a location that requires sudo acces
 
 I use this script, modified from [here]([https://gist.github.com/isaacs/579814](https://gist.github.com/isaacs/579814). It stuff it in `~/bin/node` and adds `$HOME/bin/node/bin` to your path. The `make install` is going to take a few minutes.
 
-    echo 'export PATH=$PATH:$HOME/bin/node/bin' >> ~/.bashrc
-    . ~/.bashrc
-    mkdir bin -p
-    cd ~/bin
-    mkdir node -p
-    rm -rf install-node 
-    mkdir install-node -p
-    cd install-node
-    curl https://nodejs.org/dist/v4.2.0/node-v4.2.0.tar.gz | tar xz --strip-components=1
-    ./configure --prefix=~/bin/node
-    make install
-    curl https://raw.githubusercontent.com/npm/npm/master/scripts/install.sh | sh
-    cd ~/bin
-    rm -rf install-node
-    
+```shell
+echo 'export PATH=$PATH:$HOME/bin/node/bin' >> ~/.bashrc
+. ~/.bashrc
+mkdir bin -p
+cd ~/bin
+mkdir node -p
+rm -rf install-node 
+mkdir install-node -p
+cd install-node
+curl https://nodejs.org/dist/v4.2.0/node-v4.2.0.tar.gz | tar xz --strip-components=1
+./configure --prefix=~/bin/node
+make install
+curl https://raw.githubusercontent.com/npm/npm/master/scripts/install.sh | sh
+cd ~/bin
+rm -rf install-node
+```
 
 You can run this super easily with this handy one-liner.
 
-    curl https://gist.githubusercontent.com/tyrsius/7324aaa515ade384cb1c/raw/927e4cd87d54a64c7a4ffc3b14739e5437346c35/node-and-npm-in-30-seconds.sh | sh
-    
+```shell
+curl https://gist.githubusercontent.com/tyrsius/7324aaa515ade384cb1c/raw/927e4cd87d54a64c7a4ffc3b14739e5437346c35/node-and-npm-in-30-seconds.sh | sh
+```
 
 If the length makes that linebreak in your browser (it will), just trust me. It's one line.
