@@ -17,9 +17,11 @@ This guide will cover setting up the [Servarr Stack](https://wiki.servarr.com/) 
 
 If you are using Proxmox there is a [helper script](https://tteck.github.io/Proxmox/) that will install Docker in an LXC, and give you the option to add Portainer. I used this, since it exposes a nice UI for managing Docker Compose "stacks". I recommend it.
 
-Once that is up and running you just need a good compose file. I had a ton of trouble finding one, but eventually found one that was almost perfect. You can [find it here](https://github.com/geekau/media-stack). I ended up trimming out a lot that I didn't need, and had to make several tweaks to get things working, so I will put my compose and env files below.
+Once that is up and running you just need a good compose file. I had a ton of trouble finding one, but eventually found one that was almost perfect. You can [find it here](https://github.com/geekau/media-stack), along with a helpful step-by-step [companion guide](https://www.synoforum.com/resources/ultimate-starter-page-1-jellyfin-jellyseerr-nzbget-torrents-and-arr-media-library-stack.184/). I ended up trimming out a lot that I didn't need, and had to make several tweaks to get things working, so I will put my compose and env files below.
 
-This should get you most of the way, but the finer points of configuration are so subject to change that some of them changed while I was setting up, and then again while I was writing this. So, unfortunately you are on your own for now. I might come back someday and update this post... until then.
+This should get you most of the way, and the [Trash Guides](https://trash-guides.info/) cover folder structure and quality profiles well.
+
+> Yeah, this guide is pretty light on details, but the step-by-step guide is so thorough I don't have much to add.
 
 **Compose Yaml**
 ```yaml
@@ -472,4 +474,4 @@ LIDARR_API_KEY=_GET THIS FROM THE LIDARR UI_
 
 ## Configuring Apps
 
-I highly recommend checking out [Trash Guides](https://trash-guides.info/) for details on setting up the Servarr Apps.
+I highly recommend checking out [Trash Guides](https://trash-guides.info/) for details on setting up the Servarr Apps. For official docs check the [Servarr wiki](https://wiki.servarr.com/)
