@@ -16,7 +16,7 @@ While experience with Linux (especially file permissions), ZFS, networking, and 
 
 * [Proxmox Installation and Initial Setup](/proxmox-install)
 * [Comparison of TrueNAS and Proxmox](/proxmox-vs-truenas) (why I think the move was worth it)
-* [Creating a ZFS Pool with Proxmox](/proxmox-zfs) (with a bonus story about how I corrupted my pool and how you can avoid it)
+* [Creating a ZFS Pool with Proxmox](/proxmox-zfs) (with a bonus story about how I corrupted my pool)
 * [Using Mountpoints](/proxmox-zfs-mounts) to Share the ZFS pool with Unprivileged LXC containers (without user mapping!)
 * [Configuring Samba/SMB Shares with Cockpit](/proxmox-cockpit)
 * [Setting up the Servarr stack](/proxmox-servarr-stack)
