@@ -10,7 +10,7 @@ tags:
 - cockpit
 ---
 
-This is a part of a guide on Proxmox. You can find the [Series Overview here](/proxmox-series).
+This guide is a part of a series on Proxmox for Homelabs. You can find the [Series Overview here](/proxmox-series).
 
 In the previous guide we covered how to [bind mount your ZFS Datasets with LXC Containers](/proxmox-zfs-mounts). This guide will cover setting up a Samba/SMB Share with Cockpit.
 

@@ -9,7 +9,7 @@ tags:
 - zfs
 ---
 
-This is a part of a guide on Proxmox. You can find the [Series Overview here](/proxmox-series).
+This guide is a part of a series on Proxmox for Homelabs. You can find the [Series Overview here](/proxmox-series).
 
 In the previous guide we covered [Creating A Pool](/proxmox-zfs). This guide will cover setting up permissions so that LXC Containers can bind mount datasets in the pool for shared use. Since my use case is for a Homelab running the [Servarr Stack](https://wiki.servarr.com/) it will be from a NAS/Media perspective, but the steps are generalizable.
 

@@ -9,7 +9,7 @@ tags:
 - servarr
 ---
 
-This is a part of a guide on Proxmox. You can find the [Series Overview here](/proxmox-series).
+This guide is a part of a series on Proxmox for Homelabs. You can find the [Series Overview here](/proxmox-series).
 
 This guide will cover setting up the [Servarr Stack](https://wiki.servarr.com/) using Docker Compose. It requires that you have setup bind mounts for the LXC Container, which is covered in [this guide](/proxmox-zfs-mounts).
 
