@@ -6,15 +6,16 @@ import { theme } from './config/highlight.ts'
 blog({
   title: 'T++',
   author: 'Tim Kye',
-  avatar: './images/avatar.png',
+  avatar: './posts/images/avatar.png',
   avatarClass: 'full',
-  favicon: './images/favicon.ico',
+  favicon: './posts/images/favicon.ico',
   links: [
     { title: 'GitHub', url: 'https://github.com/kyeotic' },
     { title: 'Email', url: 'mailto:tim@kye.dev' },
   ],
   theme: 'dark',
   style: theme,
+  // header: <header>Your custom header</header>,
   footer: (
     <footer class="mt-20 pb-16 lt-sm:pb-8 lt-sm:mt-16">
       <a href="/" title="T++">

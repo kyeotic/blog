@@ -9,8 +9,6 @@ tags:
 - TrueNAS
 ---
 
-# Intro
-
 This post is part of my series on setting up a [Proxmox Homelab](/proxmox-series). Unlike the other posts in this series that are _how-to_ guides, this post is my personal opinion on using [Proxmox](https://www.proxmox.com) and [TrueNAS Scale](https://www.truenas.com/truenas-scale/) as home server OSs, and why I am happy with my move to Proxmox. If you aren't interested and want to get back to the guide head to the [Series Overview](/proxmox-series#series-overview).
 
 ## Why use either of them?
@@ -53,4 +51,4 @@ Ignoring VMs, since that's "do everything yourself from scratch" on both platfor
 
 Proxmox has a one-liner to deploy docker or portainer. Not in a resource-heavy VM either, in a lightweight LXC that can easily share resources with the host or other LXCs as compute demands it. You get Docker Compose, which is my preferred way to work anything more complicated than a single image (K8s is a nightmare and every time I have to touch it I hate it more).
 
-It all adds up. Proxmox has been wonderful to work with. Except for that time I corrupted my entire ZFS pool, but that was entirely my own fault and a story for another time.
+It all adds up. Proxmox has been wonderful to work with. Except for that time I corrupted my entire ZFS pool, but that was entirely my own fault and [a story for another time](/proxmox-zfs#a-story-about-how-i-corrupted-my-pool-by-being-an-idiot).
