@@ -10,7 +10,7 @@ tags:
 - cockpit
 ---
 
-This is a part of a guide on Proxmox. You can find the [Series Overview here](/proxmox-series).
+This guide is a part of a series on Proxmox for Homelabs. You can find the [Series Overview here](/proxmox-series).
 
 In the previous guide we covered how to [setup the Servarr Stack with docker compose](/proxmox-servarr-stack). It will use similar user/group mapping techniques as those covered in [bind mount your ZFS Datasets with LXC Containers](/proxmox-zfs-mounts), so completing that will be helpful.
 

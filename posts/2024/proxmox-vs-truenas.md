@@ -9,7 +9,9 @@ tags:
 - TrueNAS
 ---
 
-This post is part of my series on setting up a [Proxmox Homelab](/proxmox-series). Unlike the other posts in this series that are _how-to_ guides, this post is my personal opinion on using [Proxmox](https://www.proxmox.com) and [TrueNAS Scale](https://www.truenas.com/truenas-scale/) as home server OSs, and why I am happy with my move to Proxmox. If you aren't interested and want to get back to the guide head to the [Series Overview](/proxmox-series#series-overview).
+This guide is a part of a series on Proxmox for Homelabs. You can find the [Series Overview here](/proxmox-series).
+
+Unlike the other posts in this series that are _how-to_ guides, this post is my personal opinion on using [Proxmox](https://www.proxmox.com) and [TrueNAS Scale](https://www.truenas.com/truenas-scale/) as home server OSs, and why I am happy with my move to Proxmox. If you aren't interested and want to get back to the guide head to the [Series Overview](/proxmox-series#series-overview).
 
 ## Why use either of them?
 

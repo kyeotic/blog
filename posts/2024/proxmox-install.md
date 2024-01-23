@@ -8,7 +8,7 @@ tags:
 - nas
 ---
 
-This is a part of a guide on Proxmox. You can find the [Series Overview here](/proxmox-series).
+This guide is a part of a series on Proxmox for Homelabs. You can find the [Series Overview here](/proxmox-series).
 
 This guide will cover the basic installation of Proxmox (8.1). It will be short, since it's fairly straightforward.
 
