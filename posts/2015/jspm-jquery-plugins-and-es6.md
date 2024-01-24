@@ -30,26 +30,29 @@ To control versioning and dependencies jspm also uses a `config.js`. This file i
 
 I am working with a jQuery plugin called [Magnific Popup](https://github.com/dimsemenov/Magnific-Popup), which provides some nice image lightbox gallery functionality. To get it to load nicely, I use this shim:
 
-    "shim": {
-        "packages": {
-          "Magnific-Popup": {
-            "main": "Magnific-Popup",
-            "format": "global",
-            "deps": "jquery",
-            "exports": "$.magnificPopup"
-          }
-        }
-      }
-    
+```json
+"shim": {
+  "packages": {
+    "Magnific-Popup": {
+      "main": "Magnific-Popup",
+      "format": "global",
+      "deps": "jquery",
+      "exports": "$.magnificPopup"
+    }
+  }
+}
+```
 
 Then below, in the map, I include the Github source:
 
-    System.config({
-      "map": {
-        "Magnific-Popup": "github:dimsemenov/Magnific-Popup@1.0.0",
-        //more stuff you don't care about
-        }
-    
+```js
+System.config({
+    "map": {
+      "Magnific-Popup": "github:dimsemenov/Magnific-Popup@1.0.0",
+      //more stuff you don't care about
+    }
+})
+```
 
 If you want to see how these fit together, you can checkout the complete [config.js](https://github.com/tyrsius/portfolio/blob/8bc0217b087c65a6b4b3a4cd0d53e78e64faf4d0/client/config.js) I am using.
 

@@ -389,7 +389,7 @@ services:
 ```
 
 Env File
-```
+```toml
 #Name of the project in Docker
 COMPOSE_PROJECT_NAME=media-stack
 

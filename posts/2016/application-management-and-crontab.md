@@ -21,14 +21,16 @@ My application server management consists of five pieces
 
 A consistent directory structure will help keep you sane as the number of projects on your server grows. Here is what I use
 
-    ~/
-    |- /git
-    |   +- /project.git
-    +- /webapps
-        +- /project
-            |- /app
-            +- /run
-    
+```
+~/
+|- /git
+|   +- /project.git
++- /webapps
+    +- /project
+        |- /app
+        +- /run
+```
+
 
 The git repository holds the source code. The `/webapps` directory has a project folder for every project. The `/project/app` directory holds the actual application code. The `/project/run` directory holds several scripts that control the application.
 

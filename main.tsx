@@ -1,6 +1,7 @@
 /** @jsx h */
 // https://github.com/denoland/deno_blog
 import blog, { h, ga, redirects } from 'https://deno.land/x/blog@0.7.0/blog.tsx'
+// import blog, { h, ga, redirects } from '../deno_blog/blog.tsx'
 import { theme } from './config/highlight.ts'
 
 blog({

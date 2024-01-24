@@ -1,5 +1,596 @@
 {
   "version": "3",
+  "packages": {
+    "specifiers": {
+      "npm:@wooorm/starry-night@^3.2.0": "npm:@wooorm/starry-night@3.2.0",
+      "npm:hast-util-to-html@9": "npm:hast-util-to-html@9.0.0",
+      "npm:markdown-it@14": "npm:markdown-it@14.0.0",
+      "npm:rehype-stringify@^10.0.0": "npm:rehype-stringify@10.0.0",
+      "npm:remark-parse@^11.0.0": "npm:remark-parse@11.0.0",
+      "npm:remark-rehype@^11.1.0": "npm:remark-rehype@11.1.0",
+      "npm:unified@^11.0.0": "npm:unified@11.0.4"
+    },
+    "npm": {
+      "@types/debug@4.1.12": {
+        "integrity": "sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==",
+        "dependencies": {
+          "@types/ms": "@types/ms@0.7.34"
+        }
+      },
+      "@types/hast@3.0.3": {
+        "integrity": "sha512-2fYGlaDy/qyLlhidX42wAH0KBi2TCjKMH8CHmBXgRlJ3Y+OXTiqsPQ6IWarZKwF1JoUcAJdPogv1d4b0COTpmQ==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2"
+        }
+      },
+      "@types/mdast@4.0.3": {
+        "integrity": "sha512-LsjtqsyF+d2/yFOYaN22dHZI1Cpwkrj+g06G8+qtUKlhovPW89YhqSnfKtMbkgmEtYpH2gydRNULd6y8mciAFg==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2"
+        }
+      },
+      "@types/ms@0.7.34": {
+        "integrity": "sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==",
+        "dependencies": {}
+      },
+      "@types/unist@3.0.2": {
+        "integrity": "sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==",
+        "dependencies": {}
+      },
+      "@ungap/structured-clone@1.2.0": {
+        "integrity": "sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==",
+        "dependencies": {}
+      },
+      "@wooorm/starry-night@3.2.0": {
+        "integrity": "sha512-SDIMYfhmfJXUzfXfG/0b8WuPLVmPVmx18sE3Q+Udm8M1yCm2rnAEN5OafFmAb7rwOf4W3SDR8fEFHzrE9AyYkA==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3",
+          "import-meta-resolve": "import-meta-resolve@4.0.0",
+          "vscode-oniguruma": "vscode-oniguruma@2.0.1",
+          "vscode-textmate": "vscode-textmate@9.0.0"
+        }
+      },
+      "argparse@2.0.1": {
+        "integrity": "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==",
+        "dependencies": {}
+      },
+      "bail@2.0.2": {
+        "integrity": "sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==",
+        "dependencies": {}
+      },
+      "ccount@2.0.1": {
+        "integrity": "sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==",
+        "dependencies": {}
+      },
+      "character-entities-html4@2.1.0": {
+        "integrity": "sha512-1v7fgQRj6hnSwFpq1Eu0ynr/CDEw0rXo2B61qXrLNdHZmPKgb7fqS1a2JwF0rISo9q77jDI8VMEHoApn8qDoZA==",
+        "dependencies": {}
+      },
+      "character-entities-legacy@3.0.0": {
+        "integrity": "sha512-RpPp0asT/6ufRm//AJVwpViZbGM/MkjQFxJccQRHmISF/22NBtsHqAWmL+/pmkPWoIUJdWyeVleTl1wydHATVQ==",
+        "dependencies": {}
+      },
+      "character-entities@2.0.2": {
+        "integrity": "sha512-shx7oQ0Awen/BRIdkjkvz54PnEEI/EjwXDSIZp86/KKdbafHh1Df/RYGBhn4hbe2+uKC9FnT5UCEdyPz3ai9hQ==",
+        "dependencies": {}
+      },
+      "comma-separated-tokens@2.0.3": {
+        "integrity": "sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==",
+        "dependencies": {}
+      },
+      "debug@4.3.4": {
+        "integrity": "sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==",
+        "dependencies": {
+          "ms": "ms@2.1.2"
+        }
+      },
+      "decode-named-character-reference@1.0.2": {
+        "integrity": "sha512-O8x12RzrUF8xyVcY0KJowWsmaJxQbmy0/EtnNtHRpsOcT7dFk5W598coHqBVpmWo1oQQfsCqfCmkZN5DJrZVdg==",
+        "dependencies": {
+          "character-entities": "character-entities@2.0.2"
+        }
+      },
+      "dequal@2.0.3": {
+        "integrity": "sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==",
+        "dependencies": {}
+      },
+      "devlop@1.1.0": {
+        "integrity": "sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==",
+        "dependencies": {
+          "dequal": "dequal@2.0.3"
+        }
+      },
+      "entities@4.5.0": {
+        "integrity": "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==",
+        "dependencies": {}
+      },
+      "extend@3.0.2": {
+        "integrity": "sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==",
+        "dependencies": {}
+      },
+      "hast-util-from-parse5@8.0.1": {
+        "integrity": "sha512-Er/Iixbc7IEa7r/XLtuG52zoqn/b3Xng/w6aZQ0xGVxzhw5xUFxcRqdPzP6yFi/4HBYRaifaI5fQ1RH8n0ZeOQ==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3",
+          "@types/unist": "@types/unist@3.0.2",
+          "devlop": "devlop@1.1.0",
+          "hastscript": "hastscript@8.0.0",
+          "property-information": "property-information@6.4.0",
+          "vfile": "vfile@6.0.1",
+          "vfile-location": "vfile-location@5.0.2",
+          "web-namespaces": "web-namespaces@2.0.1"
+        }
+      },
+      "hast-util-parse-selector@4.0.0": {
+        "integrity": "sha512-wkQCkSYoOGCRKERFWcxMVMOcYE2K1AaNLU8DXS9arxnLOUEWbOXKXiJUNzEpqZ3JOKpnha3jkFrumEjVliDe7A==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3"
+        }
+      },
+      "hast-util-raw@9.0.2": {
+        "integrity": "sha512-PldBy71wO9Uq1kyaMch9AHIghtQvIwxBUkv823pKmkTM3oV1JxtsTNYdevMxvUHqcnOAuO65JKU2+0NOxc2ksA==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3",
+          "@types/unist": "@types/unist@3.0.2",
+          "@ungap/structured-clone": "@ungap/structured-clone@1.2.0",
+          "hast-util-from-parse5": "hast-util-from-parse5@8.0.1",
+          "hast-util-to-parse5": "hast-util-to-parse5@8.0.0",
+          "html-void-elements": "html-void-elements@3.0.0",
+          "mdast-util-to-hast": "mdast-util-to-hast@13.1.0",
+          "parse5": "parse5@7.1.2",
+          "unist-util-position": "unist-util-position@5.0.0",
+          "unist-util-visit": "unist-util-visit@5.0.0",
+          "vfile": "vfile@6.0.1",
+          "web-namespaces": "web-namespaces@2.0.1",
+          "zwitch": "zwitch@2.0.4"
+        }
+      },
+      "hast-util-to-html@9.0.0": {
+        "integrity": "sha512-IVGhNgg7vANuUA2XKrT6sOIIPgaYZnmLx3l/CCOAK0PtgfoHrZwX7jCSYyFxHTrGmC6S9q8aQQekjp4JPZF+cw==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3",
+          "@types/unist": "@types/unist@3.0.2",
+          "ccount": "ccount@2.0.1",
+          "comma-separated-tokens": "comma-separated-tokens@2.0.3",
+          "hast-util-raw": "hast-util-raw@9.0.2",
+          "hast-util-whitespace": "hast-util-whitespace@3.0.0",
+          "html-void-elements": "html-void-elements@3.0.0",
+          "mdast-util-to-hast": "mdast-util-to-hast@13.1.0",
+          "property-information": "property-information@6.4.0",
+          "space-separated-tokens": "space-separated-tokens@2.0.2",
+          "stringify-entities": "stringify-entities@4.0.3",
+          "zwitch": "zwitch@2.0.4"
+        }
+      },
+      "hast-util-to-parse5@8.0.0": {
+        "integrity": "sha512-3KKrV5ZVI8if87DVSi1vDeByYrkGzg4mEfeu4alwgmmIeARiBLKCZS2uw5Gb6nU9x9Yufyj3iudm6i7nl52PFw==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3",
+          "comma-separated-tokens": "comma-separated-tokens@2.0.3",
+          "devlop": "devlop@1.1.0",
+          "property-information": "property-information@6.4.0",
+          "space-separated-tokens": "space-separated-tokens@2.0.2",
+          "web-namespaces": "web-namespaces@2.0.1",
+          "zwitch": "zwitch@2.0.4"
+        }
+      },
+      "hast-util-whitespace@3.0.0": {
+        "integrity": "sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3"
+        }
+      },
+      "hastscript@8.0.0": {
+        "integrity": "sha512-dMOtzCEd3ABUeSIISmrETiKuyydk1w0pa+gE/uormcTpSYuaNJPbX1NU3JLyscSLjwAQM8bWMhhIlnCqnRvDTw==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3",
+          "comma-separated-tokens": "comma-separated-tokens@2.0.3",
+          "hast-util-parse-selector": "hast-util-parse-selector@4.0.0",
+          "property-information": "property-information@6.4.0",
+          "space-separated-tokens": "space-separated-tokens@2.0.2"
+        }
+      },
+      "html-void-elements@3.0.0": {
+        "integrity": "sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==",
+        "dependencies": {}
+      },
+      "import-meta-resolve@4.0.0": {
+        "integrity": "sha512-okYUR7ZQPH+efeuMJGlq4f8ubUgO50kByRPyt/Cy1Io4PSRsPjxME+YlVaCOx+NIToW7hCsZNFJyTPFFKepRSA==",
+        "dependencies": {}
+      },
+      "is-plain-obj@4.1.0": {
+        "integrity": "sha512-+Pgi+vMuUNkJyExiMBt5IlFoMyKnr5zhJ4Uspz58WOhBF5QoIZkFyNHIbBAtHwzVAgk5RtndVNsDRN61/mmDqg==",
+        "dependencies": {}
+      },
+      "linkify-it@5.0.0": {
+        "integrity": "sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==",
+        "dependencies": {
+          "uc.micro": "uc.micro@2.0.0"
+        }
+      },
+      "markdown-it@14.0.0": {
+        "integrity": "sha512-seFjF0FIcPt4P9U39Bq1JYblX0KZCjDLFFQPHpL5AzHpqPEKtosxmdq/LTVZnjfH7tjt9BxStm+wXcDBNuYmzw==",
+        "dependencies": {
+          "argparse": "argparse@2.0.1",
+          "entities": "entities@4.5.0",
+          "linkify-it": "linkify-it@5.0.0",
+          "mdurl": "mdurl@2.0.0",
+          "punycode.js": "punycode.js@2.3.1",
+          "uc.micro": "uc.micro@2.0.0"
+        }
+      },
+      "mdast-util-from-markdown@2.0.0": {
+        "integrity": "sha512-n7MTOr/z+8NAX/wmhhDji8O3bRvPTV/U0oTCaZJkjhPSKTPhS3xufVhKGF8s1pJ7Ox4QgoIU7KHseh09S+9rTA==",
+        "dependencies": {
+          "@types/mdast": "@types/mdast@4.0.3",
+          "@types/unist": "@types/unist@3.0.2",
+          "decode-named-character-reference": "decode-named-character-reference@1.0.2",
+          "devlop": "devlop@1.1.0",
+          "mdast-util-to-string": "mdast-util-to-string@4.0.0",
+          "micromark": "micromark@4.0.0",
+          "micromark-util-decode-numeric-character-reference": "micromark-util-decode-numeric-character-reference@2.0.1",
+          "micromark-util-decode-string": "micromark-util-decode-string@2.0.0",
+          "micromark-util-normalize-identifier": "micromark-util-normalize-identifier@2.0.0",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0",
+          "unist-util-stringify-position": "unist-util-stringify-position@4.0.0"
+        }
+      },
+      "mdast-util-to-hast@13.1.0": {
+        "integrity": "sha512-/e2l/6+OdGp/FB+ctrJ9Avz71AN/GRH3oi/3KAx/kMnoUsD6q0woXlDT8lLEeViVKE7oZxE7RXzvO3T8kF2/sA==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3",
+          "@types/mdast": "@types/mdast@4.0.3",
+          "@ungap/structured-clone": "@ungap/structured-clone@1.2.0",
+          "devlop": "devlop@1.1.0",
+          "micromark-util-sanitize-uri": "micromark-util-sanitize-uri@2.0.0",
+          "trim-lines": "trim-lines@3.0.1",
+          "unist-util-position": "unist-util-position@5.0.0",
+          "unist-util-visit": "unist-util-visit@5.0.0",
+          "vfile": "vfile@6.0.1"
+        }
+      },
+      "mdast-util-to-string@4.0.0": {
+        "integrity": "sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==",
+        "dependencies": {
+          "@types/mdast": "@types/mdast@4.0.3"
+        }
+      },
+      "mdurl@2.0.0": {
+        "integrity": "sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==",
+        "dependencies": {}
+      },
+      "micromark-core-commonmark@2.0.0": {
+        "integrity": "sha512-jThOz/pVmAYUtkroV3D5c1osFXAMv9e0ypGDOIZuCeAe91/sD6BoE2Sjzt30yuXtwOYUmySOhMas/PVyh02itA==",
+        "dependencies": {
+          "decode-named-character-reference": "decode-named-character-reference@1.0.2",
+          "devlop": "devlop@1.1.0",
+          "micromark-factory-destination": "micromark-factory-destination@2.0.0",
+          "micromark-factory-label": "micromark-factory-label@2.0.0",
+          "micromark-factory-space": "micromark-factory-space@2.0.0",
+          "micromark-factory-title": "micromark-factory-title@2.0.0",
+          "micromark-factory-whitespace": "micromark-factory-whitespace@2.0.0",
+          "micromark-util-character": "micromark-util-character@2.0.1",
+          "micromark-util-chunked": "micromark-util-chunked@2.0.0",
+          "micromark-util-classify-character": "micromark-util-classify-character@2.0.0",
+          "micromark-util-html-tag-name": "micromark-util-html-tag-name@2.0.0",
+          "micromark-util-normalize-identifier": "micromark-util-normalize-identifier@2.0.0",
+          "micromark-util-resolve-all": "micromark-util-resolve-all@2.0.0",
+          "micromark-util-subtokenize": "micromark-util-subtokenize@2.0.0",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-factory-destination@2.0.0": {
+        "integrity": "sha512-j9DGrQLm/Uhl2tCzcbLhy5kXsgkHUrjJHg4fFAeoMRwJmJerT9aw4FEhIbZStWN8A3qMwOp1uzHr4UL8AInxtA==",
+        "dependencies": {
+          "micromark-util-character": "micromark-util-character@2.0.1",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-factory-label@2.0.0": {
+        "integrity": "sha512-RR3i96ohZGde//4WSe/dJsxOX6vxIg9TimLAS3i4EhBAFx8Sm5SmqVfR8E87DPSR31nEAjZfbt91OMZWcNgdZw==",
+        "dependencies": {
+          "devlop": "devlop@1.1.0",
+          "micromark-util-character": "micromark-util-character@2.0.1",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-factory-space@2.0.0": {
+        "integrity": "sha512-TKr+LIDX2pkBJXFLzpyPyljzYK3MtmllMUMODTQJIUfDGncESaqB90db9IAUcz4AZAJFdd8U9zOp9ty1458rxg==",
+        "dependencies": {
+          "micromark-util-character": "micromark-util-character@2.0.1",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-factory-title@2.0.0": {
+        "integrity": "sha512-jY8CSxmpWLOxS+t8W+FG3Xigc0RDQA9bKMY/EwILvsesiRniiVMejYTE4wumNc2f4UbAa4WsHqe3J1QS1sli+A==",
+        "dependencies": {
+          "micromark-factory-space": "micromark-factory-space@2.0.0",
+          "micromark-util-character": "micromark-util-character@2.0.1",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-factory-whitespace@2.0.0": {
+        "integrity": "sha512-28kbwaBjc5yAI1XadbdPYHX/eDnqaUFVikLwrO7FDnKG7lpgxnvk/XGRhX/PN0mOZ+dBSZ+LgunHS+6tYQAzhA==",
+        "dependencies": {
+          "micromark-factory-space": "micromark-factory-space@2.0.0",
+          "micromark-util-character": "micromark-util-character@2.0.1",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-util-character@2.0.1": {
+        "integrity": "sha512-3wgnrmEAJ4T+mGXAUfMvMAbxU9RDG43XmGce4j6CwPtVxB3vfwXSZ6KhFwDzZ3mZHhmPimMAXg71veiBGzeAZw==",
+        "dependencies": {
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-util-chunked@2.0.0": {
+        "integrity": "sha512-anK8SWmNphkXdaKgz5hJvGa7l00qmcaUQoMYsBwDlSKFKjc6gjGXPDw3FNL3Nbwq5L8gE+RCbGqTw49FK5Qyvg==",
+        "dependencies": {
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0"
+        }
+      },
+      "micromark-util-classify-character@2.0.0": {
+        "integrity": "sha512-S0ze2R9GH+fu41FA7pbSqNWObo/kzwf8rN/+IGlW/4tC6oACOs8B++bh+i9bVyNnwCcuksbFwsBme5OCKXCwIw==",
+        "dependencies": {
+          "micromark-util-character": "micromark-util-character@2.0.1",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-util-combine-extensions@2.0.0": {
+        "integrity": "sha512-vZZio48k7ON0fVS3CUgFatWHoKbbLTK/rT7pzpJ4Bjp5JjkZeasRfrS9wsBdDJK2cJLHMckXZdzPSSr1B8a4oQ==",
+        "dependencies": {
+          "micromark-util-chunked": "micromark-util-chunked@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-util-decode-numeric-character-reference@2.0.1": {
+        "integrity": "sha512-bmkNc7z8Wn6kgjZmVHOX3SowGmVdhYS7yBpMnuMnPzDq/6xwVA604DuOXMZTO1lvq01g+Adfa0pE2UKGlxL1XQ==",
+        "dependencies": {
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0"
+        }
+      },
+      "micromark-util-decode-string@2.0.0": {
+        "integrity": "sha512-r4Sc6leeUTn3P6gk20aFMj2ntPwn6qpDZqWvYmAG6NgvFTIlj4WtrAudLi65qYoaGdXYViXYw2pkmn7QnIFasA==",
+        "dependencies": {
+          "decode-named-character-reference": "decode-named-character-reference@1.0.2",
+          "micromark-util-character": "micromark-util-character@2.0.1",
+          "micromark-util-decode-numeric-character-reference": "micromark-util-decode-numeric-character-reference@2.0.1",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0"
+        }
+      },
+      "micromark-util-encode@2.0.0": {
+        "integrity": "sha512-pS+ROfCXAGLWCOc8egcBvT0kf27GoWMqtdarNfDcjb6YLuV5cM3ioG45Ys2qOVqeqSbjaKg72vU+Wby3eddPsA==",
+        "dependencies": {}
+      },
+      "micromark-util-html-tag-name@2.0.0": {
+        "integrity": "sha512-xNn4Pqkj2puRhKdKTm8t1YHC/BAjx6CEwRFXntTaRf/x16aqka6ouVoutm+QdkISTlT7e2zU7U4ZdlDLJd2Mcw==",
+        "dependencies": {}
+      },
+      "micromark-util-normalize-identifier@2.0.0": {
+        "integrity": "sha512-2xhYT0sfo85FMrUPtHcPo2rrp1lwbDEEzpx7jiH2xXJLqBuy4H0GgXk5ToU8IEwoROtXuL8ND0ttVa4rNqYK3w==",
+        "dependencies": {
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0"
+        }
+      },
+      "micromark-util-resolve-all@2.0.0": {
+        "integrity": "sha512-6KU6qO7DZ7GJkaCgwBNtplXCvGkJToU86ybBAUdavvgsCiG8lSSvYxr9MhwmQ+udpzywHsl4RpGJsYWG1pDOcA==",
+        "dependencies": {
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-util-sanitize-uri@2.0.0": {
+        "integrity": "sha512-WhYv5UEcZrbAtlsnPuChHUAsu/iBPOVaEVsntLBIdpibO0ddy8OzavZz3iL2xVvBZOpolujSliP65Kq0/7KIYw==",
+        "dependencies": {
+          "micromark-util-character": "micromark-util-character@2.0.1",
+          "micromark-util-encode": "micromark-util-encode@2.0.0",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0"
+        }
+      },
+      "micromark-util-subtokenize@2.0.0": {
+        "integrity": "sha512-vc93L1t+gpR3p8jxeVdaYlbV2jTYteDje19rNSS/H5dlhxUYll5Fy6vJ2cDwP8RnsXi818yGty1ayP55y3W6fg==",
+        "dependencies": {
+          "devlop": "devlop@1.1.0",
+          "micromark-util-chunked": "micromark-util-chunked@2.0.0",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "micromark-util-symbol@2.0.0": {
+        "integrity": "sha512-8JZt9ElZ5kyTnO94muPxIGS8oyElRJaiJO8EzV6ZSyGQ1Is8xwl4Q45qU5UOg+bGH4AikWziz0iN4sFLWs8PGw==",
+        "dependencies": {}
+      },
+      "micromark-util-types@2.0.0": {
+        "integrity": "sha512-oNh6S2WMHWRZrmutsRmDDfkzKtxF+bc2VxLC9dvtrDIRFln627VsFP6fLMgTryGDljgLPjkrzQSDcPrjPyDJ5w==",
+        "dependencies": {}
+      },
+      "micromark@4.0.0": {
+        "integrity": "sha512-o/sd0nMof8kYff+TqcDx3VSrgBTcZpSvYcAHIfHhv5VAuNmisCxjhx6YmxS8PFEpb9z5WKWKPdzf0jM23ro3RQ==",
+        "dependencies": {
+          "@types/debug": "@types/debug@4.1.12",
+          "debug": "debug@4.3.4",
+          "decode-named-character-reference": "decode-named-character-reference@1.0.2",
+          "devlop": "devlop@1.1.0",
+          "micromark-core-commonmark": "micromark-core-commonmark@2.0.0",
+          "micromark-factory-space": "micromark-factory-space@2.0.0",
+          "micromark-util-character": "micromark-util-character@2.0.1",
+          "micromark-util-chunked": "micromark-util-chunked@2.0.0",
+          "micromark-util-combine-extensions": "micromark-util-combine-extensions@2.0.0",
+          "micromark-util-decode-numeric-character-reference": "micromark-util-decode-numeric-character-reference@2.0.1",
+          "micromark-util-encode": "micromark-util-encode@2.0.0",
+          "micromark-util-normalize-identifier": "micromark-util-normalize-identifier@2.0.0",
+          "micromark-util-resolve-all": "micromark-util-resolve-all@2.0.0",
+          "micromark-util-sanitize-uri": "micromark-util-sanitize-uri@2.0.0",
+          "micromark-util-subtokenize": "micromark-util-subtokenize@2.0.0",
+          "micromark-util-symbol": "micromark-util-symbol@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0"
+        }
+      },
+      "ms@2.1.2": {
+        "integrity": "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==",
+        "dependencies": {}
+      },
+      "parse5@7.1.2": {
+        "integrity": "sha512-Czj1WaSVpaoj0wbhMzLmWD69anp2WH7FXMB9n1Sy8/ZFF9jolSQVMu1Ij5WIyGmcBmhk7EOndpO4mIpihVqAXw==",
+        "dependencies": {
+          "entities": "entities@4.5.0"
+        }
+      },
+      "property-information@6.4.0": {
+        "integrity": "sha512-9t5qARVofg2xQqKtytzt+lZ4d1Qvj8t5B8fEwXK6qOfgRLgH/b13QlgEyDh033NOS31nXeFbYv7CLUDG1CeifQ==",
+        "dependencies": {}
+      },
+      "punycode.js@2.3.1": {
+        "integrity": "sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==",
+        "dependencies": {}
+      },
+      "rehype-stringify@10.0.0": {
+        "integrity": "sha512-1TX1i048LooI9QoecrXy7nGFFbFSufxVRAfc6Y9YMRAi56l+oB0zP51mLSV312uRuvVLPV1opSlJmslozR1XHQ==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3",
+          "hast-util-to-html": "hast-util-to-html@9.0.0",
+          "unified": "unified@11.0.4"
+        }
+      },
+      "remark-parse@11.0.0": {
+        "integrity": "sha512-FCxlKLNGknS5ba/1lmpYijMUzX2esxW5xQqjWxw2eHFfS2MSdaHVINFmhjo+qN1WhZhNimq0dZATN9pH0IDrpA==",
+        "dependencies": {
+          "@types/mdast": "@types/mdast@4.0.3",
+          "mdast-util-from-markdown": "mdast-util-from-markdown@2.0.0",
+          "micromark-util-types": "micromark-util-types@2.0.0",
+          "unified": "unified@11.0.4"
+        }
+      },
+      "remark-rehype@11.1.0": {
+        "integrity": "sha512-z3tJrAs2kIs1AqIIy6pzHmAHlF1hWQ+OdY4/hv+Wxe35EhyLKcajL33iUEn3ScxtFox9nUvRufR/Zre8Q08H/g==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.3",
+          "@types/mdast": "@types/mdast@4.0.3",
+          "mdast-util-to-hast": "mdast-util-to-hast@13.1.0",
+          "unified": "unified@11.0.4",
+          "vfile": "vfile@6.0.1"
+        }
+      },
+      "space-separated-tokens@2.0.2": {
+        "integrity": "sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==",
+        "dependencies": {}
+      },
+      "stringify-entities@4.0.3": {
+        "integrity": "sha512-BP9nNHMhhfcMbiuQKCqMjhDP5yBCAxsPu4pHFFzJ6Alo9dZgY4VLDPutXqIjpRiMoKdp7Av85Gr73Q5uH9k7+g==",
+        "dependencies": {
+          "character-entities-html4": "character-entities-html4@2.1.0",
+          "character-entities-legacy": "character-entities-legacy@3.0.0"
+        }
+      },
+      "trim-lines@3.0.1": {
+        "integrity": "sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==",
+        "dependencies": {}
+      },
+      "trough@2.1.0": {
+        "integrity": "sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==",
+        "dependencies": {}
+      },
+      "uc.micro@2.0.0": {
+        "integrity": "sha512-DffL94LsNOccVn4hyfRe5rdKa273swqeA5DJpMOeFmEn1wCDc7nAbbB0gXlgBCL7TNzeTv6G7XVWzan7iJtfig==",
+        "dependencies": {}
+      },
+      "unified@11.0.4": {
+        "integrity": "sha512-apMPnyLjAX+ty4OrNap7yumyVAMlKx5IWU2wlzzUdYJO9A8f1p9m/gywF/GM2ZDFcjQPrx59Mc90KwmxsoklxQ==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2",
+          "bail": "bail@2.0.2",
+          "devlop": "devlop@1.1.0",
+          "extend": "extend@3.0.2",
+          "is-plain-obj": "is-plain-obj@4.1.0",
+          "trough": "trough@2.1.0",
+          "vfile": "vfile@6.0.1"
+        }
+      },
+      "unist-util-is@6.0.0": {
+        "integrity": "sha512-2qCTHimwdxLfz+YzdGfkqNlH0tLi9xjTnHddPmJwtIG9MGsdbutfTc4P+haPD7l7Cjxf/WZj+we5qfVPvvxfYw==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2"
+        }
+      },
+      "unist-util-position@5.0.0": {
+        "integrity": "sha512-fucsC7HjXvkB5R3kTCO7kUjRdrS0BJt3M/FPxmHMBOm8JQi2BsHAHFsy27E0EolP8rp0NzXsJ+jNPyDWvOJZPA==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2"
+        }
+      },
+      "unist-util-stringify-position@4.0.0": {
+        "integrity": "sha512-0ASV06AAoKCDkS2+xw5RXJywruurpbC4JZSm7nr7MOt1ojAzvyyaO+UxZf18j8FCF6kmzCZKcAgN/yu2gm2XgQ==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2"
+        }
+      },
+      "unist-util-visit-parents@6.0.1": {
+        "integrity": "sha512-L/PqWzfTP9lzzEa6CKs0k2nARxTdZduw3zyh8d2NVBnsyvHjSX4TWse388YrrQKbvI8w20fGjGlhgT96WwKykw==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2",
+          "unist-util-is": "unist-util-is@6.0.0"
+        }
+      },
+      "unist-util-visit@5.0.0": {
+        "integrity": "sha512-MR04uvD+07cwl/yhVuVWAtw+3GOR/knlL55Nd/wAdblk27GCVt3lqpTivy/tkJcZoNPzTwS1Y+KMojlLDhoTzg==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2",
+          "unist-util-is": "unist-util-is@6.0.0",
+          "unist-util-visit-parents": "unist-util-visit-parents@6.0.1"
+        }
+      },
+      "vfile-location@5.0.2": {
+        "integrity": "sha512-NXPYyxyBSH7zB5U6+3uDdd6Nybz6o6/od9rk8bp9H8GR3L+cm/fC0uUTbqBmUTnMCUDslAGBOIKNfvvb+gGlDg==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2",
+          "vfile": "vfile@6.0.1"
+        }
+      },
+      "vfile-message@4.0.2": {
+        "integrity": "sha512-jRDZ1IMLttGj41KcZvlrYAaI3CfqpLpfpf+Mfig13viT6NKvRzWZ+lXz0Y5D60w6uJIBAOGq9mSHf0gktF0duw==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2",
+          "unist-util-stringify-position": "unist-util-stringify-position@4.0.0"
+        }
+      },
+      "vfile@6.0.1": {
+        "integrity": "sha512-1bYqc7pt6NIADBJ98UiG0Bn/CHIVOoZ/IyEkqIruLg0mE1BKzkOXY2D6CSqQIcKqgadppE5lrxgWXJmXd7zZJw==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.2",
+          "unist-util-stringify-position": "unist-util-stringify-position@4.0.0",
+          "vfile-message": "vfile-message@4.0.2"
+        }
+      },
+      "vscode-oniguruma@2.0.1": {
+        "integrity": "sha512-poJU8iHIWnC3vgphJnrLZyI3YdqRlR27xzqDmpPXYzA93R4Gk8z7T6oqDzDoHjoikA2aS82crdXFkjELCdJsjQ==",
+        "dependencies": {}
+      },
+      "vscode-textmate@9.0.0": {
+        "integrity": "sha512-Cl65diFGxz7gpwbav10HqiY/eVYTO1sjQpmRmV991Bj7wAoOAjGQ97PpQcXorDE2Uc4hnGWLY17xme+5t6MlSg==",
+        "dependencies": {}
+      },
+      "web-namespaces@2.0.1": {
+        "integrity": "sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==",
+        "dependencies": {}
+      },
+      "zwitch@2.0.4": {
+        "integrity": "sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==",
+        "dependencies": {}
+      }
+    }
+  },
+  "redirects": {
+    "https://esm.sh/@microflash/rehype-starry-night@^3.5.0": "https://esm.sh/@microflash/rehype-starry-night@3.5.0",
+    "https://esm.sh/@microflash/rehype-starry-night@^3.5.0?bundle": "https://esm.sh/@microflash/rehype-starry-night@3.5.0?bundle",
+    "https://esm.sh/@wooorm/starry-night@^3.2.0": "https://esm.sh/@wooorm/starry-night@3.2.0"
+  },
   "remote": {
     "https://deno.land/std@0.120.0/async/deadline.ts": "1d6ac7aeaee22f75eb86e4e105d6161118aad7b41ae2dd14f4cfd3bf97472b93",
     "https://deno.land/std@0.120.0/async/debounce.ts": "b2f693e4baa16b62793fd618de6c003b63228db50ecfe3bd51fc5f6dc0bc264b",
@@ -135,8 +726,11 @@
     "https://deno.land/x/htm@0.1.3/mod.ts": "93485a06c930907a40f09eb8d9deadf27aaaa228c5037a24be7a08b82c8b4bee",
     "https://deno.land/x/htm@0.1.3/plugins/color-scheme.ts": "e6aae324f7d28e2ad3a9c9dfa5665ba0e4cec2e05fabb04989dc124c0b5f6e36",
     "https://deno.land/x/htm@0.1.3/plugins/unocss.ts": "dca4739d3f07a243b14d072cc470537a8711e0b7218b4968e661d62ceeee6416",
+    "https://esm.sh/@microflash/rehype-starry-night@3.5.0": "1224c17e93023b3186f8a847cc25b102a1955e44e1add14424a4c71c999ceee2",
+    "https://esm.sh/@microflash/rehype-starry-night@3.5.0?bundle": "98f55a20de2a67d99bfb389206dd074520f6529631884e5b8268b3f720bfd507",
     "https://esm.sh/@unocss/core@0.46.3": "9049ec4601a3d23ef867686a6318db0036070087ed0f042aa2fa078484b7e7a5",
     "https://esm.sh/@unocss/preset-wind@0.46.3?bundle&no-check": "9bf95bcf4a8ef5528e505238763e37fb9300b3da5042b959c7c7d41f931b6629",
+    "https://esm.sh/@wooorm/starry-night@3.2.0": "b565736ca8a3418ea131ee9ae5f1168e575d2ea441babd2bbcf0a5c2399448a6",
     "https://esm.sh/feed@4.2.2": "1a5822737d59ad06c741504c67eba07c68b582799b6b4609f17824cd5a3dcfe0",
     "https://esm.sh/he@1.2.0": "388a449d0b163506f1a5ed1b9fe178c29433c9a3af5b2465c92ec4adb0f35792",
     "https://esm.sh/katex@0.16.8/dist/katex.mjs": "9cf7668f77237b8993333732787ca8c98cfd26bed510a73e51762cf9a7ef07db",
@@ -155,14 +749,626 @@
     "https://esm.sh/prismjs@1.27.0/components/prism-typescript": "5c24a3eed8664ce1aec673dfe9b052a6aaff5324201dbb8f0602b21a73add1f0",
     "https://esm.sh/prismjs@1.27.0/components/prism-yaml": "15a8fc19ac3a1d0f8b32b97608fc5a0d3b3ba2469c8d4f7c4e5ce2c5df3c2982",
     "https://esm.sh/prismjs@1.29.0": "67e956514925401c964a7fc1205258ac2203cbd2aa246f55be11a3109fe9b6b9",
+    "https://esm.sh/prismjs@1.29.0/components/prism-bash": "8735146f58622dbed22b198a770068d3fe9ed64153307105997e0afd22857a77",
     "https://esm.sh/prismjs@1.29.0/components/prism-c?no-check": "c06f2d48b15d82b9e994856f9380bb5a6192ce0230fe33fcb49b86980d660860",
+    "https://esm.sh/prismjs@1.29.0/components/prism-hcl": "361971e28ba96fbc707fad246d68e3d22c1a717b1ad3a9448073497ebba6070a",
+    "https://esm.sh/prismjs@1.29.0/components/prism-ini": "15813a493ec0d36cde2362e185b072e2c71153d6ef08ad8307b62fdc8d674313",
+    "https://esm.sh/prismjs@1.29.0/components/prism-javascript": "876ca840035c444a07c2e8765f437b51c2a44308e6f1bf266f9db309dd2693f6",
+    "https://esm.sh/prismjs@1.29.0/components/prism-json": "b83a1636df89def04c9eb8c2d1251efcbda76a9c9689f9e58d80c8cfb822f39d",
+    "https://esm.sh/prismjs@1.29.0/components/prism-markup": "ed214113d0b9eda773ac118a00db2fe641c96d76963c6ab15fd62415eaf3b298",
+    "https://esm.sh/prismjs@1.29.0/components/prism-toml": "8e72a4ffec24df611c3a65dbdf87882a8977f4d4e8159c7052d8203b9bbfdf68",
+    "https://esm.sh/prismjs@1.29.0/components/prism-typescript": "4425a6b34592fe12012c9bfdc9359e05ae4c19a0e433860bdb2771d9fb591bfb",
+    "https://esm.sh/prismjs@1.29.0/components/prism-yaml": "6d4f0b159184940a5e0739b4a6e01c30260bc5cd86912b54e34c4988d95ca4a0",
     "https://esm.sh/remove-markdown@0.5.0": "44b9de241db9fbb69f3e526773fd6d170a14b04860e543c3a48cfa7089905aa0",
     "https://esm.sh/sanitize-html@2.8.1?target=esnext": "2605687c91e08c4a1e0c0b0966dc82fe4afea18bd1560a1c1ed03d79b69882ae",
     "https://esm.sh/stable/preact@10.11.2/denonext/preact.mjs": "deeb0873c83971be55cddc2f90bf0099a4c86adb3797884300677a3daf1b70b7",
+    "https://esm.sh/v133/prismjs@1.29.0/denonext/components/prism-hcl.js": "188160d00e30f820aa44bd0df4a1608387aa2c75b9370098d94cf5453d4cde5a",
+    "https://esm.sh/v135/@chevrotain/cst-dts-gen@10.5.0/denonext/cst-dts-gen.mjs": "3598c757c96ecd6ca95aee715fe430ee98b1828741ed2a839c72ead563ee68fc",
+    "https://esm.sh/v135/@chevrotain/gast@10.5.0/denonext/gast.mjs": "88b0a9991eed56950eb345f3d72f8445e62b6c5652b68bfce6d9215324c720e0",
+    "https://esm.sh/v135/@chevrotain/utils@10.5.0/denonext/utils.mjs": "635fbd2b4b095ace67bfb72c99dff138ec548c552f6e542c38827a53ab59449c",
+    "https://esm.sh/v135/@microflash/fenceparser@2.6.2/denonext/fenceparser.mjs": "7b4092eea6f30198b36cde411187458ad7a67f2d283dec2eaca8e9619e6e5d9a",
+    "https://esm.sh/v135/@microflash/rehype-starry-night@3.5.0/denonext/header-caption-extension.js": "276f56fabb1d71d55a9bd168d3a0b78dedf89bf79aece0fd7c5a6c8dba6d3dbe",
+    "https://esm.sh/v135/@microflash/rehype-starry-night@3.5.0/denonext/header-language-extension.js": "e733d403c675eb163bd195160308d75d238ecb40218e580886cb9315154d9a9b",
+    "https://esm.sh/v135/@microflash/rehype-starry-night@3.5.0/denonext/rehype-starry-night.bundle.mjs": "26629fce7d3c365e335e03845a174631033f6aa039c901bf498481bf35ae0447",
+    "https://esm.sh/v135/@microflash/rehype-starry-night@3.5.0/denonext/rehype-starry-night.mjs": "9dba98c667317463dd72b753c3e06da58dd2d201ee038ed1e1a0bfac10a6e502",
     "https://esm.sh/v135/@unocss/core@0.46.3/denonext/core.mjs": "ed5fc799af48df70c566212dececb0af69e4ac2e490bf3486868c4650317fb9f",
     "https://esm.sh/v135/@unocss/preset-wind@0.46.3/denonext/preset-wind.bundle.mjs": "4684306eb5efcc68054141cfce29286c33e255d03b17b47cd42c79a0858b1721",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/config.xcompose.js": "a92c5a334f887f21b17ad75293c83f5c74de97e086965edc7db17d38b5b75f67",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/etc.js": "c22ebff373a9603f7a8dcc823227d903f1f2c22f986d1ec6d6053037c9bb09ff",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/file.lasso.js": "851840cdab2fe5e52decb8cd7b1b30378a6f1ef078b5e4096a639509ffaa33f3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/go.mod.js": "647e6b0a0e415b62b234bdcd4365f388bb949b0e4a8eb85dcd2bd9e221521c65",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/go.sum.js": "1bf724f164c7fec4b77bc40efa925414e2e39122e287829d27eac4b9deec2236",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/injections.etc.js": "03912b9d25bfb8c48b737ea79764857ac3ceceb5480109a752d41283e824dc28",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/objdump.x86asm.js": "2e4bc683dc922083ecbd74f6459c6f1ba709d3dd70f4933750878390a7693c9e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.2da.js": "17f58394ac63997695bd5ddfde4c685a450fc5e890fd75219f9f6be18f926609",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.4dm.js": "58ef987e41bf914fc8b5693e5ff82389b7e3dd99879f38800121fd87d9e00419",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.abap.js": "59465abbc9cd99c03066f3c62bd684f70099a1fe7a1903cf419102c9d32a52c2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.abapcds.js": "12b3a31a8ed94ab66485984a2ada58091f57f14f5604cb39911f5e4bf0164d91",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.abl.js": "d5b1c081dec6127954ee3cd40065f3787cbdef388bd42cf49b988f2920e97c49",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.abnf.js": "3c713e5745761e051031df1a2ea45cd8c51828d85422abb69013a565fefd2204",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.actionscript.3.js": "03e8343ea5a95214a08f0ecedbef0a125b26ce843b15c07aa3c36e0adde444ee",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ada.js": "d9fc1460738a290805ea061d0bc57083a6404cbfc781094b7bd5cab68847519a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.afm.js": "2f96412c1cdaeff77ffa8c49630e86cf49c3e64908ea271ff50956d04396a706",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.agc.js": "6037a4220f01a4b7d202789b47c0bf54bf897af8fb7f67a24134f6923054cebc",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.agda.js": "593142c8074b9cf38463efea3cd54e591b923750aa770544f3256ea71c1ee539",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ahk.js": "a45db81c52e96e0bcd5430c9cf35f410921a17bbd32d6c8d9f02a5e1c7610743",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.aidl.js": "1097530dd2d1667943251d9f6033b3a179f75c5b07800a22ab408c0d04422865",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.al.js": "395a3c358701ebbe47bf42d18b28f326264aca5c03ae993348d26f93d0c98c53",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.alloy.js": "1461fecc35109243559ebd98e58cd06e59f86d49f4ac67c18bdea5cd0a419048",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ampl.js": "37549c08d210eca0840826daeafbae41e855ab00011ae062e4c22412a40ebeb8",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.angelscript.js": "16da1825cf670a6bacf2c5b21bb26d3af516f6e266960fbe04b81fa8e48a6d07",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.antlr.js": "e83fd987d8b08319918ae84f9e30fd529bd5745529447ccb0ee46bf6b72618b7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.apache-config.js": "cc14cba8a22261bfcc45114b5e4c92666e17e792b10c85813a9ead8e2258d526",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.apex.js": "b1aa6384c202158bfef3886e22b4b4b0b6aa048c41ea3cebba2b69b83642d5c8",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.apl.js": "cce1488f3296c3cb2fe22319913ecd8c3a146e43fc8e1ede1a169761f775b4b6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.applescript.js": "d7219a7e89ee93950c988030678d133260ecdcec5c2fe73217d52e38a4dd37bb",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.arr.js": "85df96357bfd9bd902a2ea578c23e3edca9d08248cdbb78d62e6f831c876ef8d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.asl.js": "e402fd1b5abacb1e0073d28eee841db84f76483d8d014487e35dedb176ffd5ea",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.asn.js": "fe01d0245eb15ff12bbe5f222a17e1de58e5a624c967cb584f0cc4cca70d9f27",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.asp.js": "196b9aad4b871ed7bfa7632afc3fb5f2acc7104ec97b12510c61840eaf5aa8a0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.aspectj.js": "d64c6f1ceb066a3d19be6e13575c53715da7de16e36c6b78c46388f07e918ce0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.assembly.js": "cc038535753b192162dd16855760166e3770f62a534f7b38a31f5128d7bdab75",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.astro.js": "0868276d3b4def94be025afb44d4781001e45584ea3397a870e84f75217602ee",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ats.js": "ff16ac1909b6b1be33e22cb7aacebbafe3b18271d5ddb347ea12e44c8e461969",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.autoit.js": "bd7175f85899fbd5597edfb8e9313dd3d306a916b9682b99add77fc25ebbc581",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.avro.js": "08cbb345418366adc0636131d6f775c79412bdb45cfe547fb3421f7055d43a5d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.awk.js": "81384dacf829ac5b403a23985f5483b2ba9da2ed8fef22335c64bb3c4d5c8e8e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ballerina.js": "78df0890e7a77ab765cce268eb41a04318fcba8d2e0521dcb423d88980482eb6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.basic.js": "96314c7c2278a9fd035f304b4b8e2b8e80a3c93ee4a114cdab13eca1c78d4827",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.batchfile.js": "ebb94c3efe20794119a1674e80a81c0689878f0fe15628b4b583c6446dd5154d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.bdf.js": "d4bb8924a8768dc5bef569c60b5a02c0eaf33b968aced5a1333d7b6b34ba673a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.befunge.js": "17cc6a6d7f34e4ba89460735422af16a4ce9fd6af8d26a0209e56f1f80ea7250",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.berry.js": "7b8f086d28c687d7514d7999a88a5a1e8d367a122378a769c5ac019cf23c6361",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.bf.js": "acf6891b0a078a4c423e5b141deb066a26b69501d285fbe450da28cb862251d9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.bicep.js": "5f99b266d770079ec722bfd3f5cfcdfe34f30af9bb39e1001fd6decc88f0a4a2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.blitzmax.js": "a8da7f6867bc64332043ed33a0569d26b7b9be68f147059dc3ac8116786420c1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.boo.js": "c60a6bf5292115cae7aa41b3a373d3d4b67e8035ed506e1de59a41a96549ddef",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.boogie.js": "95c4715effcb4532d8629c1a231f0772fc6e13f6e9eb9c40c61782bce599ecb5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.bp.js": "e9ac68b3ef4ce6dc74d859fc1f9c996c32873f9d07ecd1264a6512e43763a349",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.brs.js": "b202cd711621e71846dc61cd4100ca2e879fd2ee464171cf2390d4ed88590085",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.bsl.js": "ee0db29b9c756a1fcfce269546b7b4c15ad2ef9ba632826e70664279a5d15d5b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.bsv.js": "3ffa22c531497eb9b31784136072376c172d984f638f9dd66b765defea77500f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.c++.js": "140cc9b781de4c4ce4e29dd8aff6b62d0571fcfa9e9663d5eb9923f0581fed63",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.c.ec.js": "469b6aef4b51da4c71ed18654f8a493be8dfec9b2f55bc70df0c21654af8f4d8",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.c.js": "3c9924b8d3085f22b5b17b44ae6beab81dda98dd2184248cb007eb570cf88635",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.c.nwscript.js": "c889fd0a41b04cb315d0d6d643623474294a82d7c89cf66c7c39c3fff3b14b5b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.c.platform.js": "8ae732ccd2855efc89018cfda4dfb37e6a260516e6c1e7cc256f28667ccb88a9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cabal.js": "2e95473b8971c30200aed5fd3113c6e0db8c5babcb9f86164f0065c02ad7f30d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cadence.js": "fe012f4ee82237a3ab9c985a92cbc0b084f6323e741b938f483b851dbaa3caee",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cairo.js": "4b875dfe299b3333f3ea8cfa3e35105f0b22a9af880cbd16761e640857c63d80",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.camlp4.ocaml.js": "5424148b69d68652844c626bbbd19e7b4d8f6d0fc055ba6e217c0357d88d64c4",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.capnp.js": "9c101ca3e91974b8811831111a4167f1448dd311e4f9e7182a93aa96f2b24a88",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cds.js": "cc6db544be7ccbe89042ba899c724ac828a81c7b793228e254555829de29d3f6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ceylon.js": "ea94f2bf22d13b901879bd4143e146ae023b5d3804d6e58daac9eb58bc6ef5ce",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cfscript.js": "8fc3bd9559f32a9d414b556100e9658a11f81654447b3e6c037b7a67f138cc34",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.changelogs.rpm-spec.js": "fffafec9b7f85b79727ca7a85e3c815c0937a31c4c66505e00987c39de95e44e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.chapel.js": "de9d7636f0a2ec5419c3289f8b8188beccc88806df1429080105bac3bbd729ce",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cil.js": "60c6439f1cd8fbab9bac00e9fde4c61a64e6262e8c021fd11b432620bd750531",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.circom.js": "aba6129cc5f8940fb4be07e3f8bb0bae06788d601d15144ced4edd67fee87111",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cirru.js": "b902bfc408333eb6f070fb3dce5020fc42046d88bf612fa009183cdd359b500e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.clar.js": "216f2fb937ec7cf39ded9481399128cc687e0b019402f31c41a942f0efc90e09",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.clarion.js": "fe1b1677f0df4d6e82a6c775e5305b2dd479081443d024e21390fd5b312f2394",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.clean.js": "ee1b28bf895d5efc1edb3608f9dc86f48362ce98bada8fa434f5a302094f1a9b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.click.js": "cef7e3d231fb0dd9d6638d5413405d1df96bcb10e5a4b55e22d24c62af694b61",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.clips.js": "480ae699b45173126c213e14e15ad9f22d601516ea28937a74d9e41aa93e9ef0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.clojure.js": "d4fd8124498d4d1ac20ace8ecf6eedc77139eafa9b0812a8a74298828610f1c6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cmake.js": "c639298cc6f5a8abe4e1e0c225f56da91097f541094d0b0601a22a27de85e544",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cobol.js": "1155f387cf812029fa31435f4c80580d990e5a1fac5136e67cde13999ae11c72",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.coffee.js": "a70e7ccbc9cbeef0b6d9d31b274343b4648f9b493c8926462c2e738722d13258",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cool.js": "974e705b110726c2e60f0d6cb118747a35e33b7f672c7abc978df5b9c2fff1a2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.coq.js": "357921d0d094f852ab23494610a108351463960c6101da6c2b13c7239ca44b3a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.crystal.js": "116156a3df805c296780586353c7e5c9b5aad00e32457039f8c300e162e04386",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cs.js": "c01a66f14faad66e8c6183c69eadb9aeab872645384093e1514e03107f37ac16",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.csound-document.js": "e88ae96af37852a4dff6c9c076dfb2ef988026d38889141e0ea5e8008773602e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.csound-score.js": "3ba881e94a3e76aee5e2884999083d062e24a4ee66f3809e1885b7bc2e4723f1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.csound.js": "aa37ca0c20b47407be80a94e4a45b65fc5a4135bfea477b1797cbb330af82bde",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.css.js": "601c88b0f1be1aaa01f0effb78103f6309308e27b30da84559ca67343d48f428",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.css.less.js": "b5e5f438ad2c3c2e29690bf6beaac55912147f4299e39c53523a6913f351bad5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.css.mss.js": "6b82cd06c21ab1248aa0606dfa91a0844b2b80bf4f23651e9beb13945a8f10c7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.css.postcss.sugarss.js": "1a5072a4d5748d37bb16c43edf066ebc8a70fb5872c51f862648d448b5c4371d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.css.scss.js": "47c33cefd976c875c63808b6a4ebc494cc4696a839479660d1de4c2b99ebb11f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.csswg.js": "1ef1ee13c7bca7f3495e22a33e1713a4eaf2feef808d3c249a3bd7d46bf6312a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cuda-c++.js": "2f7236ad1adef32f53aa2132321005568be2af415d7c64891e7a21b2cbbd5ce7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cue.js": "f9ef28566f7b8deed866e75a2646bc078559d65a3d7e8260d75694090d918538",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cuesheet.js": "d6bde1225673f4488982418570d5acd634238fd66e3835afc4a13f3faa66d9b8",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.curlrc.js": "aa0174d76484fdb94fe58f65c309630fdd99f940256a169eb32cc77517016e63",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.curry.js": "d01d976a21e32059e350df2769c7a13576b65ad281e82ca07027eabf585a26ff",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cwl.js": "69e1169ca8216422c8d45a2737fcad8e9a5008c4a5dfb302c514762b3f802525",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cypher.js": "a7e6511231b29679d4c9f9b82ae8bee035007f1dd97f06dbde0332beb1ff0dee",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.cython.js": "e967fe38ac15636a8bb898a9e37745e242d91bdb6c29cee09d4b49d801b0af55",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.d.js": "f1ff59c7e7edeedb6c6c64965608ec24db4b69be99d46e8cd91b3fa1dfc1adcc",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.d2.js": "ce1b9003ae07f2395cdbc202367d899c617c10917279e88b33a32cfa7809ac5b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.dart.js": "e8e74773e51ef98c106c2fc3a52da35c9010579a98c528979d90823db0448236",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.data-weave.js": "7e37d7a88864fb43937ce9a695220fbf98f86e8cb2a190d587b74fa77d57e176",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.deb-control.js": "76b745f5330637dd264f3b6232d3d9091568b61d1fc73df108162d6aeeef56af",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.denizenscript.js": "71ec4e4b19bc613e7cbb699c79d3a2a07558147bef3356aa07655056f77da521",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.desktop.js": "08b96e414c84215ce6d641e3258f894ddc7f5e605bcf64599b640602562a6f72",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.diff.js": "d648a7d73b3150cb778d6adfb6822ec29c3635f2d081b3f66a57a8205b0f2ff9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.dircolors.js": "5b1e2261562f3a944896f34d2b28bc9e0232fdeaf1b3e9fe5db5a94ad93e821c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ditroff.desc.js": "85d3b048e7c70a705d1fddb27dad76940cafd43b03ae392547f65369462960c1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ditroff.js": "e9e46a85af8e191ba03436398992d3989d4f02ebdd3fafeb7bb7adefdcd4de59",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.dm.js": "0c58c8fd895133be80fbb0b114caf9c17849c0335181d2c1b699b24a661d667c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.dockerfile.js": "f079fd3f68a620816227d5feae02d63b6f26a2f47f8fae93884221410396b356",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.dot.js": "7e06889f8f3a0cb8656164a2ec16a1bf8fe827030e8c9129501d9526c28a9209",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.dotenv.js": "a6b238630390aa4125146c94306b717baef6422fc17ba636314618668468b679",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.dylan.js": "292a2b5c9752c333ed028d591fd92eab3dfb2e267edb0c4df471ff8fa50437dd",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.earthfile.js": "5e6d21566efd60d993db517884566ec94b7c053896df08ce450cd28b2e998387",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ebnf.js": "2510b70a691e58f7048a706660affb8fa6d71f7c5dfff962ebd0c88030af1230",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ecl.js": "1d7840fabddb2ac7a505a5bb81e1894ca8404b5c94fd1012efba6b5d0b13e035",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.edgeql.js": "782a5d5cdf84f5b4d927dd18319537601ac8193dacffb5caed4eac559d48e34f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.editorconfig.js": "63d29154e2f7fabd0110c5f0b8d6f05f294daf26aff3f6a35a25b3a26ad7c3f0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.eiffel.js": "f5489a3a880753dc9d0bde3d42cdd32cbfd2370343c9c1d16cb21e5ca9511868",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.elixir.js": "5d4b8311154bf76e574262aea7ff1171ad0c0f9aeb36b5400b027afccf16a509",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.elm.js": "0da1e09212fd70d0d10beb815f02a21acc124583b32e526ec770ca7126a43403",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.elvish-transcript.js": "562d0c53bff83ad36e793345eb97481c31791ca2de49894831e834e4041445e9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.elvish.js": "f5170199ed7546949e63610f86121d0b6a55e842f524cf9b91da55d93dc0b236",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.emacs.lisp.js": "6b0a278f930a75705e41400745a547871b80e65e2c1b036706e78fd8cb079ef2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.erlang.js": "e397ba2a1a0c237d2c6f48760245c54cb187ee43b46e5b39daf6f6353fa4ab01",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.euphoria.js": "c0816685098a5cea98a7b23ce32543807f1d6c527017b17c11e6596ecdd1bde8",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.factor.js": "56ff3bc3f1742e352c4a5c5e58ec17f54afec49a21659309e8df0cd462fe9e31",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.fan.js": "476108ce0129f79f6dcc050072e5a88300041d11fa2a94551871b5c126e713cf",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.fancy.js": "748654e1403ab0af766c90a4ff816abdd1058bda7c51ccab4fc8d82f50913467",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.faust.js": "cb702979855e2638cdfa2520d1dddded07111850c3a6b0851ac8574f757f9d71",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.figfont.js": "7fe066ac3df9e249a2f33071160ae5f09dcd0876412e6cbeb98beccba351c39b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.firestore.js": "05a90d8974935401875b9e68ec5bbca2bf942a39026fbe279b83ad3e40dc91da",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.fish.js": "65448e72b4004eef23686a1181a7190d9b6f7c60897d1583059db8dccd85c81e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.fnl.js": "78390aa01daf79928428e1de34ca5e408a73b158676fea396679c7ad5376d274",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.fontdir.js": "04e041318f597735d356b63d4f46de6e09aaa7f9ad672c6257818ec3b419147c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.fontforge.js": "2fbe548a2a962cd41587da36caf36a22c0bd818004d215b596edbd1c916891b2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.forth.js": "0639790362e98a939341965ea426c916c8a8decc7b376bba472575693872c53c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.fortran.js": "5e5175fef60ac74e2373313bed759b1ae5e9c7272b9850b1a1be72b6b1a853c9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.fortran.modern.js": "12de72a83f8d2f639e9f286ce470f897fbd3a51f4a998aeb5bce2878082a70ec",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.fsharp.js": "2024f822459698fcf9453e8cc471b8e9fdfeff41cf60e0a35ee51f26f1582587",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.fstar.js": "8d90d6e0d3b7455f6a29b1abcd420f6658baff0d47fe8b6df109c7b740e2d045",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ftl.js": "d4fffb5d91f1932665194a9bd89d085a4f7cd23508c8407a64d3a53c4ed65116",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.futhark.js": "be551dd3cba1b3818309c1e20462fd40881df9a5138d8a5bc2a8aac964ceab19",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gap.js": "602727abd78c9936b067f0aea188e450a1e7ff0cc0dfae231ef0e1ee3d672c90",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gcode.js": "aa93d10bda0a26a9bc1b775326fd2f9b37c2bd2a41cefe709a33fa807e62933f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gdb.js": "c0f37932ab0813979cd7cfade688e0c6ce478d60310666fe15923b99f7a2405d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gdresource.js": "f1731eb24f79276fbfd008f522798b073f1d3ae910c70e06c5e7b5b6d0042eb5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gdscript.js": "a062cd7318656fda34e6e5d032b1a3988dbbb8411eb442162b36ef5905707e50",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gedcom.js": "2184beb2ca8b3298962f5871578f38c546e4e109d5d66624ab6dd137ed4961cb",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gemfile-lock.js": "39863859ca0e5f9b7a9578d665de12b99118c9de2c2c1605eb219b3528af9792",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gemini.js": "5236bea149ffbd1398ed1c18805fe55cdcd4e273b8fdfa066b27b5413bb61a16",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.generic-db.js": "94a854cf66b88f91ca9b8ff793639524af319ddbc39b977cfed8ca927f0fed28",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.genero-4gl.js": "f125b0199596883e1bb8daafbb0cf00f13eb450851b9f5884165fc2bf1416c23",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.genero-per.js": "7331cc974dcb954da00ff097f02687a9ae7776a77e12ce57f8461c099119a395",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gerber.js": "a21261a0cf14266064208190b5d0d488e6044d6db46e3b45f8c8b27fd241fefc",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gf.js": "69dbaf694a350366ffbc833e06a3159a05f4c227b93d42c478f04f0d7b63044e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.git-revlist.js": "f57f5478c3a0f0b56570b734587372513cb13b3259e70a98635d51982abf7984",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gitattributes.js": "847017ef20afebb22f6f1adcac4559c581e4d59227ae22b3a9488941bbb07290",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gitconfig.js": "0eefabff8227b264fa789f599e12bd894c35056ed3425985720a5f43a4e49595",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gitignore.js": "7da552a904e737f7e37f39fdd3f0d5b81c41b2af95eddafb24412dd8a6f5c2a5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gjs.js": "803ca51e3f4a176a069f27cc28bdfae27b96e95e2d0c7cce67c2c10d7ccab4ba",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gleam.js": "c962f1efe0dfbd67ce32ef6b98ca89bc8dd162fdffc41fd5f33e39a62a265881",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.glsl.js": "5e496c2a54ea22c272ff5d945116926e18701a343974bb019a3f51cbc4df05be",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gn.js": "f0eca9d243479c191d754b9d9ce2c4076c8fa903462e0a0a7c7c94fafb2ca990",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gnuplot.js": "7eb5939885af39512dd967f2e06084c7a451c49fdd559429b5998b0718a8fc8c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.go.js": "365b69d728ebd935577c8b11b0e79354d16d68e591df44a7398e3620854d7674",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.golo.js": "400c5abbb6333fb79159574d414530a6d977cb1e0269395e0c6369305aefeb6f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gosu.2.js": "a6c84d20e2555af0b41c1199f5d73c8f8ae448042286677c978981956e90d81a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.grace.js": "ec335a2391b9ba9960def21897391e95f538e50da77cb622ce7f375f265bdab9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.graphql.js": "59509a6a9e6ec5e350e9100552ec9ebfe3489d6035be36786096eb3637456834",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gremlin.js": "6d106550b7f446e08d32033f27cd38906ff618de467cf92b417da22a36c0e218",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.groovy.gradle.js": "fb4edb9b11851ae07569f7c4c189ee256a15cee18eb91b40b4f5e85ed8cfa9ce",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.groovy.js": "decbb977709633199b36319d6cff12a97e2af6850df0cc10a10903f5b0dacf23",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.gsc.js": "392cbea6c0a57d1913f51e777c7bd5d953b8f350cd20b37865b32ce36c3adc9e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hack.js": "9dd448ac2a3068b57218db7b08158afc689a41241f881155292005fbb2a413da",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.haproxy-config.js": "bfcf33e6d6e5db6413e26a6bd7ed6285f023d08037978a9996f51b1e4e0a0774",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.harbour.js": "d5e88f25fe7c3e6c29a783aa66d10422387dacbfa2f94144aef8dcc2c1db4d46",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.haskell.js": "ba9b0643b541bf701b7932999b26f00f3c7474a89037fdce36e360826be88e99",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hc.js": "0638dc4f71c7168e837095af66278942f76a6bf1e4dbab8627dd72e860d32b11",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hcl.terraform.js": "3a8609cab7ecdcd0b85255a33172b84a1dc8a7192e8e7c58c78d901eb3aa9bf7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hlsl.js": "0294311905f303eda94fac0c39c893077490722a902833afddc6424f73e28ed6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hocon.js": "7b4c57579107bba3dfca010f52880c6ae36359f7337dd2f9283621ec9400f0b9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hoon.js": "0188933ca06991a723b9afd859ffc5738b9193fe5a80ee41bbd32473ade02c1a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hosts.js": "651e9a425a53d264085a263dd16dd81388283f2502de5addeab78603bf9de0ca",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hql.js": "c5b868547e59f01b30679b1d1e3399f8d77c9a59e886c2544e048df5619bb080",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.httpspec.js": "8ca7eb6d556519e6bd74667ac473490de749f8fb35ca3e017911ce5de8ac803e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hx.js": "3202e4522974807b01b8ef9a7dacc0c26a23a06f02fdec432075026b28a30f00",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hxml.js": "e8f9c07e127ff92a54544c1dd95aadb68d86ef86a2757a7f1fcae54c70b10029",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.hy.js": "e94a52cbe7bdf94d0a37ee1b1a7d9762e66e1de5a5d20729ceacfae4e8967c53",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ideal.js": "29575cfeef9ecf7545602d10dac97c4036a12961ea793a586b139c874f2abf21",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.idl.js": "1230e391163833097fd5cfb69f5fd94fac06cbbec6b2520dcff179e1e97a8a21",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.idris.js": "d3d62263949c187e8718aa7bf9680c157115722292a53922f266f1a1de7ebf27",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.igor.js": "a3eba3bf03bd877309c5e3dbf61d41b475b13f79c5f62bf125e9fa612401ff0d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.imba.js": "817b510616f7acec7db62f08e49e663b2ce7f13d0460947c93294be8e9e055ca",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.inform7.js": "910f0d62985a0b3ef19381ac254e5371e99d7bca3d491fc3c64e5c1743af2ee0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ini.js": "e90bd18cc3d1d5388b3e1a2c410a62002a62784012828bf71904dda496c91d8c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ini.npmrc.js": "8c08b3b7a2a9f51f70571fcacd4c94c47c6d55166eb1bc62328b6cd3345f3e69",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ink.js": "6610c081e76670415b51712ded13fe1494d6237e3fec0e8c20f28dac5521c8b0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.inno.js": "a44c1ca65ad7258f4e90bc28314064a8b4a2754f9820c92a7fcb89f0c5441e64",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.inputrc.js": "5485d43f68171cbf2e15547d825e98aeb03e86790314f1405c13bc9bb939c511",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.io.js": "2f9e8c92d6a4b36a4a344105699384c8e28b13fb13a2f7a7635a51593e188e50",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ioke.js": "e666a2c09b2d3f3bb582fb2edc190242d3b1f65163085f653ff5d583570a9e6b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.isabelle.root.js": "2bcd924ce00d1f19ff5d4a2189592da8ebb30bb3081c4240fbc6157dd8b130f4",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.isabelle.theory.js": "8bfe113959d2cb7e3e0d68412d7ea7e98ed72621ae8179e0e013e2987af94e5d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.j.js": "e2bde7458e31bb11d418bda78aeac19d06249de5498e9ff55a75fb4cfda1bbd5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.janet.js": "d1ed34191105915ddfb58d8a2beb55b4228d1f8a209f797df6c36244d6297d27",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.jasmin.js": "ba0ec8e1eef94bceaa8f579676bfe95ac3ae22c10483b238d4d80be50c35c653",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.java-properties.js": "8b82c6cf28d283658e200babe8d2b58f22e5aa416378bdeab4328932d1acffd0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.java.js": "0a23046befd81114aad20e688590311446508eeadcf91c784dc2f2bd6db94683",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.jcl.js": "005d9feb4fefad96d8981514b4317c8c259b87ca3447497030ef4c58e31c196e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.jest.snap.js": "fc3bd00a772047ef3e8cb98217031702f6c317e260ecb272de404c8caf4a64f5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.jflex.js": "38f360877c6fb17492edaa538d38f5c1364b1ef5d3250dbdb23158e46e5f2971",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.jison.js": "f56bac27e2be7b7d3dfa7a3aaa90b83220a4a19d83f8297c71ad118a6738ccfd",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.jisonlex.js": "63966060b9e6547963edd1b177aa16ff3663c359554a13c3d893828d7bd20fcb",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.jolie.js": "f98b3c1e70f4381c4245efa896cf368f26faa6204a0275488a8a6420296d3fa4",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.jq.js": "a8e1d9479a7a4911c660909abf401e69da15e56259c6c406b2d3c3a4161e1684",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.js": "86ebf9ca5adf238c0d056c105f69363573534afee6fc1489dafd7eb55d417408",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.js.objj.js": "c342c9e129311878b1711a6f2877f308e0ce8b5b8ac5004b27d30a059b0fa6f7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.json.js": "3ede631dbf6982abbca8bd9308d55c12179e478be82cd1cec8e84228f0dfd188",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.jsoniq.js": "29da1f7806708b8d5c3e64ee02aa24b8051cb6904434ef291e893926c6f084cf",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.jsonnet.js": "2d41624daea2561fa98fe6d0ceb32aacf11120e2fa837137240bda19bfdfa9a7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.julia.js": "2c27d1df9cb77b9ca09de35bd70716f0fac4132c047c4bb52880011a449f9b8b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.just.js": "21f4d8da94f8b7abb00959bab45d56803d6616c3b7309146fbe376085f0f91d0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.kakscript.js": "42711ef77ed8a377802eb81264798a84644ad1c376fb4d4f813321b721e64053",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.kerboscript.js": "92fad1d083ae9fa5ebf7cbdd765f0556712d07ec96a8c8d7f9cf94bf70822eae",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.keyvalues.js": "23c720eb533a9e0440d7cf25c1748759a09465a1161ca31975266e434d249cff",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.kickstart.js": "f3370971da6eecbabc196e9128e3d6deadb1f69b8aabf24dd44aee14c233701b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.kotlin.js": "76a0c5f5de81b50368864cc7468a54ad37b9129d0e84eaef9c9d83f0907ff140",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.kusto.js": "5bd8effaeb25dc7e5773ea1ed8a781b5351d0d580d5f7a49848485a01716eea8",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.lark.js": "8f404537c60c8a23d4c26b8cdb3692bde12cc6c4b69efbdcfc6938f366576c44",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.lean.js": "0b2936194f7adf0f86652e6114f9be83a951dd4a5ad6c2317f44d705a75b2b26",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.lean4.js": "52c84766c7ca50e60aa1c2cf97b69aa78fa2fc27708f1d39804137be3efa980c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.lex.js": "375e6e4561d591198766d6745bf645fa6311137b223137687b2cb07f311f07fd",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.lex.regexp.js": "0b89aa084e29c50835448e398831000c7c22428bf9e92daa1abbe81a2f481281",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ligo.js": "a63bb6e911e5912657c2a5ad734e4f89b46fb9bc9e648e50c1e8523f0919e6ab",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.lilypond.js": "102233daee919278aba1b45f516b9667ca8b4357ead3d429af0e6e00dc615108",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.lisp.js": "fbfeff462bdf8fe68d68026295e22ae2d5fbdbe0d04d0a4d56f16fc5a1e095ca",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.litcoffee.js": "16e2f5edbf79ecb41d0ff6cec2f78f3bc83f427e5d0595d19e827950c8e72b77",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.livescript.js": "19e268ede6ce11a52bf57900f1192465ad8609c4d208f5d4c327b5b63fb83c33",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.llvm.js": "906afcb96d5b42a4a8772ce2af66478a89ad9ab72417335b66db5a9b5fbb7e92",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.logos.js": "1c2c2c52f3c33d5094c366876fb00c5a415442d52dcad364b86f4ac4f1e5e474",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.logtalk.js": "c83802fa45b0f464eff1acc4ff18a9c3e112b52fd5dab79fbc78f520ee7ba9d5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.lolcode.js": "0ae1e9882fc91d23df00952042a32b3bbd9f3ed6420b4695e7bdfbbfd06f3f45",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.loomscript.js": "7d7823673903ac867879726207927a29c2392938d99a81c4b9996beed631fd99",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.lsl.js": "762dc57295c007dc0344d3456d2f8fe6d9c5e331f562c2c44367401840713a51",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ltspice.symbol.js": "13c5a330f1093e1581e08cfdd4a19da5560044fe2a43af0eeb8709e4e9b8ff1d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.lua.js": "484fb4841874540a68cc06d525576d5e3048cfaa7f7f5807e959af7cc6432326",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.m2.js": "4cc238736062ab7f86e52c300fec6dd571adeb690678943bea123f76fc443f97",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.m4.js": "521c1a52dff6d00830ba8d59eb71897202090a1741c3dc3fa3fa43dee4fef60f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.m68k.js": "ad728208257e004ccf419670d0687bc9ac200ca44fddbc4d4d8d4093a8dd8644",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.makefile.js": "cad638e3819ddf72c2cc91142f033bb104fb928778b2dd2088f293f9b75de14c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mask.js": "7ac2ea5415dc404f573eb6edd290d5bdacf815162b004cef10fafd13bbe24b25",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mathematica.js": "f73036df6e76974cc833fa64ed70b900f49cc4a52b30e0918ef4a06713d755e1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.matlab.js": "dc2c429ec8b911d8fc898ae495e312e6a42026fae37a3053f53f8d463101c3ea",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.maxscript.js": "28a1688ecaf5abfa46e1c8c9187c324addb122428aaa04a4916c80c041255772",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mc.js": "69dc782184f78dbec9120442d112b5948be76c86a767ebcbfdc6ae0227037a3d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mcfunction.js": "9dc38ebae230332d7d24b1ba539abd2c1811d31b84abe0254ce3d39c0cc1b28a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mdx.js": "931c90b8b4b86a6117e66ff69b2dbdbbbcfc06965acfe7aeb64a4af5207c824c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mercury.js": "16cc1156f4d0983ec3bd05e32a02d45586bd5ead068ceb79fa412cb5b9cd3316",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.c4c-diagram.js": "9a71e2cfb3b9e5dd883965f67caa9d78527f5dfb26fcbd85525d140566339224",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.class-diagram.js": "5107564053501fd02720b574fe2875b644b70f429d05f51a613238f4103be8c5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.er-diagram.js": "b91b67727945b2c53e02bb13fe99950c88a221e2a64c45cd06c092fed3338189",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.flowchart.js": "223e1719f686c5bad7d94997531313964b748675a558f701cab4a21e526fdb51",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.gantt.js": "7a9e21d074f1b76eb339ac0c3b1a9636a1202e5531fa9a88fede6c52ef598ecd",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.gitgraph.js": "7538a46d5fd848578ec3c06373c2a192562bb68454bcef18d68bf60734b17a66",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.js": "dffc299ca23fb1d20c93499d9bb2e4cf66dea5a9df4b466aa30abbeb232f3b85",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.mindmap.js": "157424fb01d1db87207ec35a43f9db779d353c126c8526bab66e57d15f0b7af3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.pie-chart.js": "8166ef899e8617ef27b8a1f4ffc9da3122b0a948d8c9f565d901227d747c3160",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.requirement-diagram.js": "f64a440d2f8b7057cba78f6d09bce765b2faf14c947d3bf125dd866c01c20064",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.sequence-diagram.js": "25ae4892c698c30b7a9622a02cc21b5ce108718575836561cde72f7cc6aea907",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.state-diagram.js": "8c77b5e9c5b1f3457659f0d4367756e40a483f5f6f7259ea3a9993bdda81bb54",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mermaid.user-journey.js": "16f37ad3cb9c88210e1405bda7c60885bb04ff2f01ae760657793c69f75bb93f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.meson.js": "f9dd77c0555eb0ae7a1777ab1be052f2bdac3d67a62d64da8acc6cc4c271701c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.miniyaml.js": "b2f4acf9eb9d1361ac577d7ecf0fab8f94222c167721eb616a6e45ae6ee1bdb4",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mint.js": "1f0527c8a1c97fddcc3ad511c1d14b77f4b187ea2bd036f466b86a1c69ed3c9b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ml.js": "0cacc662339a4df7f11c0300be0b8a83b0a7edc5d13324f9f52a55e9ad481f1e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mligo.js": "5828d142419b348b68cc3139b245ee70b638d5166dd2fed01d4b05187a842718",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mlir.js": "913682d3effd769dc4a400ad86497d2ec06b77c6bc8311d580d21c6185810930",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mo.js": "70094afe68fabcdd17723a8db7e7c08993aa2fa580ac863beac46b1770aef587",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.modelica.js": "91a6e4cd71b1429419aa30d21f8fdcfb8861e253e139450047917c5703234d98",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.modula-3.js": "3898eb2d57cdee8ef3b21bfdb12b9284f65928f73c527a4edfe7d2c60db26350",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.modula2.js": "18d0a3050ccfc9467253d47cc0532057cf3bdc077ae21f7c30cd471baac0acff",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.monkey.js": "682788de7e637b1fe8c1010879d455f96d20956102928ddfb59a7f7275085baa",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.moonscript.js": "7f77489db510510d99b534970f164fd2b88a421569e147c5904c5f5599e132d1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.move.js": "5bd9aae5a5bf2a7326c50997fe58df77e34df190854c65b0d4f21cc3024169fd",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mql5.js": "1dc75c356b942dce19617a1bd9f390fa14e214b0fdf66b76d947306d5553b7b9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.msl.js": "0f5187a8970be8978b221d79a408549651ad8a402a8a90661239a4a535ee03ad",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.mupad.js": "20bbe2eca83e1f80e35dc404fc740e1912768d14deede8a9d6e0919ef271dcd3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nanorc.js": "cf0a7b25bd7ec52dd441df71b2c54a4dec6ab33165c8a69c7388a7f2110c936e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nasal.js": "cc1796b41ad5aa7faff7aafe6751207c03774e87d2bcedc56a36682c339f0be8",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nasl.js": "9df9e46d14b5a56354a040201ddea586862260916765db1cf06a64648d0cb5e7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ncl.js": "38794f3af2239460daca59fd5ac05c3a3bf903f9fea3ea4073aff0ff8a0db385",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ne.js": "cacc9a56743e4e4fec2b165d1648d139906f7009a202309c77bd126a769b9885",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nemerle.js": "f5cc3f33de94b5b5672f3629793bb7dd52fcca579a36bfb16bbdc0a58717d706",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.neon.js": "8db54e4e24749017c1c1b23ae58bf3bfaa599110d2edc7907bfb228853906c0a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nesc.js": "2b27bc021679f1059d6dcb94247bb6d0d7c5e10ec5be382f96746ea0af19eb0a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.netlinx.erb.js": "a7186cd87e1c0b92a74e5e9809c6e13b697d4db999f314f3ecb15b9a0d5c84c7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.netlinx.js": "1fd98778295dcdadc93baa91ff6069692e5410baeb4406f1bbd0ff99f225e3a9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nextflow-groovy.js": "ebcbbe5c81d98a7bc0b9407f3be586ec6a9c67197cdf01a921ba43fe3145f4d2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nextflow.js": "084f443a941bd7e1512c0280a74e4a942fea0029130e45e0539d83313266b920",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nginx.js": "405da66619269b319b357bc9c0a687f71451c7d8fb31f484f2582e679deba98d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nim.js": "eaa4d9c2bd28130ac2c787a854e4d4ccf33d44311cfdb4afeda7da0635b62764",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ninja.js": "530a010ce804960a553709ff7264e8f39595932c649c7b4c319aebf43a2ba9b1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nit.js": "a7e189ff651a51e88e469be28b5e9683dfc5bb384999afd9a78ea383e8f844ef",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nix.js": "db7e4f6bcca23a5d6141278eda2312dea30df2e31d4c4c137d28e880f4f88079",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nsis.js": "5e79cdde004dabeb6279242bb41752c56d127d3338799f0dccb6066b67761a40",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nu.js": "2c6e3f0e4bf4683f58b1435e5f62ca2e22dffc6b4c04cfe254c0cb5968485dd2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nunjucks.js": "1ce56bee9c3a7badf1b5a55840c616af9c93020189d1fa35ea4c2ff74924f985",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nushell.js": "7c0c69e2f0457ff9cd914531d36409c7e33919c8a5f8bb0afa042f5a2f53754a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.nut.js": "91f3433a10e2b2edba0a55bb092b30e7f8b3c8b91ea6af096932e1318968b651",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.objc++.js": "e032a90331fa86f151bbfb7cd5173afc5ec527a7adadce7c1109021b32519ee5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.objc.js": "1eb5d44c39b769e0e2e1c290b78f023323cf4e0c04f26231be61851237bc2ae1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.objc.platform.js": "742d19df0466812d2f70e119e970dc90c331974d10a61453973a408ae6af5aaf",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.objectscript.js": "fd5eaa8bc8cbe4f707f5e543b60ba16c48d333732213fe16cd1618c5200a996a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.objectscript_macros.js": "7ce6ab6f6729c118e5aca7046919966519be7d3f5559dbb9d90c368d81ae4d1d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ocaml.js": "6a407cf03f34d554373efbfdf78f49d6d3cd175d76d7e48a4fa1596cb9f74ec3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.odin-ehr.js": "c2638c5b0865b8d9d765952638782671c1ed96ec74123c44a33fac1731e2f2cd",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.odin.js": "a7589ac92760284fd7086d8c8fab708e8f6f4b1aad53937fa7dbd0e6334084db",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ooc.js": "c67f241e92eab62e22dbd86b74693f3e1b68db5c9308cf8280f279e0ba9baefc",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.opa.js": "42ab7b308f8dbfd0985381997ecbff8aea8439f84dca51a0d98ac81ced8eee93",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.opal.js": "55ff906e5dedb583d5ee7cf37a2bd28052c2ae99e8ccc0f19a5db33e48d002b1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.opentype.js": "015c5f0b8a107a532c4aa9ee7e2f1d8c88198c266602f9d316b73461b823a4d9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.opts.js": "a032bdce671d9594b9e9fffd88813b2ac5f7ec24aef6fd60fbced9d5498b6c96",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ox.js": "4a95d7f21badfc3c1c490fabeb22877fe729d9eeefa5148ab329e3e7f1daf9fd",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.oz.js": "15d37e788d2997cd60bd0dc5e1101a7ddd64ac409fda21c6eba98d6711656440",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.p4.js": "1e73fcd3cb4f861c5a1028f6c3869d0e608cf1f6d5f4eadf342a500dcf523e9d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pact.js": "3948134e063aad5775a78a21f066e4606823ace976a7fa383ffcc0185461114e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pan.js": "0a545c92659b04073cdb81b636f292a71d8ebc32f0f1f1a4ce4bb71a396c09b9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.papyrus.skyrim.js": "e4b0b555d1101c7ac1ac2e89d956767c9b638a60167c2db6282ec5d636377ccd",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.parrot.pir.js": "f5d63ef4369d3a4d7e5a58726b5580caa6f3fdabaaa79ff12327dbbc96452374",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pascal.js": "e04a95aba12d8887720c104c9bbc772d703bbfb058878080b83990786432b1ec",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pawn.js": "492c4cc7a32598e53356a29ebbb78ba6452e4097f4d0629a7c54be0495715035",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pcb.board.js": "359730e6931acb1fc23d71aab9e949dcc29706c58c1f77b7bc097f98261c8fb0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pcb.schematic.js": "c3688c96043c0fa237e026bc7e2269874906722501a84154ef329f0f8e51934a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pcb.sexp.js": "d3c39d7ee8c4ab868592a1bbe9b3a9d3a7ec89d0ac3de1b7a7e7110ee01a64e6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pddl.js": "70ae6e3b07fa60f6ff3f5ebad1ce6e43f5bf7d39e8b22f1e9d71845815c29f8c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pegjs.js": "a87cbcc7ea0d3abec9b6da7bb99ca9792c447c381eb4bf9f78ee521356c1838f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pep8.js": "81d0f3221cbb61372b1575ee0f9b152db95715e48fad765e65828f370d056161",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.perl.js": "60965c24f958b02ea00f4a9de0ebd7e927e353ea0d839c69909931c48eeff339",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.php.zephir.js": "8bde1521ebd204a7fb2846fd45d52089b1402dd3bc8548c7988a1e7d7354a581",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pic.js": "e7d987b0bc2f9528ba70781bf4fdba6f09e033a550640ef5e3fcfe4a559d1cb1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pig_latin.js": "33ab2921dfc8f2ea81460a06befd2ae47e2b302214a672a73e80fce4c64a6828",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pike.js": "61b2b04ee06d58376e205ef70909dd80584711a2bec49b1e0f6930813be66900",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.plist.js": "31e08081aaaf1bbf638e5dba2884e743f2e8cc9bb642b65f8c96612f258e192d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.po.js": "5a16d9e5b4154e6581f3b584e5bac728c729581566b858f3436d8f3868a33359",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pogoscript.js": "00a1530ad7c6515883cc3783d7324b3169126793b3ca6617a1fc134e48bcb953",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.polar.js": "c12a8e612dc6df320d3988dff1672a54ccc2f90921c1f7ea5fd31f13d1045fa1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pony.js": "cb3905088ec3c1b8078a9d90f119ff8d8e429dd83d1f788eb65e1b573675dce9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.portugol.js": "7e082e5880f77c7aa1def9e03d63989d6eb0ac6561661271980f68361bc88cd7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.postcss.js": "155600225eab2b0e5a4c788a82d064d02df0464d353e31fb08c30d42ac29534d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.postscript.js": "b09c485129f74db11980224f20567cef7328b7f57e1f6c29e743a202d08a2f4a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.pov-ray%20sdl.js": "8d91e9831bc880bfc4acb2fb4b35d24530e678f54ff623f7b36d3cb01dbd75b5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.powershell.js": "e38afa72bd8f4d30236255cc89e0ae2497f01994c74266e73bdd302cf7a295c3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.praat.js": "8e5842fb9d2cd3e7edce407081a9ada8b24df777ac2545217e570f4917932a2f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.prisma.js": "f8a39eb6c259e173febeb64a5e55f40315fea30e17d3455e6a9d103e2b8ee0da",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.processing.js": "9619ad1a72c9233210f0a19e938c474a7a26784d64e57ba5f71beb83bb5eb962",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.procfile.js": "e887fc2ca432a407497644f9ec8f078c1c1310ae3a0c7b45372e35dd35c69c42",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.prolog.eclipse.js": "2a2b0fb60ecd408f8b260708ed2c36b67648e7d40862348bbce44ac0596edad7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.prolog.js": "14c7f2cbd449fdcd075b75f2179ed146bc1d673949fabdd0124efa0a27158507",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.promela.js": "c21560fd239d2c4b5197ce332c3b25e600895b3509bd82755b220119dfbaa302",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.proto.js": "7ae9141eea60f413764e8df3e6854e5e9a36b1baefb3c1f10fc0fb0db9106478",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.puppet.js": "4f801206c6eaef46744371b85a00cc36c5225ae3d2b412dddbf637612ab8d908",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.purescript.js": "0b5c48ffe044877f682f0eac09760325fc58f2282c22155ddb19ebdfccaa5306",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.python.js": "3854568d4946dea95b5eb9773536277a9a080baeccc95525a6f9c83e9adbfc0c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.python.kivy.js": "297c6fe5f0bd0791f6b62ca82008d317eb9c32a9d017b82f8548e924a5a92a77",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.q.js": "6a4f1e98a1bcdb47cbaa56f50fb2b7f46f7b9b8a6a31444221deb360fbc4a590",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.qasm.js": "78bdda7255c0394e73282f5c31b2b72463c284e020e828be189b0801f1199b01",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ql.js": "c22ff33cd5cc325303adf7b087cd2b8b7f72535618fd6f7ef077f0a73214bef8",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.qmake.js": "a9841c22eb003534924a6bc5158e3e8899b2d76839b51dbe0b653d16236f17fc",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.qml.js": "8a9a1550a103dd304237da9df83aa64a8d850faea0c64691e43289406a30b947",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.qsharp.js": "b54a7e49612168571ab5a4b726597a6e46565d2e1952102188d7ac4a7d36a322",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.quake.js": "fd3eb0d7eaba726b595dc44ad185fae8dc405dfc458aeae878887013865898f3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.quoting.raku.js": "03e6de35422882a0399668344333977023006c055aba896d7e345e7ef793b24f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.r.js": "b1ed15fba9bbcbe115c9f6a53771aeca73a1f14561b2521169ce1cf3ab68cd10",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.racket.js": "b8bf1b2cd4c8faf727177c76844efbba2a5c869b629fc81ea8784bee36b5de97",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.raku.js": "0bbc0d1912fa92bd69a547bd13ed2b255308c8b2feedd1bea6e23bcc7c425796",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.rascal.js": "680f976ee5aacacaa20a5b84d3cafa76ec74b768d7fe9cb4a7bcb85e5ee00341",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.rbs.js": "e2ea5aaa6b14faa4bc0e1c5ac77b52cca9614080449f4874c0ec621ffb11d033",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.reason.js": "e07b5fbbb040dccee4f16961846ad7a526b8edafa9b221fe0aafbff5098dd52e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.rebol.js": "ed65832a8054af78cab2da60eff6618598692bbabbd552215ed35696bbb3abac",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.record-jar.js": "62c217ed303293d3884c1818e5adc67b3bb3fba43f7cc0618c7f7ca50c976de1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.red.js": "85b22a3d83d096c7f0d709f59b87637d59c24d8a0cf67118f89d174f009f2ec5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.redirects.js": "7830d3a76a66338d47cce909f22e3d493897a89ef1df58938d6eca12ef4562a9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.reg.js": "ad1a95c22cca291f5a146f5574282f266515314d906cb59fe38794db85f87d8c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.regexp.extended.js": "9ce4b4da5477260dfd951d7bdb956ebf92a16c3a28270763e1eaed02647cf570",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.regexp.js": "2413df4ca525dcefd7c3360b058bd69741144f6144c9f930916bf725a9a296aa",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.regexp.posix.js": "1d65efa7f699b7ab221e761658743884f789218862353b52c4947cb0f741ac1a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.regexp.python.js": "9915c63f3157ff49aaebc3ee886f8a7d3dcf8bb216c7b6f8a2d8fe38e77eb161",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.rego.js": "fe66cb1d18b6e220224cd2d39a79bf1c17e8a21adcbf95191016ef6400cf9f51",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.religo.js": "eacf05c1a3ce8fc7486f99b0e6636eb0c4eedc46beba520c9d908b88d2ba1d3e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.renpy.js": "9aef874ac4cc848a6df670f1205492841b05630afc31aae68b51d3726bea4bb2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.rescript.js": "626f27ee209b68deea61d09ed16ba449cf8d3d6cf16a493b762fa806d4b3daf2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.rexx.js": "78dfe7ac0470950a20cdb260822386801a5cff0b7a1ad9e08202d3ec454ddc18",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.rez.js": "4f13e63bdee55c400d614c7fbf802b9ca63f7090ffb54616999d58f4ae7900eb",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ring.js": "98261ac0e723573f6a067c39f22bb6601443f3fc658cb6935db181cfb9bf72da",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.rpgle.js": "7646ce0f5174868c7c0dbfe11e95d454ddcda8d17a2575f42433ee3c2c48173f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.rpm-spec.js": "864af321ca68cfccad574f5788fc5075292837452719167b3aa09b82c3e7d739",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ruby.js": "d16fd86b133b130b0c04e6bf2e7b60de27ab2f22609e20c87e2e1ac041bc8e53",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.rust.js": "b51b71616044d56d1758a85d7e08f6079abceb580f8e097e584ef716923fbb72",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sas.js": "0bc9a5870040b70ead13b51c962d476a4c6eb45cc7abd7291ccfee641a148a1b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sass.js": "910de7659e756e10681ddc8a09af66e2c3b025c28ef17e56e6eefe859088bfa1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.scad.js": "75c16a3b8bd1bf368f1e3333b9d00119a7318702fa91d199e0c64b933175d13d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.scala.js": "563dd326720e0f858c67561e387469dfb04bd24eb71f1f1dacbbc23072bc5440",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.scaml.js": "a6ad267beba3c8a22d2b08f279d408d5d8babb24e78eedb95e6c1d01617f6311",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.scenic.js": "5828060f1ea13c3e8545df384ed78781d9445ce0be9cdc2a6406903b56281b4b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.scheme.js": "7e7a801e41a0828810a7c47730a3f6a7e6b979302ad419fc1a512b4b14849124",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.scilab.js": "33d320e8809008d29590d2544f25187617cd8a802f9cd64a922b6362f20f97f1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sdbl.js": "121f3d9927a767075e12002b6e3efe6a7c3a6122673eda3ab659a32cb5e2935b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sed.js": "69bc918a166bb23e936ca9c9714d012443de8754fcada40ca94ff8d3036c559f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sepolicy.js": "734f190132ecb70251240e52083b3c84d35f5b14733bfbee12fb209054aa8e15",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sfv.js": "7107aed977ed21fd1554843cba2b1d5fa0138f3684159b64988bf8192c37e1c2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.shaderlab.js": "9e2854360c61356e64377cea24d4b3bb599fa0f9a240c15cbad7c8b90cba0daa",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.shell.js": "db2ee841c46ab1d5e0385149e57536b2033d8b1bfa44652a9bd1b3dd2ede76f8",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.shellcheckrc.js": "347fad5594959cb6fa90ff365638912f92ca635d8ea964ec3974c65301069ab0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.shen.js": "9ca119bdad2ae9f1b4aa014bbc5de7db61c85842950b34f77bafdb2e717c9183",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sieve.js": "cec63eff1e49e62a105d3d4104a434fb30917ae2eb2b11777eb067a0e8c60a17",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.singularity.js": "38412dd77a2afa932a6216317cc1c6a7218694d3b8687d914acdd4bdcc23d856",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.slice.js": "6d03c41c2fe0beb9a56cce0eab158ef2adfc30c03ca2289974988708c1d506b1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.smali.js": "0ad0bef92e93b765de994d9a557c0a79ec81c93cbcd1177b6f146ec696038c37",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.smalltalk.js": "76646228312c821b4e459b1cad05fd6fa9f522fd5ed0837f52ccaa40d27b7ddf",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.smithy.js": "cf558535d5a06f048ef2960f53edc8a2811d9172ac295e46ef767e023ce58fef",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.smpl.js": "f9e4583fe4a2317441adc934a06517f37df85ec1e0eb3a5e48f87bae05c00d87",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.smt.js": "2d172099616dcd5820a37aa336c1659c8a1bcf1aec911bd4effe67382e20a580",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.solidity.js": "cd1827759ddf6983a8860d1881f849d691fc0ec6deeb38bf656e10f26f962087",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.solution.js": "c4a0c47243c7d52c96387d36f670bfdcca4bc5f62b53c9b71b468e1a37b15c67",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sourcepawn.js": "5eee663c9830bff94f94df5989365eb787e29619128e046502eb1159f605d238",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sparql.js": "08edca5f40eed239422e9a491b6d2113f891bb31b19f8b71aef8047fe2f3ab9d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.spin.js": "2d06468c3a19ccb0210a299a709eaba8781fc782aaaa7295eacf08816c2b43fb",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sqf.js": "966bdcfe34e5ebd75f1881361973a6c42f3ba8f1fd17a32fd2b9f16bd8fd9b6e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sql.js": "da7e79e8118b6e8a955c08e3c9c2b6eef64d09c6fd185d27a5b44d45229d71be",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ssh-config.js": "829bcc38adf58f5c83fe9d53edc77eab060d51b066780dfff62ccd259b2c6cb0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.stan.js": "b84503e13ed911b53d188ced530166a046d6404698e41f4ffa5b24fbc5c33f8e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.star.js": "454533d2d7be724dc5f0ae3edf8567b10e493eafc4703df99b65911565c47008",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.stata.js": "d32cb90c812ecf423b690e109dc4f0c2552bdf5cd07102e0a95b36214dba2fb3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.stl.js": "cbf7ee343910c2138d00be0274c8d2880c7fb4f60aef965539cae70369cbc1c4",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.string-template.js": "130b4cfb3be5f46ae003ec3a430f6a0880b6603540bbfd27c57f3e64fccbc234",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.stylus.js": "d043f312969f88988408a8daa53c4d6c61df8fe41bfbad0d7665a1525ef4ab95",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.supercollider.js": "6061c4bcefb76a55a1c488e3dd1aa743789641351e302a9099f7c051c0535713",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.svelte.js": "808cde6fa0e97e819c06349f71c18caab4ba47c9f88dd8d83e5012184886b6ff",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sway.js": "747d12f36fb3a210c3b2f1355bfcf5f279823a56e7ba8a62338fb090d9447c06",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.swift.js": "45dda9e0882c65fc76602dd26e072bbe42c6dd556809698560cb072a4443f965",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.sy.js": "6c6b29fa0719c79e998522038ef726dc36ae8ba7817dec4de989b63b38bb0b66",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.systemverilog.js": "64c857c5f6694c954eece088a891078c84a3ca7f20f5d76f8f93d265a657b4da",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.talon.js": "4e14b3eabc0857623036dbbcf6da9835427853cb94e86f17820bd11943c27635",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.tcl.js": "4d2d04f787c1b49ffd12f35e81b998d8958b3d3f3432989f330d55c858273975",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.tea.js": "94d608180a8a24d9b82f2b3b856bfd536424355b1e2c64c6df7ba8728d863a25",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.terra.js": "ec869b29b90c0eb5bb53d4e21e3667e2fdf2c96b133673994de915a2550a0049",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.terraform.js": "4725de276db60718bdcb70176a324af0f36d29f97d2e0294e0ab1ac33263c638",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.textproto.js": "b06145fd38ce86a54db063d042b730711eed40603ec53ca6947fa1f460417616",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.thrift.js": "3f5553f870513c7587c0f3c16796d56387ec20cc2c9814793c6e3a3e474570a1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.tl.js": "425dc652a218380f0123fd1a0f36aeb91e05544af27a350636f8954c35c9f3af",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.tla.js": "b460830359444ba27400f608cd898537998583a88eabc0379aeca141b162add9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.tlverilog.js": "26842c157bb0cc07e2b8bac0c44e8eaaa991f744734ffcb05eef386929d19000",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.tm-properties.js": "a2fb32f48d891d465425e1a596208e8faeb4e8629a2400d65aaab55ddef66944",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.toc.js": "31fb3fa395855bf4824f7f21317cd3b91f1d6903bd508104840146df08db755b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.toit.js": "4a0ca0ba4228412f944a84829efe6a3f1c0c7fa679e7aff737a45bbdc55e7e87",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.toml.js": "21b2b891cac824bbbb1e6afc2ec7f7ec19a12546d5e735668171d7c21d506743",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ts.js": "a2fc3ac421168aa827c3e0942c3bc99cf32cb80bf8a6d8fedddc3681954f4f8b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.tsql.js": "0902d2bd7328168a4f905816ed88790133626f5b3db8877d9c1cfbb1c9eb828e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.tsx.js": "19a81f2af0b5cb0ed522ff62514316a73b8d14ed17a231e0c65acbc63df66b43",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.turing.js": "c61e406c1271068c9cc62aaa5f129c7af2b272426e1e666420e261628d0103a4",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.turtle.js": "0d27606820ff26f09efe14e78e717a23dea9895e954945f5461d2bae1d16702f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.txl.js": "590ce64b9a6538434c6d7ac45c1cdecbb5210e69fd71d4e8341f346974a8be14",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.typst.js": "31512be04144d96537f0a093bb5eaf0fb8484f4628c16038ba4d960cec116dea",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.ur.js": "e0e68beef34cb59d5a163066f8cd9649a1ec35dac917ac6c8731762b1b92d4b0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.v.js": "439951f275b64d32b1de7b82b8c4da4bc93babda7960d0d87de6192ad32cc83e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.vala.js": "8f5f33eee98f0d9cf0e8880c913cf4453b23d01d91d080c2fdc1e3a43803ead0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.varnish.vcl.js": "0ccb407326d1d96953b492cd663cbb5a7e6888b1e04621794ad6c90cf2cbb1ae",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.vba.js": "4c83f740bd9e5c2e90911f92a735249e6b027be0cfaf3e82ddcd8e102e534cdd",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.vbnet.js": "d96db332f78dd13eddbcfe850d00b84ea95c127a8f536f1b2f3f950b16ab7398",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.velocity.js": "966cd4dcccf96e037aa3bbd8d54652ce05dc6003ab9aed8e8d6a4065290309a3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.verilog.js": "28eff0cb6ec8d567fc0640e68717aad6dbb59b1d0cf5b873413a04f8be3a129a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.vhdl.js": "d4dbabd9200c3e779408d15bd07307c95cac0b31e31344ebcbd090ee236a0f55",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.vim-snippet.js": "eccb1947963906c28a533791b25872009f4f82539ce4d78bbf428b3c4745a788",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.viml.js": "f275b12938635b7653f8cfcd33273a446ebccd4f0bc70cc8429a2bdfa430f8ac",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.vyper.js": "31f4cad0f6a4a6b972dcc49370f1ab9d1aee9d86a21c21e7922d228a42b96a42",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.wavefront.mtl.js": "7fc3da0b6fbd9495c961da83af76190fa94f62e82169fdd8bc20b998cecd9ac3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.wavefront.obj.js": "bffd1434e11864894f5b5164df7c0b3b00f2424c9e8613056e25b4251ef5f67d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.wdl.js": "79ccf625d8b123e29ddc0c4998ff3cb99c7e2b7e465d3745e0cd835022050869",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.webassembly.js": "5fecd726b45db15bfdc14871a2ed6a6daee7503a4988155dd6d9023813ec3466",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.webidl.js": "6390aaac513eb946aad6d40f7c05f627644fac59f9c9ec8869abdc6c1cb26145",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.wgetrc.js": "6ebd75cdf6f7d991ce2a8b0d156c8463c3a459c2a99cd2a75eac33209732952e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.wgsl.js": "30ff7058f48dd495d2472e30ce7b1136a036c155b489fa7526510ec8e1d008e4",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.whiley.js": "19bec4352b2b6816844efd6c73bac1417e05cdb0473c93d3463f370a71767ee6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.win32-messages.js": "c7a271b1a1743f68c43b7e296bfddc193aa74007c2f77494950e2147f7557b93",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.wit.js": "490ea0c6bffb8698e3bf619520c5a41c091d36c8c90e551fcf68e7ede6050069",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.witcherscript.js": "88a53c492b119b96a04db3ffe21e5247dda620ee5190af20c69d9fbb92c528a6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.wollok.js": "6c282510b3bf222fb11397c0825272ded754a59e661749daceb5137726b38123",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.wren.js": "b6335c9ed4608ad390647b1ec71fab75675feb091d1f34dcfdf263941493032f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.wsd.js": "d709eb279ad47a29be8cc096994c06a6b23aa87893421ab0e80a5b6aa1e699fb",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.x10.js": "9c1aa2a7c71bdee1cbb70347c3594d51f72139cf51b002a50b812b709e840d7c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.x86.js": "0118f62780d95dd701fb1df4571a12130fa7e2c0d3a8d7f0a159a272ee2c3464",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.xc.js": "2406ab6dfbaf1cecc572d03dad4d26a8e10497be2ece405b0552d621666cfdb6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.xlfd.js": "681b8f3fc69836b64f0b145d457008bf080a4507b2e58bde4b799e059cbade55",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.xojo.js": "302ead10dc3a447987cbf1fd387e541e7df8fbce8d7c8473a046d07c4592073f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.xq.js": "cc8e2f120644d601a57836664c9831beff254a9b712323c707e0c57417a7d798",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.xtend.js": "3a78bd06097bfbaeae3ff2fc461699cfdd92f174ce49bf898f056297c1260162",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.yacc.js": "2245edd9b6c8ada01e0cf32194d71b5a5469aac62a86b0b015eb3913e41ffe2c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.yaml.js": "0460a83113765e9d565296b6288eccf68d53679132840c52ceabcc2e587de702",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.yaml.salt.js": "d3d1e08710e0bfa43a2251f4ec12ceb6dc115340008251f3bfc121d4545b7d63",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.yang.js": "2fe3bdfe354e8005106650a6a9c4732647b0f789bb272b9afc2eac16eceea0c2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.yara.js": "3989db0db3863040aa89cbf3e562a83d81ce10327cc8ec7814ce5a6b50633897",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.yasnippet.js": "a86acaef81c13f52eb736e7bf4f88e3492fd36c3a7c09f35b0d9da95cb3dbdf2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.yul.js": "dc94b0d332f2f67fe2182b9d0e63cd421f641bc7e511445032d315157bbd1c96",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.zap.js": "290a0837b661dc5d1a31e1a101e5d302b8d4a24b89baeb634819e4275f31e15d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.zeek.js": "330ad08b7675042d34d87e9896a3a1879e57c88e64fca329047c192f06376bb7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.zenscript.js": "e7ced7beaf6e2a83b1874d8c1089724b2b597f67d26e279e21014d06805867f3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.zig.js": "a1f69c5f5e28f59622ad7da8e5758a04272ee6bede36d107a5f4d28c90c67e29",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/source.zil.js": "3fca7bef5dded1d27d8cc34035b6608147864c741b4ac1c77df2e7a916f94d68",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/starry-night.mjs": "53f4acad3bcd56abc787fdc9dc0ff4b555bdc5ac8bfe50265bf9e18044f20952",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.adblock.js": "65cf6beffdf90b19e74611b5fd4a9a7b252f8e9c702f918d5a1eb30b3fad515b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.bibtex.js": "63ec170f2f93a784015c5f7085325120d489126eec4b7218d27c9834dd50bd66",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.browserslist.js": "4fab7678967bd35464d35fa152807a8f31e425e815c55c7c59151fe4766645c8",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.cfml.basic.js": "0f9407bdb275481d4cac6fe571c66dab51ffced2b6a2be6a0683a81507f44fc5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.checksums.js": "8cd0b4a48155d12552380128d26bd493787cb9e55cdfd6f3b27176d26d983ad3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.codeowners.js": "bc3075df3d927c7e90c59298cf8fe1fa19fb4e350a5db51151acc62371cb9b97",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.conllu.js": "36ec14c55985d35925c1f7065b800e353529f5eeca21a14565b6b37cc844fb8c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.dfy.dafny.js": "da328b71d33b8541d485d665041eed9d88feb27de3d556d85d60973944377da9",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.elixir.js": "82a29d83c47ae5d0379949999dd2266277f35f0a76dfa3b569b35b500a12f3f4",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.eml.basic.js": "714453f38743012d18e1bffe75394a7fd6efa2413a428c4f828437d5d9b67d10",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.gherkin.feature.js": "6cd4d75e397406ad3791e0f91ff55f2f9c1a043f102ced8419f414cb6c1281fb",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.grammarkdown.js": "8bb9c84f2f6ef71b236db46ba324348945e2e5bd927a52a8bcd073aac7ff70fa",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.haml.js": "aecd168c889d7fb22b48ca3bec8b61560d60de4ec75674b1d6acfb814a37426f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.asciidoc.js": "1e7cdcddc6d3c6fbf388040f003d3d41e512dacb5a0cd147df63d000496998e3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.asdoc.js": "de1fce9a120c3999ef734d57165d4f88f41ffce02942aee1d5dd6123612a08a2",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.asp.js": "0c67ab7c9d8627dbd1b5b1e51b35b03ad831dfe72e64f6705ca5385986078d64",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.basic.js": "05ad42bd7c1e7f2ea605486d63d1fd6dd3a81c1543acf574181e122c4702577c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.cfm.js": "7387ed6117d1a68356c449bea681c64db8791b4750622f55168e412f052e18c0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.creole.js": "30c6a8e2dc239563d6d409b5b4d747eb4e71513f26d81eaf66f95001d3ae4cd0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.cshtml.js": "8e3be68d1ea0ebde488c82ae7439019c7bd3b6053918446f5b2afb6aefd95dc5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.django.js": "b7c542574d5c79d34037fc6593d9ecbe848aaba44b52c085d9c08c18a4dca747",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.ecmarkup.js": "a858ca261a8b11bedd733db95cb102b40900d648b81c3d61b4a7d0bb94f6a871",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.ecr.js": "ad725118b8490483fa7ae49772248f095d59833cff6cf89a087ba816c550f0ef",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.elixir.js": "72320c8e7fe0db67fd4c25e5e1f8216d380f55ff8b8353d226f4d1f3645cccef",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.erb.js": "507c7bbd55158098905606d79d82a2bd49c0d6de69b20945ad411204ed1e1e10",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.ftl.js": "764e6296d1e811739ffa0fb27e26b76d3f5cc08c8346259a2fb0a54e88ec7f6c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.handlebars.js": "7cf1caf779ed4455e1051baa47e15c3efe7d775e674f48c779ecec4b010be56a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.javadoc.js": "cd293f6f874a3e6396fd2dd93ae43ee1ee6c70dd17beb0448c4ca52460f36a7b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.js": "388e60d4fe3e3b79e5a57baf4f0a68856e823954e396d0a4635f9a382fd0a715",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.jsp.js": "fe47f97fef0861d2b45155b55e91af16fb567a60bb1ec9c915287773c8bba0d4",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.liquid.js": "220be68f8fa6327aefb4d5df2a44f59de72db32d80015b97049929ff7e873b4f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.mako.js": "576c1eedc1ab70d39e9ceb6181d97aff94d58d1d72e86e729cd73e2b2589d248",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.markdown.source.gfm.apib.js": "dca0bc981c8001d5ddba347c8e965743d4ce411bffd461ff420cf50ec146da7e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.markdown.source.gfm.mson.js": "4e0ae92415e8614f63cdfca7557645693c9a5b86d0cda929f04215adc14fb93d",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.mediawiki.js": "798c0d6287acb6d32c09d6bb8f3dca90dedc1662ad0ae70c22e49fe91ae4a9d3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.nunjucks.js": "aa4c201dc698501245e20555380fac006baf8fe8f3c8943d403b460b4ee7fc68",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.php.blade.js": "7eda09d1b4506573396115c01fd45a20d37106921ca1d4a7a42a3334a1136e04",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.php.js": "6274b5ad4fdd73f9c22d2b6a628b73e1a5225bffee1d91fb0fa88f2287ec5675",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.riot.js": "35cd3dddef8f08f51489d56d53bc32501ce406d725b4e53cc844ca339c1459e6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.slash.js": "88ed3fd7f804b655b283e1fb47edba2e3e6dd5b68ebeb659f47f8180e347a3d0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.smarty.js": "50e6b9107778e936224f7894b991893057f813ebc4aeb0407033a6e72d05e482",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.soy.js": "c058caebf2fd7d6b6ff2359c78cf64ed313af4b33857472facad3949d423495f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.statamic.js": "eb463b8562c1842fcb1ecd6cf3ed528af6e88ca33843e8a8643a5423cebefd8f",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.twig.js": "e09f75300be61584a9e1986644157707e0b6086977d3d8c4d9884b490d257555",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.html.vue.js": "abda788613c7cb44991de4b42e70dc5e4f3a2984b41de5272f13272ee9cc395b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.jade.js": "be9c5b34e3333c651a023eed5f4f1a6075e1dc52444251d3636c84f0a48c06b3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.marko.js": "4596be636dd146242ffbc738d38aa243d030a2b0247da67d301640498cb39734",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.md.js": "5a2a5a92c5e089550b4985f0e5bcc8e33471856f7380533280eabc5749e50bbe",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.muse.js": "42be107a19b0d0adf2e50f96dbeb8d0179bd9811ba2b17063e1543f9fbc4f67b",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.python.console.js": "05aa265cbbc9be7c5470bcb8568f73c7fcdd2f71fdd6d6e1df421a84c203a25a",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.python.traceback.js": "55174e667cc3fcc115a42a59f07453e34975aeac43dbb558edab3c74f9912c18",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.rdoc.js": "ee37e139339ff51b5bb3cbe0ecadf26e3f231654d7963cde875d1c260a374750",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.restructuredtext.js": "70b0a81a612806fecc8f92c2d0cd1c2a96f0ddf99942f9bcc4e994b906d985e1",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.robot.js": "f1cae227160db37830b1dd2e0cd959340df511ff382bd2c34a478538a427a102",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.robots-txt.js": "a30a31498b75d24e10e99b611619148cd5730737e6dc185f643f187cb134d017",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.roff.js": "c38d42b0b5fcbede649de51a984e61186c49c14e1249557b750a1c2825b4a75c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.rtf.js": "dd8acecf378c3f2be82e0b230645d7942dbfb26f91fc9309e48b25188abd8187",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.runoff.js": "f647640e5a80a678a96610b40a70a4ef5d9fbb7c4bad4280bc15ee8f3f2ed879",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.sfd.js": "b67bc99fba8e8c0747612b782ce459839b18ec3eef840ab0d7294b2689dc23dd",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.shell-session.js": "8c4afcf9ffc69e8b795df419eea468a8a7ee2de37fcb863937b14703a6c2701c",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.slim.js": "ce0396baec8e1c865630b1b9531b3efdd75736468d0f0313836a0cbd480043c0",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.srt.js": "1545b46610b75f90d4896db30e8b689e088f8b89c72ce476c88850b5115e8e30",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.tex.js": "246e1aefe77aeddcdec5080c00e507145fdab35aa2440abffe369292ef76e2e3",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.tex.latex.haskell.js": "f3562cce3a511e980f90c6d0aad7e8b6f7c7a7dc1097d1d8f5fe0610f151b304",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.tex.latex.js": "053c7f51a4f8572eda8f04a54a853df01ddc8bf09af0d70ea2bf05436b3b160e",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.tex.latex.sweave.js": "7ba12c68cf7aa68fa70d03867f4e8d07e7ebe4b714bb532db422d862c4854ba5",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.texinfo.js": "1352fe637b8297b675f24de4bfd2da21c3934b4779da6f82798cf1748fb8beb6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.vim-help.js": "9669690d4975d8ba7a0d76b1b654daca423bd957c160b1973c2640513cba4121",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.vtt.js": "d49cdf5ff7358514633c294d68aa56bc689389beb8c9feae9f4cf9854990ed00",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.xml.ant.js": "0c6c0502276c21da2e2bc6cf2112587c400fb561462f5516959d95aea61da337",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.xml.genshi.js": "74d6c3798eb5b773d2b216c9da27186143fa23efb3bd071d21c4e336701288ae",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.xml.js": "f9a705cf7a4e6eb3dc11a7750d57f15cb5264ea3f271792440220c1f2ade1ad7",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.xml.plist.js": "17d0a4ad9cfbbbc377d314bfb332a62e4f4d33ef0d10a74dedd2b3b7bc956ad6",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.xml.pom.js": "2eb1875fa969ce2543b6da5d6a0aa8bac518a79a9f525cdfe514a5d2845ba8db",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.xml.svg.js": "5552db1e510d6a32d1fce8f3392f5161d30b4f1a74017e299705902b7b866d92",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.xml.xsl.js": "02a7eb5e18a3d7dacf3653ff688bbaf330687219addce5e5c1aa1141adba91fb",
+    "https://esm.sh/v135/@wooorm/starry-night@3.2.0/denonext/text.zone_file.js": "90c792247194d8fb169180254b534d8cc3f5da8a787e8a4e251acc2e628bc7ac",
     "https://esm.sh/v135/base64-js@1.5.1/esnext/base64-js.mjs": "349361f227d34ff80b673a7741ea0b509dbb6c9c89d650b86a0b55705e25c8dc",
     "https://esm.sh/v135/buffer@6.0.3/esnext/buffer.mjs": "f6de86b04b58a64f82d591b05fff1626ed7c8f4a9c7726c274c96abef31326c3",
+    "https://esm.sh/v135/chevrotain@10.5.0/denonext/chevrotain.mjs": "6a5eba6117b8720b62ab3cee5bfca3dab8a8321d5092a02829f57db159df6bf4",
     "https://esm.sh/v135/deepmerge@4.3.1/esnext/deepmerge.mjs": "426fb4ada3c99ddd720d7c28ce216d8fcb47543e3d64ead96d97b1103cc16487",
     "https://esm.sh/v135/dom-serializer@2.0.0/esnext/dom-serializer.mjs": "87460f6bde59cb3823912201b076223e5ab690c1075d071904567de591310bec",
     "https://esm.sh/v135/domelementtype@2.3.0/esnext/domelementtype.mjs": "1e4dd3222620668a50040012a6b0d1582e89e7a570826a079a11226a7929e20c",
@@ -174,11 +1380,49 @@
     "https://esm.sh/v135/escape-string-regexp@4.0.0/esnext/escape-string-regexp.mjs": "7f00803b40f74aee2522808c0cf76057a715636dd84f4f679731b0e935cd3a56",
     "https://esm.sh/v135/feed@4.2.2/denonext/feed.mjs": "d6dc8357b3e9474bb21a6b339b9c1d311ce389c5971be2235945d267563a6dc3",
     "https://esm.sh/v135/github-slugger@2.0.0/denonext/github-slugger.mjs": "42ff6fe7ba4f63d8a048970e5a32cd5b0348905dde3f9e270d90e44a6e7635ae",
+    "https://esm.sh/v135/hast-util-to-string@3.0.0/denonext/hast-util-to-string.mjs": "4f7c061733fa8e99e3055e443c09a8d4e7f6e95ccd7a06b61d38682989bf6ba8",
     "https://esm.sh/v135/he@1.2.0/denonext/he.mjs": "1ffb3a2e1892578e01267fda4b32f30dd0b4b3be7393fe239b0ea30cf1d654c7",
     "https://esm.sh/v135/htmlparser2@8.0.2/esnext/htmlparser2.mjs": "62c0657327db8a639c850b4ebdc24bb051e33d4c2fa97d87a3d542b57fbe7565",
     "https://esm.sh/v135/ieee754@1.2.1/esnext/ieee754.mjs": "697af7a0508eafc364c7ff778310afdc7e7d7187c15f5f3a3295b541785af5b4",
     "https://esm.sh/v135/is-plain-object@5.0.0/esnext/is-plain-object.mjs": "d990fb0c3e251072728088888873225a35995aedff2e3b443b5e3c33efe1be3b",
     "https://esm.sh/v135/katex@0.16.8/denonext/dist/katex.js": "bc364d4cfbb8f11d62531fbdb634e13abef4b6a41456c8161ac4dc61b3523d36",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/assign.js": "cce87f49b08d6d1c8be28143208d5282699989036435a90e092ab61308d529ba",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/clone.js": "de80a1c49277e93f1d694052217ad02276912ebfd23f92a7f925d097c6463ac7",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/compact.js": "2ccf30c5ff330f18d456727b17790e1e946771028c797e948c5bd30a4fe2df93",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/defaults.js": "a5075413cf8a5ffd41c0dbc35206533cd465fe2bd98450d37279cf4fc9ebfe64",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/difference.js": "6a64c70d772120bbdb64e87794729fec83dabdead90c11dff24cf4f392a25d6c",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/drop.js": "fe4860143d9e9de103e840172aa99261af843613b8f6917817290ab88d959bb0",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/dropRight.js": "00249ad3cc7531270abada0c973a64d923d535813a5ccaa0ca48a9800bd70db5",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/every.js": "26bf992907bc6af30cf8435e1f14c4be860a9c9edd386f4bbfcf6a9c22b3a468",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/filter.js": "3365287337399d6100780c92aa9917a877e54e6b81382d5dafe2cadfcf76e75d",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/find.js": "c8ba86e388254282c2a45faa04d653eb76a0847b8b4756ead69a0c3a38d535a8",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/first.js": "0f06a0311c1b56dec84cde28747f3536afd6ffe48b68a7c4196c6444d029dea5",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/flatMap.js": "204856ab963f58ac45aa7e5eecb9666c8a7c876be71111f4307afc354639f525",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/flatten.js": "e42e4cd0a94a087f460751d025a0d6f0a447cbc76a14b4801d7d9174cf1965ad",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/forEach.js": "6ca7267d2e6d6e1091be378747b03d5e8620dc758cdbbd409d343d07b33d2977",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/groupBy.js": "c92c20444e3518b201f22983708e898f8660a174d04e4187c0f2188dee8a51dd",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/has.js": "1bb701ef7ccacc4bd245a252495b70ae082f38def05151107ddfd000673f17b8",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/identity.js": "e3658f2a401086a3389c9906babbb461f0a65885b9f454b142f4f876d15dc12a",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/includes.js": "81b4f2f7941da1922bd279d75575bcfdf426e7862e4cd4317b2e7b92e130ff1b",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/indexOf.js": "8d0ae04a08aa637413496fbe5b7017e77bf396e447a201acb8b8e14b6ed5cc53",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/isArray.js": "0df45788d8e625401f40a6e6b08118bcacc4f66ac7bf2b96ed6cfdb401072997",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/isEmpty.js": "b709e7662de0cb178ecb90df61cea2548a76241d89f3b9311278ce199f95c1c4",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/isFunction.js": "124c36ab6bf6bcf808bea41dcf4131ed673edc9019ed5955358a3d9eacba1aa6",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/isObject.js": "1473c80b3c01da603950c980d62c64c7c70d99c3a2888ce023eca0cb257fa0f4",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/isRegExp.js": "7a386db59de4a13394885919fb6d215f52dcc9256ba0a98841f38a0f5c231efa",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/isString.js": "da7b56e3ce755f1e9e16dd8f8e079ec5436f05a21b801e5a7221c7086b19bdbd",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/isUndefined.js": "b88cae1d64325a92111320d4928cfac010e1d6ba7a0beac7874f7aa37c6f3ec6",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/keys.js": "c82e296d92837cb28c6003c142cf5d448f32c58667f6a3ef0d61b072c44dca8c",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/last.js": "71b1d07f822db9b2d186e65c508aad2f7a176d0229fe37d73d0a7179a8a4e577",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/map.js": "0eac8008315e0f96957f3c7598d20398375935929c42c84fe911da3a32f5a50d",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/noop.js": "0af18ac6f951cb478c0930d0a0d7bef673f1ad2c28ff9cf95bc9faeec2e116bb",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/pickBy.js": "8ebce4da6c877bec1b9d245ec556bd59c963693fc701e813ae84371c24ae1169",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/reduce.js": "80787cd82767f96ee943f540f065376505e307faa984bec91d2bc14e832ccf57",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/reject.js": "431c2670cf6d5ee57c68d41b0eaa22250e47516802a30486af86db259e49da56",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/some.js": "7416714cff8ee1004e9b9673b84b71c9fbe2642911a52f4d597225c9446769a2",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/uniq.js": "8142821933fe2d3b868a0e8f241fdb71d9f524ddedf4936c6adefb8233a32b44",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/upperFirst.js": "6d8d3faa236a5f441fcce1b7e3bcf2d6da7b42f8a43be84e7af38287f45c1f2a",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/values.js": "b87b0ede73c8d394705737844d9e65fbf7b6cd449c22c8e78a257c78d9bf1f44",
     "https://esm.sh/v135/marked-gfm-heading-id@3.0.4/denonext/marked-gfm-heading-id.mjs": "bae45841cebac49956f65a9945862a9c0457d4afee63b2888d45e3afaedb41b3",
     "https://esm.sh/v135/marked-mangle@1.1.0/denonext/marked-mangle.mjs": "4f600a0d00388999e394cdea37c195354f30979320b6d0d1390a412c27edb7fd",
     "https://esm.sh/v135/marked@5.1.0/denonext/marked.mjs": "246354e3911a238fd24ea38dcf51564e0878c7052b0ee8575061fc27792fa0d4",
@@ -224,12 +1468,30 @@
     "https://esm.sh/v135/prismjs@1.27.0/denonext/components/prism-toml.js": "d07308a72c2a4cb025cd70db15597edbf13e25afcd5d06c3e1b9becb31d48431",
     "https://esm.sh/v135/prismjs@1.27.0/denonext/components/prism-typescript.js": "2864b0748ebd4a82e24df1db06054d5e01ee485309b70951aac485c68bd17d08",
     "https://esm.sh/v135/prismjs@1.27.0/denonext/components/prism-yaml.js": "aa7529846bc9f0d3c856cbe08621e4f6974e4d04b20740a97923416a69b23b78",
+    "https://esm.sh/v135/prismjs@1.29.0/denonext/components/prism-bash.js": "a7fb03659c2e8e377b38879bfc24a4066dd14d5fbddf8c8ddbd9a56f9d365c25",
     "https://esm.sh/v135/prismjs@1.29.0/denonext/components/prism-c.js": "a953feccc190607c9aa27e8efabd149aa3eaa1105808a99e08be3b4513ef0f20",
+    "https://esm.sh/v135/prismjs@1.29.0/denonext/components/prism-ini.js": "86cc6ee191b9c9a0a0000c18532d7890b41e2b001efde0aa45ddb3bc48dfce08",
+    "https://esm.sh/v135/prismjs@1.29.0/denonext/components/prism-javascript.js": "d6cc7554bcec7ff0be12857cb253b9dc4320a9a6d89bd3542eb4b1eb84128428",
+    "https://esm.sh/v135/prismjs@1.29.0/denonext/components/prism-json.js": "fed95b04a92ec206115dd4d2a42a427e13a765ad10b874520fe3efc9637cc27d",
+    "https://esm.sh/v135/prismjs@1.29.0/denonext/components/prism-markup.js": "459e6437e26bfc8f6f430a8cf7bf929b89060fa8698b1d0c4a29ba9b94c87091",
+    "https://esm.sh/v135/prismjs@1.29.0/denonext/components/prism-toml.js": "8ecc12e770ff899f9d215acf9a3c5cb6ece464fd1a01f49251980d504c9fb1d4",
+    "https://esm.sh/v135/prismjs@1.29.0/denonext/components/prism-typescript.js": "352652ff7b2088229915806e281dbe1cd7fa10801bcab54ed84f8ae747923a8b",
+    "https://esm.sh/v135/prismjs@1.29.0/denonext/components/prism-yaml.js": "a8265c6a21ae2bec805306a808ce58dc614012f753bf2f63172841e229de3c14",
     "https://esm.sh/v135/prismjs@1.29.0/denonext/prismjs.mjs": "0ccddfab01b35eb5fd1e32ee2230809343dfec5bab2ec50039aee88c5ec1e3e7",
+    "https://esm.sh/v135/regexp-to-ast@0.5.0/denonext/regexp-to-ast.mjs": "d71b19debe0445b53365a77b8df35e3370fb2c818d5b2b390f125c52b03670b3",
     "https://esm.sh/v135/remove-markdown@0.5.0/denonext/remove-markdown.mjs": "abcc5cbc5f9dbee0bb06776b5a84f7c3bb65bc9b4454b3991f6964fbecd403c2",
     "https://esm.sh/v135/sanitize-html@2.8.1/esnext/sanitize-html.mjs": "f4d7c5f3b1fbe23a23a08b8cd8e8eb60c987bce0eab6e3aeec42b6139ce11008",
     "https://esm.sh/v135/sax@1.3.0/denonext/sax.mjs": "9bc4584a87fa83f1ce8bd60ddda5864b3bc7895ef6f751a818d2aa0f7a426505",
+    "https://esm.sh/v135/unist-util-is@6.0.0/denonext/unist-util-is.mjs": "d92da46b3a1084450f150cc06c02f3bf85b93ab4c4b43a960d72a4f5678e95cc",
+    "https://esm.sh/v135/unist-util-visit-parents@6.0.1/denonext/do-not-use-color.js": "a1c0a6b93471dd4ed996804dd8a2b9f753c83c4a2da98373253e6b312c8492e2",
+    "https://esm.sh/v135/unist-util-visit-parents@6.0.1/denonext/unist-util-visit-parents.mjs": "5f7ececae47bea6d87b7e323153a7415ad8f299dc42e61aefda6d28eaf264c64",
+    "https://esm.sh/v135/unist-util-visit@5.0.0/denonext/unist-util-visit.mjs": "6c1b5b3d517cc6dbc88406b2dbab1735d503a797e994dbd4a89f3764098318f7",
+    "https://esm.sh/v135/vscode-oniguruma@2.0.1/denonext/vscode-oniguruma.mjs": "449b9599db7b985b773d38447c4a905d38837450c827c312454654ad45a26baf",
+    "https://esm.sh/v135/vscode-textmate@9.0.0/denonext/vscode-textmate.mjs": "4b51aa5669bc69fee8595f3a2430f45b7f81f64e208d6d67dd78424989eb5f52",
     "https://esm.sh/v135/xml-js@1.6.11/denonext/xml-js.mjs": "9d1e9b85bc3e74ef2327bf96800e0d752bcd0f55b323a2a6a5ca969624390e8c",
-    "https://raw.githubusercontent.com/kt3k/callsites/v1.0.0/mod.ts": "a5fdfa7916d03459fd4830ca526d493d5f4ce0ea91619905d524c9a3a5c3cd15"
+    "https://raw.githubusercontent.com/kt3k/callsites/v1.0.0/mod.ts": "a5fdfa7916d03459fd4830ca526d493d5f4ce0ea91619905d524c9a3a5c3cd15",
+    "https://raw.githubusercontent.com/kyeotic/deno-gfm-starrynight/main/deps.ts": "e6ce060304c2ee2be60d4d89addc94ea7bed50d98e9709155ec7bf3af6d41082",
+    "https://raw.githubusercontent.com/kyeotic/deno-gfm-starrynight/main/mod.ts": "053b68b3508c211f2f96d7ea6819a765f00b3946b704752ef29aa780ac4d747a",
+    "https://raw.githubusercontent.com/kyeotic/deno-gfm-starrynight/main/style.js": "86de9308f5d108ee0976e296260eb634c7477a11a9bebf44e6f863a5b8fb6d6d"
   }
 }

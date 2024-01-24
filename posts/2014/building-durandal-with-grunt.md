@@ -28,8 +28,9 @@ Grunt needs 3 things to work
 
 Grunt is an `npm` package, so installing the cli is done through `npm`.
 
-    npm install -g grunt-cli
-    
+```
+npm install -g grunt-cli
+```
 
 ### Creating your `package.json`
 
