@@ -1,6 +1,12 @@
 /** @jsx h */
 // https://github.com/denoland/deno_blog
-import blog, { h, ga, redirects } from 'https://deno.land/x/blog@0.7.0/blog.tsx'
+// import blog, { h, ga, redirects } from 'https://deno.land/x/blog@0.7.0/blog.tsx'
+// Using fork to bump deno-gfm dep
+import blog, {
+  h,
+  ga,
+  redirects,
+} from 'https://raw.githubusercontent.com/denoland/deno_blog/main/blog.tsx'
 // import blog, { h, ga, redirects } from '../deno_blog/blog.tsx'
 import { theme } from './config/highlight.ts'
 
