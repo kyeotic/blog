@@ -17,10 +17,10 @@ ol, ul {
 /*
 	Override variables
 	full list: https://github.com/denoland/deno-gfm/issues/36#issuecomment-1441034903
+	.markdown-body {
+		/* --color-canvas-subtle: #272822 !important; */
+	}
 */
 
-.markdown-body {
-  /* --color-canvas-subtle: #272822 !important; */
-}
 
 `
