@@ -18,7 +18,13 @@ This guide will cover how to configure GPU Passthrough for an Unprivileged LXC C
 
 > This guide was inspired by this one [this guide](https://dustri.org/b/video-acceleration-in-jellyfin-inside-a-proxmox-container.html), which did not work for me as-is but was incredibly helpful in finding my solution.
 
-**IMPORTANT NOTE**: Hardware Acceleration depends heavily on the kind of hardware you have. I am working with a AMD RyzenTM 5 7600, so these instructions are specific to AMD integrated graphics. For Intel you will need to do some tweaks, many of which are covered in the [Official Jellyfin Docs for Intel GPUs](https://jellyfin.org/docs/general/administration/hardware-acceleration/intel).
+**IMPORTANT NOTE**: Hardware Acceleration depends heavily on the kind of hardware you have. I am working with a AMD Ryzen 5, so these instructions are specific to AMD integrated graphics. For Intel you will need to do some tweaks, many of which are covered in the [Official Jellyfin Docs for Intel GPUs](https://jellyfin.org/docs/general/administration/hardware-acceleration/intel).
+
+## A Simpler Method
+
+If you only need GPU passthrough on a single LXC, or all of the LXCs you need passthrough for have the same distro and `render` group, TheHellSite's [Passthrough Guide](https://github.com/TheHellSite/proxmox_tutorials/blob/main/lxc_gpu_passthrough/README.md#2-pve-host-shutdown-the-lxc-run-one-of-the-commands-below-and-start-the-lxc) might work for you. It is simpler and cleaner. However, it didn't work for me using Jellyfin, and I am using multiple LXCs that don't match the requirements above.
+
+For those hanging around, the rest of this guide covers the method I am currently using.
 
 ## GPU Passthrough
 
