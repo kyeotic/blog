@@ -64,6 +64,8 @@ chown -R nas:nas_shares /tank/apps/
 chown -R nas:nas_shares /tank/media_root/
 ```
 
+> You may see a warning like "uid 10100 is outside of the UID_MIN 1000 and UID_MAX 60000 range". I also got this warning, and just ignored it. It does not impact behavior.
+
 ## Permissions on the LXC
 
 You will need to repeat these steps for each LXC you want to share with.
