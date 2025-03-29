@@ -1,5 +1,8 @@
 {
   "tasks": {
-    "dev": "deno run --allow-net --allow-read --allow-env=NODE_DEBUG --watch --no-check main.tsx --dev"
+    "dev": "deno run --allow-net --allow-read --allow-env --allow-import --watch --no-check main.tsx --dev"
+  },
+  "imports": {
+    "https://deno.land/x/gfm@0.2.5/mod.ts": "jsr:@deno/gfm@^0.10.0"
   }
 }

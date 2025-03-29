@@ -11,7 +11,7 @@ tags:
 
 This guide is a part of a series on Proxmox for Homelabs. You can find the [Series Overview here](/proxmox-series).
 
-This guide will cover creating a ZFS Pool on Proxmox, intended to be used by LXC Containers via Mount Points (which is covered by [this guide](/proxmox-zfs-mountpoints)).
+This guide will cover creating a ZFS Pool on Proxmox, intended to be used by LXC Containers via Mount Points (which is covered by [this guide](/proxmox-zfs-mounts)).
 
 ## The elephant in the room
 
