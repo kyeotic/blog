@@ -11,7 +11,7 @@ import blog, {
   h,
   ga,
   redirects,
-} from 'https://raw.githubusercontent.com/kyeotic/deno_blog/theme-fix/blog.tsx'
+} from 'https://raw.githubusercontent.com/kyeotic/deno_blog/main/blog.tsx'
 // import blog, { h, ga, redirects } from '../deno_blog/blog.tsx'
 import { theme } from './config/highlight.ts'
 
