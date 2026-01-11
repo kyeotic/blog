@@ -21,6 +21,7 @@ While experience with Linux (especially file permissions), ZFS, networking, and 
 * [Configuring Samba/SMB Shares with Cockpit](/proxmox-cockpit)
 * [Setting up the Servarr stack](/proxmox-servarr-stack)
 * [Configuring GPU passthrough](/proxmox-gpu-passthrough) for hardware transcoding on Unprivileged LXC containers (without user mapping!)
+* [Backup and Restore](/proxmox-backup-restore) to backup containers and data, and restore them onto a fresh Proxmox
 
 ## Helpful Links
 
