@@ -54,6 +54,10 @@ Change: 2024-01-19 08:10:39.936000372 -0800
  Birth: 2024-01-19 08:10:39.928000372 -0800
 ```
 
+> NOTE: your system may have a `card1` or some other number than card0! Use `ls /dev/dri` to figure out what you have, and adjust all commands to use the card number you have.
+> 
+> When I first wrote this guide I had a card0, and spent quite a while on a fresh install that had a card1 before I figured out why hardware acceleration wasn't working
+
 In this example you can see that `/dev/dri/card0` has a `Device type: 226,0`. Hence the configuration example using `lxc.cgroup2.devices.allow: c 226:0 rwm`. These are the devices we care about
 
 To get all the values we need, run these commands and note their `Device Type`
