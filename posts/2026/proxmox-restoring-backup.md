@@ -34,7 +34,7 @@ I'm interested in backing up 3 kinds of data, and they will each be handled slig
 
 ## Container Backup Strategy
 
-If you followed along in the (ZFS mounts)[/proxmox-zfs-mounts] and (Servarr stack)[/proxmox-servarr-stack] guide you should have a ZFS dataset for `app_configs`. This lives on the ZFS Pool and is used directly by the respective Docker container. I extend this pattern to all Docker containers that I need persistent configuration for, not just the Servarr stack. This includes syncthing, scrypted, and the dedicated game servers that I run.
+If you followed along in the [ZFS mounts](/proxmox-zfs-mounts) and [Servarr stack](/proxmox-servarr-stack) guide you should have a ZFS dataset for `app_configs`. This lives on the ZFS Pool and is used directly by the respective Docker container. I extend this pattern to all Docker containers that I need persistent configuration for, not just the Servarr stack. This includes syncthing, scrypted, and the dedicated game servers that I run.
 
 For the LXC containers I'm using a weekly backup schedule to a new ZFS dataset `/tank/container-backups`. This will be backed up by restic to Borgbase, fulfilling the 3-2-1 requirements.
 
