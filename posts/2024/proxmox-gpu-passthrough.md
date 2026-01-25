@@ -104,12 +104,6 @@ $ udevadm control --reload-rules && udevadm trigger
 
 Restart LXC, then follow [this guide](https://jellyfin.org/docs/general/administration/hardware-acceleration/amd#configure-with-linux-virtualization).
 
-In the LXC Shell:
-
-```
-getent group render | cut -d: -f3 # 106 for me
-getent group video | cut -d: -f3 # 44 for me
-```
 
 Take the output and update your Jellyfin to use these values
 
@@ -119,9 +113,6 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     user: 1000:1000
-    group_add:
-      - "122" # Change this to match your "render" host group id and remove this comment
-      - "123" # Change this to match your "video" host group id and remove this comment
     network_mode: 'host'
     volumes:
       - /path/to/config:/config
@@ -129,7 +120,34 @@ services:
       - /path/to/media:/media
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
-      - /dev/kfd:/dev/kfd # Remove this device if you don't use the OpenCL tone-mapping
     environment:
       - ROC_ENABLE_PRE_VEGA=1
+```
+
+### Old Recommendation
+
+I used to have this section
+
+> In the LXC Shell:
+
+```
+getent group render | cut -d: -f3 # 106 for me
+getent group video | cut -d: -f3 # 44 for me
+```
+
+and recommended using this in the docker compose
+
+```yaml
+    group_add:
+      - "122" # Change this to match your "render" host group id and remove this comment
+      - "123" # Change this to match your "video" host group id and remove this comment
+```
+
+However with the open udev rules above this should not be necessary. Everyone will have access to the `renderD128` device. You can confirm this from a shell inside the docker container by running
+
+```
+ls -l /dev/dri/renderD128
+
+# should see something like
+# crw-rw-rw- 1 nobody nogroup 226, 128 Jan 24 01:54 /dev/dri/renderD128
 ```
