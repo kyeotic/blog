@@ -1,5 +1,5 @@
 ---
-title: "Proxmox Storing from Backup"
+title: "Proxmox Restoring from Backup"
 pathname: "/proxmox-backup-restore"
 publish_date: 2026-01-09
 tags:
