@@ -18,7 +18,8 @@ While experience with Linux (especially file permissions), ZFS, networking, and 
 * [Comparison of TrueNAS and Proxmox](/proxmox-vs-truenas) (why I think the move was worth it)
 * [Creating a ZFS Pool with Proxmox](/proxmox-zfs) (with a bonus story about how I corrupted my pool)
 * [Using Mountpoints](/proxmox-zfs-mounts) to Share the ZFS pool with Unprivileged LXC containers (without user mapping!)
-* [Configuring Samba/SMB Shares with Cockpit](/proxmox-cockpit)
+* **ORIGINAL** [Configuring Samba/SMB Shares with Cockpit](/proxmox-cockpit)
+* **UPDATED** [Configuring Samba/SMB Shares with Debian](/proxmox-samba)
 * [Setting up the Servarr stack](/proxmox-servarr-stack)
 * [Configuring GPU passthrough](/proxmox-gpu-passthrough) for hardware transcoding on Unprivileged LXC containers (without user mapping!)
 * [Backup and Restore](/proxmox-backup-restore) to backup containers and data, and restore them onto a fresh Proxmox
