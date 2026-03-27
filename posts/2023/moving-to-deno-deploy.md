@@ -1,7 +1,7 @@
 ---
 title: "Moving to Deno Deploy"
-pathname: "/blog-deno-deploy"
-publish_date: 2023-04-30
+url: "/blog-deno-deploy"
+date: 2023-04-30
 tags:
 - deno
 - "deno deploy"

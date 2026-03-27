@@ -2,9 +2,14 @@
 # Required variables (do not add defaults here!)
 #-------------------------------------------
 
+variable "cloudflare_account_name" {
+  default = "tim@kye.dev"
+}
+
 #-------------------------------------------
 # Configurable variables
 #-------------------------------------------
+
 variable "region" {
   default = "us-west-2"
 }
@@ -17,6 +22,7 @@ variable "zone_name" {
   default = "kye.dev"
 }
 
-variable "deno_deploy_acme" {
-  default = "2a49f3a51c08eae6d5e5a82e._acme.deno.dev."
+variable "pages_project_name" {
+  type    = string
+  default = "kye-blog"
 }

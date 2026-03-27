@@ -1,7 +1,7 @@
 ---
 title: "Center DIV Vertically and Horizontally with full width and height"
-pathname: "/center-div-vertically-and-horizontally-with-full-width-and-height"
-publish_date: 2016-01-29
+url: "/center-div-vertically-and-horizontally-with-full-width-and-height"
+date: 2016-01-29
 tags: ["css"]
 ---
 

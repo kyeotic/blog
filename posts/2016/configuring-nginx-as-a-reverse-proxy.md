@@ -1,7 +1,7 @@
 ---
 title: "Configuring Nginx as a Reverse Proxy (for NodeJS)"
-pathname: "/configuring-nginx-as-a-reverse-proxy"
-publish_date: 2016-01-07
+url: "/configuring-nginx-as-a-reverse-proxy"
+date: 2016-01-07
 tags: ["centOS", "nginx", "linux-admin-for-beginners"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Install Fail2Ban on CentOS"
-pathname: "/install-fail2ban-on-centos"
-publish_date: 2016-01-07
+url: "/install-fail2ban-on-centos"
+date: 2016-01-07
 tags: ["centOS", "linux-admin-for-beginners", "fail2ban"]
 ---
 

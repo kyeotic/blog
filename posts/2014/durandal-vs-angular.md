@@ -1,7 +1,7 @@
 ---
 title: "Durandal vs Angular"
-pathname: "/durandal-vs-angular"
-publish_date: 2014-12-31
+url: "/durandal-vs-angular"
+date: 2014-12-31
 ---
 
 Yep, time to throw in my $.02. I've used Durandal on multiple personal projects, as well as a large professional project spanning several months. I have used Angular on two personal projects, and am currently using it at work. I have a lot more experience with Durandal than I do with Angular, so if I make any factual errors here feel free to let me know. I would love to be wrong about some of my gripes, since that would mean not having to deal with them.

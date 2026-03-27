@@ -1,7 +1,7 @@
 ---
 title: "Setup ZFS on Proxmox"
-pathname: "/proxmox-zfs"
-publish_date: 2024-01-19
+url: "/proxmox-zfs"
+date: 2024-01-19
 tags:
 - homelab
 - proxmox

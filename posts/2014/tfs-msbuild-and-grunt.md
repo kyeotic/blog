@@ -1,7 +1,7 @@
 ---
 title: "TFS MSBuild and Grunt"
-pathname: "/tfs-msbuild-and-grunt"
-publish_date: 2014-03-10
+url: "/tfs-msbuild-and-grunt"
+date: 2014-03-10
 tags: ["mdbuild", "grunt", "tfs"]
 ---
 

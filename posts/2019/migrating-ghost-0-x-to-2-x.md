@@ -1,7 +1,7 @@
 ---
 title: "Migrating Ghost 0.x to 2.x (and a new domain!)"
-pathname: "/migrating-ghost-0-x-to-2-x"
-publish_date: 2019-05-15
+url: "/migrating-ghost-0-x-to-2-x"
+date: 2019-05-15
 tags: ["ghost", "dns"]
 ---
 

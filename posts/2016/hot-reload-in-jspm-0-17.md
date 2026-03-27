@@ -1,7 +1,7 @@
 ---
 title: "Hot Reloading redux in jspm 0.17"
-pathname: "/hot-reload-in-jspm-0-17"
-publish_date: 2016-03-15
+url: "/hot-reload-in-jspm-0-17"
+date: 2016-03-15
 tags: ["jspm", "redux"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Jasmine Spies Won't Load Outside Test Scope"
-pathname: "/jasmine-spies"
-publish_date: 2014-03-31
+url: "/jasmine-spies"
+date: 2014-03-31
 tags: ["jasmine spies", "unit-test", "jasmine"]
 ---
 

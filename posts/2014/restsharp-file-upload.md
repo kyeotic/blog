@@ -1,7 +1,7 @@
 ---
 title: "MultipartForm FileUpload with RestSharp"
-pathname: "/restsharp-file-upload"
-publish_date: 2014-12-26
+url: "/restsharp-file-upload"
+date: 2014-12-26
 tags: ["RestSharp", "file-upoad"]
 ---
 

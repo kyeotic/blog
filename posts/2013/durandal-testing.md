@@ -1,7 +1,7 @@
 ---
 title: "Testing Durandal Code with Jasmine"
-pathname: "/durandal-testing"
-publish_date: 2013-12-10
+url: "/durandal-testing"
+date: 2013-12-10
 tags: ["durandal", "unit-test", "jasmine", "phantomjs"]
 ---
 

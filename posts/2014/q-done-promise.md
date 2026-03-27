@@ -1,7 +1,7 @@
 ---
 title: "Q Promise resolves immediately when .done() is called"
-pathname: "/q-done-promise"
-publish_date: 2014-04-05
+url: "/q-done-promise"
+date: 2014-04-05
 tags: ["q", "promises", "javascript"]
 ---
 

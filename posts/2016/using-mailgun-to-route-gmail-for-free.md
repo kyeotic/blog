@@ -1,7 +1,7 @@
 ---
 title: "Using Mailgun to route email to Gmail"
-pathname: "/using-mailgun-to-route-gmail-for-free"
-publish_date: 2016-01-28
+url: "/using-mailgun-to-route-gmail-for-free"
+date: 2016-01-28
 tags: ["email", "linux-admin-for-beginners",  "gmail",  "mailgun"]
 ---
 

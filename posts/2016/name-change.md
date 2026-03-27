@@ -1,7 +1,7 @@
 ---
 title: "Name Change"
-pathname: "/name-change"
-publish_date: 2016-02-19
+url: "/name-change"
+date: 2016-02-19
 ---
 
 I legally changed my name today from

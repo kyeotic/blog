@@ -1,7 +1,7 @@
 ---
 title: "Configuring the firewall on CentOS"
-pathname: "/configuring-the-firewall-on-centos"
-publish_date: 2016-01-07
+url: "/configuring-the-firewall-on-centos"
+date: 2016-01-07
 ---
 
 This is part of my complete guide to [Setting up a CentOS Digital Ocean droplet with Nginx for beginners](/digital-ocean-for-beginners).

@@ -1,7 +1,7 @@
 ---
 title: "Gulp in Windows"
-pathname: "/gulp-in-windows"
-publish_date: 2014-04-17
+url: "/gulp-in-windows"
+date: 2014-04-17
 tags: ["windows", "gulp"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Building Durandal with Grunt"
-pathname: "/building-durandal-with-grunt"
-publish_date: 2014-01-17
+url: "/building-durandal-with-grunt"
+date: 2014-01-17
 tags: ["gruntjs"]
 ---
 

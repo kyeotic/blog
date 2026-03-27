@@ -1,7 +1,7 @@
 ---
 title: "Home page is up"
-pathname: "/home-page-is-ready"
-publish_date: 2013-12-07
+url: "/home-page-is-ready"
+date: 2013-12-07
 ---
 
 As part of my goal to actually have a professional web presence (which starts with this blog), I made a home page.

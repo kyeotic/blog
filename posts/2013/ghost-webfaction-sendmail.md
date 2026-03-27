@@ -1,7 +1,7 @@
 ---
 title: "Setting up Webfaction Sendmail with Ghost"
-pathname: "/ghost-webfaction-sendmail"
-publish_date: 2013-12-07
+url: "/ghost-webfaction-sendmail"
+date: 2013-12-07
 tags: ["sendmail", "email", "webfaction", "ghost"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Proxmox GPU Passthrough on Unprivileged LXC Containers"
-pathname: "/proxmox-gpu-passthrough"
-publish_date: 2024-01-19
+url: "/proxmox-gpu-passthrough"
+date: 2024-01-19
 tags:
 - homelab
 - proxmox

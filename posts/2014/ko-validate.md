@@ -1,7 +1,7 @@
 ---
 title: "Validation in Knockout"
-pathname: "/ko-validate"
-publish_date: 2014-03-10
+url: "/ko-validate"
+date: 2014-03-10
 tags: ["knockout", "validation"]
 ---
 

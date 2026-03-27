@@ -1,7 +1,7 @@
 ---
 title: "Magnific Popup and Durandal's Router"
-pathname: "/durandal-magnific-popup"
-publish_date: 2014-01-03
+url: "/durandal-magnific-popup"
+date: 2014-01-03
 tags: ["durandal", "jquery", "lightbox", "magnific-popup"]
 ---
 

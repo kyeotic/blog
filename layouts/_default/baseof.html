@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ if not .IsHome }}{{ .Title }} — {{ end }}{{ .Site.Title }}</title>
+  <meta name="theme-color" content="#000" />
+  {{ with .Description }}<meta name="description" content="{{ . }}" />{{ end }}
+  <meta property="og:title" content="{{ if not .IsHome }}{{ .Title }} — {{ end }}{{ .Site.Title }}" />
+  <link rel="canonical" href="{{ .Permalink }}" />
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+  {{ if .IsHome }}<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="/index.xml" />{{ end }}
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/gfm.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+</head>
+<body>
+  {{ block "main" . }}{{ end }}
+</body>
+</html>

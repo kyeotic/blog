@@ -1,7 +1,7 @@
 ---
 title: "JavaScript tests with Mocha and jspm"
-pathname: "/javascript-tests-with-mocha-and-jspm"
-publish_date: 2016-02-18
+url: "/javascript-tests-with-mocha-and-jspm"
+date: 2016-02-18
 tags: ["jspm", "mocha", "unit-test"]
 ---
 

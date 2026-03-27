@@ -1,7 +1,7 @@
 ---
 title: "Setting up ConEmu with Git Bash on Windows"
-pathname: "/setting-up-conemu-with-git-bash-on-windows"
-publish_date: 2014-12-04
+url: "/setting-up-conemu-with-git-bash-on-windows"
+date: 2014-12-04
 ---
 
 The Windows command prompt sucks. It just does. Every other terminal in every other operating system is better than it, and Microsoft doesn't seem to care.

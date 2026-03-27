@@ -1,5 +1,1 @@
-module "watcher" {
-  source      = "github.com/kyeotic/tf-domain-heartbeat"
-  lambda_name = "blog-watcher"
-  watch_url   = "blog.kye.dev"
-}
+# Removed: AWS Lambda watcher replaced by Cloudflare health checks if needed

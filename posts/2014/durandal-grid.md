@@ -1,7 +1,7 @@
 ---
 title: "Durandal Grid"
-pathname: "/durandal-grid"
-publish_date: 2014-01-09
+url: "/durandal-grid"
+date: 2014-01-09
 tags: ["durandal", "widgets", "durandal-grid"]
 ---
 

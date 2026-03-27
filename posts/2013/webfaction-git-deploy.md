@@ -1,7 +1,7 @@
 ---
 title: "Setting up SSH Git deploy with Webfaction"
-pathname: "/webfaction-git-deploy"
-publish_date: 2013-12-07
+url: "/webfaction-git-deploy"
+date: 2013-12-07
 tags: ["git", "deploy", "webfaction", "node", "ssh"]
 ---
 

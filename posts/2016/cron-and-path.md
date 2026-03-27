@@ -1,7 +1,7 @@
 ---
 title: "Cron and $PATH"
-pathname: "/cron-and-path"
-publish_date: 2016-01-02
+url: "/cron-and-path"
+date: 2016-01-02
 tags: ["linux", "cron"]
 ---
 

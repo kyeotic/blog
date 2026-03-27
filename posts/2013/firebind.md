@@ -1,7 +1,7 @@
 ---
 title: "FireBind: Knockout bindings for Firebase"
-pathname: "/firebind"
-publish_date: 2013-12-11
+url: "/firebind"
+date: 2013-12-11
 ---
 
 Everybody loves [Knockout](http://knockoutjs.com) (or they should, because it's fantastic). I think less people know about [Firebase](https://www.firebase.com/), but its a very cool service. It basically provides a real-time backend for persistent data, along with either client libraries or a REST api for subscribing to the changes in that data.

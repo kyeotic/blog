@@ -1,7 +1,7 @@
 ---
 title: "Proxmox Homelab Series"
-pathname: "/proxmox-series"
-publish_date: 2024-01-19
+url: "/proxmox-series"
+date: 2024-01-19
 tags:
 - homelab
 - proxmox

@@ -9,8 +9,6 @@ _infra="${_scripts}/../infra"
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity | jq -r '.Account')
 terraform_state_bucket="terraform-remote-$AWS_ACCOUNT_ID"
 
-export $(grep -v '^#' $_project/.env | xargs)
-
 pushd "${_infra}"
 
 terraform init \

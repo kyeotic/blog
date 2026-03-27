@@ -1,7 +1,7 @@
 ---
 title: "Deploying Hugo to GitHub Pages with GitHub Actions"
-pathname: "/hugo-github-pages-actions"
-publish_date: 2019-10-03
+url: "/hugo-github-pages-actions"
+date: 2019-10-03
 tags: ["GitHub", "GitHub Actions", "Hugo", "GitHub Pages"]
 ---
 
@@ -150,21 +150,21 @@ This *almost* works out of the box. Unfortunately we can't use GitHub Actions's 
 
 To do this go to **Settings > Deploy Keys > Add Deploy Key**
 
-![](/2019/hugo/hugo-deploy-keys.png)
+![](hugo-deploy-keys.png)
 
 Copy the key and then add it to **Settings > Secrets**.
 
-![](/2019/hugo/hugo-secrets.png)
+![](hugo-secrets.png)
 
 With all of this in place you are ready to **commit to master**. This should kick off the publish workflow, which you can view under **Actions > Publish Docs**.
 
-![](/2019/hugo/hugo-publish.png)
+![](hugo-publish.png)
 
 ## Turn on GitHub Pages
 
 Finally, enable GitHub pages from your repository **settings **page by selecting **gh-pages branch** on the **Source** dropdown.
 
-![](/2019/hugo/hugo-enable-pages.png)
+![](hugo-enable-pages.png)
 
 Once you've done that you should get a link to your new GitHub Pages deployment!
 
