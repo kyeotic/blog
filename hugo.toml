@@ -1,0 +1,29 @@
+baseURL = "https://blog.kye.dev/"
+languageCode = "en-us"
+title = "T++"
+contentDir = "posts"
+
+[params]
+  author = "Tim Kye"
+  avatar = "/images/avatar.png"
+  github = "https://github.com/kyeotic"
+  email = "mailto:tim@kye.dev"
+
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+    codeFences = true
+    style = "github-dark"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  page = ["HTML"]
+  section = ["HTML"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]

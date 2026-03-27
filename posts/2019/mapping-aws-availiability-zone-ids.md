@@ -1,7 +1,7 @@
 ---
 title: "Getting AWS Availability Zone IDs with Terraform"
-pathname: "/mapping-aws-availiability-zone-ids"
-publish_date: 2019-05-31
+url: "/mapping-aws-availiability-zone-ids"
+date: 2019-05-31
 tags: ["aws", "terraform", "gist"]
 ---
 

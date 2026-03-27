@@ -1,7 +1,7 @@
 ---
 title: "Writing Javascript tests that will run on Windows and Linux with Grunt"
-pathname: "/grunt-phantomjs-windows-or-linux"
-publish_date: 2014-02-07
+url: "/grunt-phantomjs-windows-or-linux"
+date: 2014-02-07
 tags: ["unit-test", "phantomjs"]
 ---
 

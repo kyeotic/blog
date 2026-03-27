@@ -1,7 +1,7 @@
 ---
 title: "Application Management and Crontab"
-pathname: "/application-management-and-crontab"
-publish_date: 2016-01-08
+url: "/application-management-and-crontab"
+date: 2016-01-08
 tags: ["nodejs", "centOS", "linux-admin-for-beginners"]
 ---
 

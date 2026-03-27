@@ -1,7 +1,7 @@
 ---
 title: "Installing Nodejs on CentOS"
-pathname: "/installing-nodejs-on-centos"
-publish_date: 2016-01-08
+url: "/installing-nodejs-on-centos"
+date: 2016-01-08
 tags: ["nodejs", "centOS", "linux-admin-for-beginners"]
 ---
 

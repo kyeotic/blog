@@ -1,7 +1,7 @@
 ---
 title: "Proxmox SMB Shares with Cockpit"
-pathname: "/proxmox-cockpit"
-publish_date: 2024-01-19
+url: "/proxmox-cockpit"
+date: 2024-01-19
 tags:
 - homelab
 - proxmox

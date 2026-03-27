@@ -1,7 +1,7 @@
 ---
 title: "React and jspm"
-pathname: "/react-and-jspm"
-publish_date: 2016-01-02
+url: "/react-and-jspm"
+date: 2016-01-02
 tags: ["jspm", "react"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Relative Paths and PushState in Durandal"
-pathname: "/pushstate-relative-paths"
-publish_date: 2013-12-12
+url: "/pushstate-relative-paths"
+date: 2013-12-12
 tags: ["durandal", "pushstate"]
 ---
 

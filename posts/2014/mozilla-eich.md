@@ -1,7 +1,7 @@
 ---
 title: "Mozilla's new CEO"
-pathname: "/mozilla-eich"
-publish_date: 2014-03-26
+url: "/mozilla-eich"
+date: 2014-03-26
 tags: ["mozilla", "gay rights"]
 ---
 

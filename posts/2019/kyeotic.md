@@ -1,7 +1,7 @@
 ---
 title: "Kyeotic"
-pathname: "/kyeotic"
-publish_date: 2019-05-15
+url: "/kyeotic"
+date: 2019-05-15
 ---
 
 This last weekend I went through what I thought would be the laborious process of changing my handle from "Tyrisus" to "[Kyeotic](https://kyeotic.com/kyeosis)" on every site I use. This turned out to be breeze.

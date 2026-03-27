@@ -1,7 +1,7 @@
 ---
 title: "Proxmox ZFS Mount Points"
-pathname: "/proxmox-zfs-mounts"
-publish_date: 2024-01-19
+url: "/proxmox-zfs-mounts"
+date: 2024-01-19
 tags:
 - homelab
 - proxmox

@@ -1,7 +1,7 @@
 ---
 title: "Proxmox SMB Shares with Debian"
-pathname: "/proxmox-samba"
-publish_date: 2026-02-01
+url: "/proxmox-samba"
+date: 2026-02-01
 tags:
 - homelab
 - proxmox

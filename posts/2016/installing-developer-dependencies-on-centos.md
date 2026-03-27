@@ -1,7 +1,7 @@
 ---
 title: "Installing developer dependencies on CentOS"
-pathname: "/installing-developer-dependencies-on-centos"
-publish_date: 2016-01-07
+url: "/installing-developer-dependencies-on-centos"
+date: 2016-01-07
 tags: ["centOS", "linux-admin-for-beginners", "yum"]
 ---
 

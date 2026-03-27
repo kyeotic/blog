@@ -1,7 +1,7 @@
 ---
 title: "Proxmox Restoring from Backup"
-pathname: "/proxmox-backup-restore"
-publish_date: 2026-01-09
+url: "/proxmox-backup-restore"
+date: 2026-01-09
 tags:
 - homelab
 - proxmox

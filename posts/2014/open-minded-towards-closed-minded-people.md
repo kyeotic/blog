@@ -1,7 +1,7 @@
 ---
 title: "Being open-minded towards closed-minded people"
-pathname: "/open-minded-towards-closed-minded-people"
-publish_date: 2014-04-01
+url: "/open-minded-towards-closed-minded-people"
+date: 2014-04-01
 tags: ["philosophy", "politics", "free speech"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Echo is on."
-pathname: "/echo-is-on"
-publish_date: 2014-03-22
+url: "/echo-is-on"
+date: 2014-03-22
 tags: ["batch", "script"]
 ---
 

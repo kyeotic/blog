@@ -1,7 +1,7 @@
 ---
 title: "Setting up a CentOS Digital Ocean droplet with Nginx for beginners"
-pathname: "/digital-ocean-for-beginners"
-publish_date: 2016-01-07
+url: "/digital-ocean-for-beginners"
+date: 2016-01-07
 tags: ["digital-ocean", "centOS", "nginx", "ssh"]
 ---
 

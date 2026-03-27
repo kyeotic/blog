@@ -1,7 +1,7 @@
 ---
 title: "Deploying Applications with Git and SSH"
-pathname: "/deploying-applications-with-git-and-ssh"
-publish_date: 2016-01-08
+url: "/deploying-applications-with-git-and-ssh"
+date: 2016-01-08
 tags: ["git", "ssh", "linux-admin-for-beginners"]
 ---
 

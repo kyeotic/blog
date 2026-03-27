@@ -1,7 +1,7 @@
 ---
 title: "JsTestLite"
-pathname: "/jstestlite"
-publish_date: 2014-01-09
+url: "/jstestlite"
+date: 2014-01-09
 tags: ["jstestlite", "unit-test", "jasmine", "javascript"]
 ---
 

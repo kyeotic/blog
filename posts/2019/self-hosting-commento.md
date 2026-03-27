@@ -1,7 +1,7 @@
 ---
 title: "Self-Hosting Commento alongside Ghost 2.x"
-pathname: "/self-hosting-commento"
-publish_date: 2019-05-15
+url: "/self-hosting-commento"
+date: 2019-05-15
 tags: ["ghost", "disqus", "commento", "digital-ocean"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Replacing the Durandal Modal with Boostrap's Modal"
-pathname: "/durandal-bootstrap-modal"
-publish_date: 2014-06-05
+url: "/durandal-bootstrap-modal"
+date: 2014-06-05
 tags: ["twitter bootstrap", "bootstrap"]
 ---
 

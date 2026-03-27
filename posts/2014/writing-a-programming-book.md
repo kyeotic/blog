@@ -1,7 +1,7 @@
 ---
 title: "Writing a Programming Book"
-pathname: "/writing-a-programming-book"
-publish_date: 2014-06-07
+url: "/writing-a-programming-book"
+date: 2014-06-07
 tags: ["knockout", "teaching", "writing", "programming"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Configuring AWS PrivateLink in non-routable VPCs Consumers with Terraform"
-pathname: "/aws-privatelink-non-routable-vpc"
-publish_date: 2019-05-31
+url: "/aws-privatelink-non-routable-vpc"
+date: 2019-05-31
 tags: ["aws", "vpc", "privatelink", "terraform"]
 ---
 

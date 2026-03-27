@@ -1,7 +1,7 @@
 ---
 title: "Comparing Proxmox and TrueNAS"
-pathname: "/proxmox-vs-truenas"
-publish_date: 2024-01-19
+url: "/proxmox-vs-truenas"
+date: 2024-01-19
 tags:
 - homelab
 - proxmox

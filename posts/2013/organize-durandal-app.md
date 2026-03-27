@@ -1,7 +1,7 @@
 ---
 title: "Organizing a Durandal Application"
-pathname: "/organize-durandal-app"
-publish_date: 2013-12-09
+url: "/organize-durandal-app"
+date: 2013-12-09
 tags: ["durandal"]
 ---
 

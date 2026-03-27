@@ -1,0 +1,6 @@
+name = "kye-blog"
+pages_build_output_dir = "public"
+
+# Set HUGO_VERSION in the CF Pages dashboard env vars to match this
+# Build command: hugo
+# Build output: public

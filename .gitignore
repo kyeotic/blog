@@ -9,6 +9,8 @@ $RECYCLE.BIN/
 .DS_Store
 /dist
 /build/
+/public/
+/resources/
 
 .terraform/
 *.zip

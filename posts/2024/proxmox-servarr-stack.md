@@ -1,7 +1,7 @@
 ---
 title: "Installing Servarr Stack with Docker Compose"
-pathname: "/proxmox-servarr-stack"
-publish_date: 2024-01-19
+url: "/proxmox-servarr-stack"
+date: 2024-01-19
 tags:
 - homelab
 - proxmox

@@ -1,7 +1,7 @@
 ---
 title: "Setting up a remote SSH user on CentOS"
-pathname: "/setting-up-a-remote-ssh-user-on-centos"
-publish_date: 2016-01-07
+url: "/setting-up-a-remote-ssh-user-on-centos"
+date: 2016-01-07
 tags: ["centOS", "digital-ocean", "nginx-for-beginners"]
 ---
 

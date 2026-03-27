@@ -1,7 +1,7 @@
 ---
 title: "jspm, jQuery Plugins, and ES6"
-pathname: "/jspm-jquery-plugins-and-es6"
-publish_date: 2015-01-14
+url: "/jspm-jquery-plugins-and-es6"
+date: 2015-01-14
 tags: ["aurelia", "jspm",  jquery-plugins,  es6,  jquery]
 ---
 

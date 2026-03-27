@@ -1,7 +1,7 @@
 ---
 title: "Configuring TimeZones and Network Time Protocol on CentOS"
-pathname: "/configuring-timezones-and-network-time-protocol-on-centos"
-publish_date: 2016-01-07
+url: "/configuring-timezones-and-network-time-protocol-on-centos"
+date: 2016-01-07
 ---
 
 This is part of my complete guide to [Setting up a CentOS Digital Ocean droplet with Nginx for beginners](/digital-ocean-for-beginners).
