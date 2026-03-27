@@ -12,6 +12,6 @@ resource "cloudflare_record" "blog" {
   zone_id = data.cloudflare_zone.kye_dev.id
   name    = "blog"
   type    = "CNAME"
-  content = "blog.pages.dev"
+  content = "${var.pages_project_name}.pages.dev"
   proxied = true
 }
