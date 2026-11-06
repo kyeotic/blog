@@ -16,3 +16,4 @@ $RECYCLE.BIN/
 *.zip
 *.tfstate*
 /.env
+.wrangler/
